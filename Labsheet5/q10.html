@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 10 - Apache .htaccess Python Handler</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; padding: 30px; color: #1e293b; }
+        .card { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-size: 24px; color: #0f172a; margin-bottom: 8px; }
+        .badge { background: #dbeafe; color: #1d4ed8; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 13px; }
+        pre { background: #1e293b; color: #38bdf8; padding: 15px; border-radius: 6px; font-size: 13px; line-height: 1.5; overflow-x: auto; }
+        .step { margin: 20px 0; }
+        .step h3 { color: #2563eb; font-size: 16px; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 10:
+      Configure Apache `.htaccess` files and handler directives to execute Python scripts seamlessly 
+      within web directories.
+    -->
+    <div class="card">
+        <h1>Apache <code>.htaccess</code> Python CGI Handler Directives</h1>
+        <span class="badge">Seamless Python Web Execution</span>
+
+        <div class="step">
+            <h3>1. Content of the configured <code>.htaccess</code> file:</h3>
+            <pre># Enable CGI execution permissions
+Options +ExecCGI +FollowSymLinks
+
+# Register .py extensions to be handled as CGI scripts
+AddHandler cgi-script .py
+
+# Set default directory index
+DirectoryIndex index.py index.html
+
+# Prevent direct downloads of sensitive log & database files
+&lt;FilesMatch "\.(log|sql|ini|env)$"&gt;
+    Require all denied
+&lt;/FilesMatch&gt;</pre>
+        </div>
+
+        <div class="step">
+            <h3>2. Requirements in Apache's main <code>httpd.conf</code>:</h3>
+            <p>Ensure that <code>AllowOverride</code> allows Options and FileInfo for this directory:</p>
+            <pre>&lt;Directory "E:/webDesigning"&gt;
+    AllowOverride All
+    Require all granted
+&lt;/Directory&gt;</pre>
+        </div>
+    </div>
+</body>
+</html>

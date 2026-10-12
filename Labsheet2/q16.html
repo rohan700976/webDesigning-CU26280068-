@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 16 - Float and Clear Layout Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            padding: 30px;
+        }
+        .form-card {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-bottom: 25px;
+            color: #0f172a;
+        }
+        /* CSS Float Alignment */
+        .form-row {
+            margin-bottom: 16px;
+        }
+        /* Float labels to the left */
+        .form-row label {
+            float: left;
+            width: 35%;
+            padding-top: 8px;
+            font-weight: bold;
+            color: #334155;
+        }
+        /* Float input containers to the right */
+        .form-row .input-field {
+            float: left;
+            width: 65%;
+        }
+        .input-field input,
+        .input-field select,
+        .input-field textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+        }
+        /* Clear property to reset float flow for each row */
+        .clear {
+            clear: both;
+        }
+        .btn-submit {
+            float: right;
+            padding: 10px 24px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-submit:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 16:
+      Create a structured employee evaluation form using CSS float and clear 
+      properties for alignment.
+    -->
+    <div class="form-card">
+        <h2>Employee Annual Evaluation Form</h2>
+        <form action="#" method="POST">
+            <!-- Row 1 -->
+            <div class="form-row">
+                <label for="empName">Employee Name:</label>
+                <div class="input-field">
+                    <input type="text" id="empName" name="empName" required>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <!-- Row 2 -->
+            <div class="form-row">
+                <label for="empId">Employee ID:</label>
+                <div class="input-field">
+                    <input type="text" id="empId" name="empId" required>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <!-- Row 3 -->
+            <div class="form-row">
+                <label for="performance">Performance Score:</label>
+                <div class="input-field">
+                    <select id="performance" name="performance" required>
+                        <option value="">Select Rating</option>
+                        <option value="5">Outstanding (5/5)</option>
+                        <option value="4">Exceeds Expectations (4/5)</option>
+                        <option value="3">Meets Expectations (3/5)</option>
+                        <option value="2">Needs Improvement (2/5)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <!-- Row 4 -->
+            <div class="form-row">
+                <label for="remarks">Manager Remarks:</label>
+                <div class="input-field">
+                    <textarea id="remarks" name="remarks" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <!-- Submit Row with Float Clear -->
+            <button type="submit" class="btn-submit">Submit Evaluation</button>
+            <div class="clear"></div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 18 - Timetable Grid with Colspan</title>
+</head>
+<body>
+    <!-- 
+      Question 18:
+      Create a timetable grid where at least one cell spans across multiple columns using the 
+      colspan attribute.
+    -->
+    <h1>Weekly Class Timetable</h1>
+
+    <table border="1" cellpadding="10" cellspacing="0" text-align="center">
+        <caption><strong>Computer Science Department - Semester 3 Timetable</strong></caption>
+        <tr bgcolor="#e0e0e0">
+            <th>Day</th>
+            <th>09:00 - 10:00</th>
+            <th>10:00 - 11:00</th>
+            <th>11:00 - 12:00</th>
+            <th>12:00 - 01:00</th>
+            <th>01:00 - 02:00</th>
+            <th>02:00 - 04:00</th>
+        </tr>
+        <tr>
+            <th>Monday</th>
+            <td>Data Structures</td>
+            <td>Mathematics III</td>
+            <td>Computer Networks</td>
+            <td rowspan="3" align="center" bgcolor="#fff3cd"><strong>L<br/>U<br/>N<br/>C<br/>H</strong></td>
+            <td>Web Designing</td>
+            <!-- Cell spanning 2 columns using colspan -->
+            <td colspan="1" align="center">Web Tech Lab</td>
+        </tr>
+        <tr>
+            <th>Tuesday</th>
+            <td>Operating Systems</td>
+            <td>Data Structures</td>
+            <td>Web Designing</td>
+            <td>Digital Electronics</td>
+            <td>Library Hour</td>
+        </tr>
+        <tr>
+            <th>Wednesday</th>
+            <!-- Cell spanning 2 columns using colspan -->
+            <td colspan="2" align="center" bgcolor="#d4edda"><strong>Workshop / Guest Lecture</strong></td>
+            <td>Mathematics III</td>
+            <td>Operating Systems</td>
+            <td>Sports / Activity</td>
+        </tr>
+    </table>
+</body>
+</html>

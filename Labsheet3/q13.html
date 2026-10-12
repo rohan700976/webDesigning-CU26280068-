@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 13 - Private Counter using Closures</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 40px; background: #f8fafc; text-align: center; }
+        .box { max-width: 420px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .counter-val { font-size: 52px; font-weight: bold; color: #2563eb; margin: 20px 0; }
+        .btn-group { display: flex; justify-content: center; gap: 10px; }
+        button { padding: 10px 18px; font-size: 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-inc { background: #16a34a; color: white; }
+        .btn-dec { background: #dc2626; color: white; }
+        .btn-reset { background: #64748b; color: white; }
+        p.explain { font-size: 13px; color: #64748b; text-align: left; margin-top: 25px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 13:
+      Write a JavaScript program implementing closure to maintain a private counter variable 
+      with increment and decrement methods.
+    -->
+    <div class="box">
+        <h2>Closure-Based Private Counter</h2>
+        
+        <div class="counter-val" id="counterDisplay">0</div>
+
+        <div class="btn-group">
+            <button class="btn-dec" onclick="counter.decrement()">- Decrement</button>
+            <button class="btn-reset" onclick="counter.reset()">Reset</button>
+            <button class="btn-inc" onclick="counter.increment()">+ Increment</button>
+        </div>
+
+        <p class="explain">
+            <strong>How Closure Works:</strong> The variable <code>count</code> is defined inside the factory function scope and is not directly accessible on the global window. The returned inner methods form a closure over <code>count</code>, preserving its private state.
+        </p>
+    </div>
+
+    <script>
+        // Closure implementation
+        function createCounter(initialValue = 0) {
+            // Private variable - inaccessible from outside scope
+            let count = initialValue;
+
+            function updateUI() {
+                document.getElementById("counterDisplay").textContent = count;
+            }
+
+            return {
+                increment: function() {
+                    count++;
+                    updateUI();
+                    return count;
+                },
+                decrement: function() {
+                    count--;
+                    updateUI();
+                    return count;
+                },
+                reset: function() {
+                    count = 0;
+                    updateUI();
+                    return count;
+                },
+                getValue: function() {
+                    return count;
+                }
+            };
+        }
+
+        // Creating counter instance using closure
+        const counter = createCounter(0);
+    </script>
+</body>
+</html>

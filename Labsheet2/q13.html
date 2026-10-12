@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 13 - Custom Checkboxes &amp; Radio Buttons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #faf5ff;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        h2 {
+            color: #6b21a8;
+            margin-bottom: 20px;
+        }
+        .option-group {
+            margin-bottom: 25px;
+        }
+        .group-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #374151;
+        }
+        /* Custom wrapper */
+        .custom-control {
+            display: block;
+            position: relative;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            user-select: none;
+        }
+        /* Hide default native input */
+        .custom-control input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        /* Common visual box for both radio and checkbox */
+        .checkmark {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #f3f4f6;
+            border: 2px solid #9ca3af;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        /* Make radio circular */
+        .radio-mark {
+            border-radius: 50%;
+        }
+        /* Sibling selector (~) on checked: change border and background */
+        .custom-control input:checked ~ .checkmark {
+            background-color: #7c3aed;
+            border-color: #7c3aed;
+        }
+        /* Checkbox tick using ::after */
+        .custom-control input:checked ~ .checkmark::after {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        /* Radio center dot using ::after */
+        .custom-control input:checked ~ .radio-mark::after {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 4px;
+            left: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 13:
+      Implement custom styled checkboxes and radio buttons using CSS pseudo-elements 
+      (`::before` and `::after`) and sibling selectors (`~`).
+    -->
+    <div class="container">
+        <h2>Custom Styled Controls</h2>
+
+        <!-- Custom Checkboxes -->
+        <div class="option-group">
+            <div class="group-title">Select Web Technologies (Checkboxes):</div>
+            <label class="custom-control">
+                <input type="checkbox" name="skills" value="html" checked>
+                <span class="checkmark"></span>
+                HTML5 &amp; Semantic Tags
+            </label>
+            <label class="custom-control">
+                <input type="checkbox" name="skills" value="css">
+                <span class="checkmark"></span>
+                Modern CSS &amp; Flexbox
+            </label>
+            <label class="custom-control">
+                <input type="checkbox" name="skills" value="js">
+                <span class="checkmark"></span>
+                JavaScript &amp; ES6+
+            </label>
+        </div>
+
+        <!-- Custom Radios -->
+        <div class="option-group">
+            <div class="group-title">Subscription Tier (Radio Buttons):</div>
+            <label class="custom-control">
+                <input type="radio" name="plan" value="free" checked>
+                <span class="checkmark radio-mark"></span>
+                Community (Free)
+            </label>
+            <label class="custom-control">
+                <input type="radio" name="plan" value="pro">
+                <span class="checkmark radio-mark"></span>
+                Professional ($19/mo)
+            </label>
+            <label class="custom-control">
+                <input type="radio" name="plan" value="ent">
+                <span class="checkmark radio-mark"></span>
+                Enterprise ($49/mo)
+            </label>
+        </div>
+    </div>
+</body>
+</html>

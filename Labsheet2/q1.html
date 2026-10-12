@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 1 - Form Styled with External CSS</title>
+    <!-- Linking External CSS -->
+    <link rel="stylesheet" href="q1_style.css">
+</head>
+<body>
+    <!-- 
+      Question 1:
+      Create an HTML form with text input, password, radio buttons, checkboxes, 
+      dropdown select, and a textarea, styled entirely with external CSS.
+    -->
+    <div class="form-card">
+        <h2>User Information Form</h2>
+        <form action="#" method="POST">
+            <!-- Text Input -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
+
+            <!-- Radio Buttons -->
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="inline-group">
+                    <label><input type="radio" name="gender" value="male"> Male</label>
+                    <label><input type="radio" name="gender" value="female"> Female</label>
+                    <label><input type="radio" name="gender" value="other"> Other</label>
+                </div>
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="form-group">
+                <label>Interests:</label>
+                <div class="inline-group">
+                    <label><input type="checkbox" name="interest" value="web"> Web Dev</label>
+                    <label><input type="checkbox" name="interest" value="ai"> AI/ML</label>
+                    <label><input type="checkbox" name="interest" value="cyber"> Cyber Security</label>
+                </div>
+            </div>
+
+            <!-- Dropdown Select -->
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <select id="country" name="country" required>
+                    <option value="" disabled selected>Select country</option>
+                    <option value="india">India</option>
+                    <option value="usa">USA</option>
+                    <option value="uk">UK</option>
+                    <option value="canada">Canada</option>
+                </select>
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-group">
+                <label for="bio">Short Bio:</label>
+                <textarea id="bio" name="bio" placeholder="Write something about yourself..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Form</button>
+        </form>
+    </div>
+</body>
+</html>

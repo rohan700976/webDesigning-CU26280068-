@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 14 - Range Slider and Number Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            padding: 30px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+        .control-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .slider-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        input[type="range"] {
+            flex: 1;
+        }
+        .unit-badge {
+            background: #e2e8f0;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #0f172a;
+            min-width: 60px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 120px;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 14:
+      Design an HTML form with a range slider (`type='range'`) and number input, 
+      displaying live unit labels.
+    -->
+    <div class="container">
+        <h2>System Configuration Settings</h2>
+        <form action="#" method="POST">
+            <!-- Range Slider with live label via inline oninput -->
+            <div class="control-group">
+                <label for="volume">Audio Volume Level:</label>
+                <div class="slider-wrapper">
+                    <input type="range" id="volume" name="volume" min="0" max="100" value="65" 
+                           oninput="document.getElementById('volumeVal').textContent = this.value + ' %'">
+                    <span id="volumeVal" class="unit-badge">65 %</span>
+                </div>
+            </div>
+
+            <!-- Range Slider for Temperature -->
+            <div class="control-group">
+                <label for="temp">Target Room Temperature:</label>
+                <div class="slider-wrapper">
+                    <input type="range" id="temp" name="temp" min="16" max="32" value="24" 
+                           oninput="document.getElementById('tempVal').textContent = this.value + ' °C'">
+                    <span id="tempVal" class="unit-badge">24 °C</span>
+                </div>
+            </div>
+
+            <!-- Number Input with Unit Label -->
+            <div class="control-group">
+                <label for="storage">Allocated Cloud Storage:</label>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <input type="number" id="storage" name="storage" min="1" max="500" value="50"
+                           oninput="document.getElementById('storageVal').textContent = this.value + ' GB'">
+                    <span id="storageVal" class="unit-badge">50 GB</span>
+                </div>
+            </div>
+
+            <button type="submit">Save Preferences</button>
+        </form>
+    </div>
+</body>
+</html>

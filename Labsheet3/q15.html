@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 15 - ES6 Arrow Functions, Template Literals &amp; Destructuring</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f8fafc; }
+        .box { max-width: 620px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        pre { background: #0f172a; color: #38bdf8; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 14px; line-height: 1.5; }
+        button { background: #0284c7; color: white; border: none; padding: 10px 18px; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 15:
+      Write a script utilizing arrow functions, template literals, and destructuring assignment 
+      syntax (ES6 features).
+    -->
+    <div class="box">
+        <h2>ES6 Features Demonstration</h2>
+        <p>Demonstrating Arrow Functions, Template Literals (<code>`${...}`</code>), and Object/Array Destructuring.</p>
+
+        <button onclick="runES6Demo()">Run ES6 Script</button>
+
+        <h3>Output Console:</h3>
+        <pre id="output">Click 'Run ES6 Script' to see results...</pre>
+    </div>
+
+    <script>
+        function runES6Demo() {
+            let log = [];
+
+            // 1. ES6 Arrow Functions
+            const calculateBonus = (salary, rate = 0.1) => salary * rate;
+            const greet = (name) => `Hello, ${name}! Welcome to the Web Dev Portal.`;
+
+            log.push("=== 1. ARROW FUNCTIONS ===");
+            log.push(greet("Aarav"));
+            log.push(`Calculated Bonus for ₹50,000 at 10%: ₹${calculateBonus(50000)}`);
+
+            // 2. ES6 Object Destructuring
+            const developer = {
+                devName: "Riya Verma",
+                role: "Full Stack Engineer",
+                experienceYears: 4,
+                location: {
+                    city: "Roorkee",
+                    state: "Uttarakhand"
+                }
+            };
+
+            // Destructuring properties from object
+            const { devName, role, experienceYears, location: { city } } = developer;
+
+            log.push("\n=== 2. OBJECT DESTRUCTURING & TEMPLATE LITERALS ===");
+            // Using ES6 Template Literals with interpolated expressions
+            const profileSummary = `Developer Profile:
+- Name: ${devName}
+- Designation: ${role}
+- Experience: ${experienceYears} years
+- City: ${city}`;
+            log.push(profileSummary);
+
+            // 3. ES6 Array Destructuring
+            const rgbColors = [255, 128, 0];
+            const [red, green, blue] = rgbColors;
+
+            log.push("\n=== 3. ARRAY DESTRUCTURING ===");
+            log.push(`Extracted Colors: Red=${red}, Green=${green}, Blue=${blue}`);
+
+            document.getElementById("output").textContent = log.join("\n");
+        }
+    </script>
+</body>
+</html>

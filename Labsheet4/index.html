@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COER University - Web Designing Lab Sheet 4 Solutions</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        h1 {
+            color: #0f172a;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            color: #64748b;
+            font-size: 15px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        .card-num {
+            font-weight: 700;
+            color: #2563eb;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .card-title {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+        .card a {
+            display: inline-block;
+            text-align: center;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .card a:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>COER UNIVERSITY - LAB SHEET 4</h1>
+            <p class="subtitle">Complete PHP, Apache &amp; MySQL Solutions Index (Questions 1 to 21)</p>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-num">Question 1</div>
+                <div class="card-title">Configure and verify Apache web server default page locally.</div>
+                <a href="q1.html" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 2</div>
+                <div class="card-title">php.ini error reporting setup &amp; phpinfo() verification.</div>
+                <a href="q2.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 3</div>
+                <div class="card-title">Connect MySQL server &amp; create `college_db` database.</div>
+                <a href="q3.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 4</div>
+                <div class="card-title">Establish secure MySQL database connection using PDO.</div>
+                <a href="q4.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 5</div>
+                <div class="card-title">Create MySQL table `students` via PHP script.</div>
+                <a href="q5.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 6</div>
+                <div class="card-title">Insert student record using PDO prepared statements.</div>
+                <a href="q6.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 7</div>
+                <div class="card-title">Retrieve and display student records in a styled HTML table.</div>
+                <a href="q7.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 8</div>
+                <div class="card-title">Update existing student email address based on student ID.</div>
+                <a href="q8.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 9</div>
+                <div class="card-title">Delete student record using URL parameter (GET request).</div>
+                <a href="q9.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 10</div>
+                <div class="card-title">Configure Apache virtual hosts (`httpd-vhosts.conf`).</div>
+                <a href="q10.html" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 11</div>
+                <div class="card-title">Inspect Apache server environment variables via `$_SERVER`.</div>
+                <a href="q11.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 12</div>
+                <div class="card-title">User authentication verifying username &amp; password against MySQL.</div>
+                <a href="q12.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 13</div>
+                <div class="card-title">File upload handler validating size and extensions with `$_FILES`.</div>
+                <a href="q13.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 14</div>
+                <div class="card-title">MySQL restricted user permissions (SELECT, INSERT, UPDATE).</div>
+                <a href="q14.html" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 15</div>
+                <div class="card-title">Session management using `session_start()` and `$_SESSION`.</div>
+                <a href="q15.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 16</div>
+                <div class="card-title">Cookie management (`setcookie()`) storing theme preferences.</div>
+                <a href="q16.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 17</div>
+                <div class="card-title">Export MySQL table data into downloadable CSV file.</div>
+                <a href="q17.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 18</div>
+                <div class="card-title">Apache server performance and `error.log` / `access.log` testing.</div>
+                <a href="q18.html" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 19</div>
+                <div class="card-title">PDO transaction management (`beginTransaction`, `commit`, `rollBack`).</div>
+                <a href="q19.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 20</div>
+                <div class="card-title">Verify and configure PHP extensions in `php.ini`.</div>
+                <a href="q20.php" target="_blank">Open Solution</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 21</div>
+                <div class="card-title">Secure password hashing with `password_hash()` &amp; `password_verify()`.</div>
+                <a href="q21.php" target="_blank">Open Solution</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

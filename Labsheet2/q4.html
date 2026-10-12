@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 4 - Modern Layout using Flexbox</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Header Frame Replacement */
+        header {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 18px 24px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        /* Middle Flex Container */
+        .main-wrapper {
+            display: flex;
+            flex: 1; /* Fills remaining height */
+        }
+        /* Sidebar Navigation Frame Replacement */
+        nav {
+            width: 240px;
+            background-color: #f1f5f9;
+            border-right: 1px solid #e2e8f0;
+            padding: 20px;
+        }
+        nav h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #475569;
+            text-transform: uppercase;
+        }
+        nav ul {
+            list-style: none;
+        }
+        nav li {
+            margin-bottom: 12px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 500;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        /* Main Content Frame Replacement */
+        main {
+            flex: 1;
+            padding: 30px;
+            background-color: #ffffff;
+        }
+        main h2 {
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+        main p {
+            color: #334155;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 12px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 4:
+      Create a modern webpage layout replicating frame-like behavior using CSS 
+      Flexbox (`display: flex`) instead of HTML frames.
+    -->
+    <header>
+        Modern Portal (Flexbox Replicating Frames)
+    </header>
+
+    <div class="main-wrapper">
+        <nav>
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Admissions</a></li>
+                <li><a href="#">Faculty Directory</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <h2>Welcome to Modern Responsive Layout</h2>
+            <p>This layout uses CSS Flexbox (<code>display: flex</code>) rather than deprecated HTML frames.</p>
+            <p>Flexbox offers complete responsive control, accessible DOM hierarchy, clean URL routing, and seamless CSS styling across all screen sizes.</p>
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2026 COER University - Web Technologies Lab
+    </footer>
+</body>
+</html>

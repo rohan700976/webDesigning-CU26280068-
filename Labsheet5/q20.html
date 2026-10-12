@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 20 - Python Virtual Environment &amp; Apache Integration</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; padding: 30px; color: #1e293b; }
+        .card { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-size: 24px; color: #0f172a; margin-bottom: 8px; }
+        .badge { background: #dbeafe; color: #1d4ed8; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 13px; }
+        pre { background: #1e293b; color: #38bdf8; padding: 15px; border-radius: 6px; font-size: 13px; line-height: 1.5; overflow-x: auto; }
+        .step { margin: 20px 0; }
+        .step h3 { color: #2563eb; font-size: 16px; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 20:
+      Configure Python virtual environments (`venv`) and integrate them with Apache web server 
+      deployment settings.
+    -->
+    <div class="card">
+        <h1>Python Virtual Environment (venv) &amp; Apache Integration</h1>
+        <span class="badge">Isolated Dependency Management</span>
+
+        <div class="step">
+            <h3>Step 1: Create and Activate Virtual Environment</h3>
+            <pre># In terminal, navigate to project directory
+cd E:\webDesigning\Labsheet5
+
+# Create virtual environment
+python -m venv myenv
+
+# Activate virtual environment on Windows
+myenv\Scripts\activate
+
+# Install project dependencies inside venv
+pip install mysql-connector-python PyMySQL sqlalchemy</pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Point Apache / mod_wsgi to Virtual Environment</h3>
+            <p>In Apache's <code>httpd.conf</code> or VirtualHost configuration:</p>
+            <pre># WSGI Daemon Mode using Virtual Environment python-home:
+WSGIDaemonProcess mywebapp python-home="E:/webDesigning/Labsheet5/myenv" python-path="E:/webDesigning/Labsheet5"
+WSGIProcessGroup mywebapp
+WSGIScriptAlias / "E:/webDesigning/Labsheet5/wsgi.py"</pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Direct CGI Shebang to Virtual Environment Python Executable</h3>
+            <p>For standard CGI scripts, point the first shebang line directly to the venv binary:</p>
+            <pre>#!E:/webDesigning/Labsheet5/myenv/Scripts/python.exe
+# This guarantees scripts run with isolated libraries installed in myenv</pre>
+        </div>
+    </div>
+</body>
+</html>

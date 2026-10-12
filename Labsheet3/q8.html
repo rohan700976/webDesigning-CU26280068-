@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 8 - Interactive Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0f172a; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .calc-box { width: 320px; background: #1e293b; padding: 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+        #display { width: 100%; height: 55px; background: #0f172a; color: #38bdf8; font-size: 26px; text-align: right; padding: 10px; border: none; border-radius: 8px; margin-bottom: 15px; box-sizing: border-box; }
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        button { height: 50px; font-size: 18px; font-weight: bold; border: none; border-radius: 8px; background: #334155; color: white; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #475569; }
+        button.op { background: #f59e0b; color: black; }
+        button.op:hover { background: #d97706; }
+        button.clear { background: #ef4444; }
+        button.clear:hover { background: #dc2626; }
+        button.equal { background: #10b981; grid-column: span 2; }
+        button.equal:hover { background: #059669; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 8:
+      Create an interactive calculator web page using JavaScript event listeners 
+      (`addEventListener`) for click events on buttons.
+    -->
+    <div class="calc-box">
+        <input type="text" id="display" readonly value="0">
+        <div class="grid" id="btnContainer">
+            <button class="clear" data-val="C">C</button>
+            <button class="clear" data-val="DEL">DEL</button>
+            <button class="op" data-val="%">%</button>
+            <button class="op" data-val="/">/</button>
+
+            <button data-val="7">7</button>
+            <button data-val="8">8</button>
+            <button data-val="9">9</button>
+            <button class="op" data-val="*">*</button>
+
+            <button data-val="4">4</button>
+            <button data-val="5">5</button>
+            <button data-val="6">6</button>
+            <button class="op" data-val="-">-</button>
+
+            <button data-val="1">1</button>
+            <button data-val="2">2</button>
+            <button data-val="3">3</button>
+            <button class="op" data-val="+">+</button>
+
+            <button data-val="0">0</button>
+            <button data-val=".">.</button>
+            <button class="equal" data-val="=">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById("display");
+        const buttons = document.querySelectorAll("#btnContainer button");
+
+        // Attaching click event listeners using addEventListener to each button
+        buttons.forEach(button => {
+            button.addEventListener("click", function() {
+                const val = this.getAttribute("data-val");
+                handleInput(val);
+            });
+        });
+
+        function handleInput(val) {
+            if (val === "C") {
+                display.value = "0";
+            } else if (val === "DEL") {
+                if (display.value.length > 1) {
+                    display.value = display.value.slice(0, -1);
+                } else {
+                    display.value = "0";
+                }
+            } else if (val === "=") {
+                try {
+                    // Safe evaluation
+                    display.value = Function('"use strict";return (' + display.value + ')')();
+                } catch (e) {
+                    display.value = "Error";
+                }
+            } else {
+                if (display.value === "0" || display.value === "Error") {
+                    display.value = val;
+                } else {
+                    display.value += val;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

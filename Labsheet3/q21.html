@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 21 - Callbacks and Asynchronous setTimeout</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f8fafc; }
+        .box { max-width: 550px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        button { background: #059669; color: white; border: none; padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .terminal { background: #1e293b; color: #a7f3d0; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 13px; line-height: 1.6; min-height: 160px; margin-top: 15px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 21:
+      Write a JavaScript program demonstrating callback functions and asynchronous behavior 
+      using `setTimeout`.
+    -->
+    <div class="box">
+        <h2>Asynchronous Callbacks with `setTimeout`</h2>
+        <p>Demonstrating non-blocking async execution and passing callbacks to handle completion.</p>
+
+        <button onclick="startAsyncWorkflow()">Execute Async Task</button>
+
+        <div id="consoleLog" class="terminal">Click button to start asynchronous demonstration...</div>
+    </div>
+
+    <script>
+        const terminal = document.getElementById("consoleLog");
+
+        function log(msg) {
+            terminal.textContent += "\n" + msg;
+        }
+
+        // Asynchronous function accepting a callback
+        function fetchUserData(userId, callback) {
+            log("[Step 2]: Fetching data for User ID: " + userId + " (Asynchronous API simulation)...");
+
+            // Simulating 2 seconds network delay asynchronously
+            setTimeout(function() {
+                const simulatedUser = {
+                    id: userId,
+                    name: "Rahul Verma",
+                    role: "Software Engineer",
+                    department: "Engineering"
+                };
+
+                log("[Step 3]: Data received after 2 seconds delay!");
+                // Invoking the passed callback function with retrieved data
+                callback(simulatedUser);
+
+            }, 2000);
+        }
+
+        function startAsyncWorkflow() {
+            terminal.textContent = "=== Starting Async Demonstration ===";
+            log("[Step 1]: Initiating workflow synchronously.");
+
+            // Passing a callback function as an argument
+            fetchUserData(101, function(userData) {
+                log("[Step 4 (Callback Executed)]: Processing user: " + userData.name + " (" + userData.role + ")");
+                log("=== Workflow Finished Successfully! ===");
+            });
+
+            // This demonstrates non-blocking asynchronous behavior:
+            log("[Sync Check]: Notice that this line executes immediately BEFORE Step 3 and Step 4 because setTimeout is non-blocking!");
+        }
+    </script>
+</body>
+</html>

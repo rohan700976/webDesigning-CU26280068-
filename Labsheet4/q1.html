@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 1 - Apache Web Server Verification</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; padding: 30px; color: #1e293b; }
+        .card { max-width: 750px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { color: #0f172a; margin-bottom: 10px; font-size: 24px; }
+        .status-badge { display: inline-block; background: #dcfce7; color: #166534; padding: 6px 14px; border-radius: 20px; font-weight: bold; margin-bottom: 20px; }
+        pre { background: #1e293b; color: #38bdf8; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 14px; line-height: 1.5; }
+        .steps { margin: 15px 0; line-height: 1.8; }
+        code { background: #e2e8f0; padding: 2px 6px; border-radius: 4px; color: #0f172a; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 1:
+      Configure and verify the Apache web server installation locally, ensuring the default test page 
+      (`index.php` or `index.html`) loads correctly on `http://localhost`.
+    -->
+    <div class="card">
+        <h1>Apache Web Server Verification &amp; Setup</h1>
+        <div class="status-badge">✓ Apache Test Page Ready</div>
+
+        <p>This test page verifies that your local Apache HTTP Server (via XAMPP, WAMP, or standalone Apache) is correctly configured and responding on <code>http://localhost</code>.</p>
+
+        <h3>Verification Steps &amp; Commands:</h3>
+        <div class="steps">
+            <ol>
+                <li><strong>Start Apache:</strong> Open XAMPP / WAMP Control Panel and click <strong>Start</strong> next to Apache (or run <code>httpd -k start</code> in terminal).</li>
+                <li><strong>Document Root:</strong> Place this file as <code>index.html</code> (or <code>index.php</code>) inside your web directory (e.g. <code>C:\xampp\htdocs\</code>).</li>
+                <li><strong>Verify in Browser:</strong> Open <code>http://localhost</code> or <code>http://127.0.0.1</code> in your browser.</li>
+            </ol>
+        </div>
+
+        <h3>Apache Configuration Snippet (<code>httpd.conf</code>):</h3>
+        <pre># Listen on standard HTTP port 80
+Listen 80
+
+# Server Name
+ServerName localhost:80
+
+# Document Root
+DocumentRoot "C:/xampp/htdocs"
+&lt;Directory "C:/xampp/htdocs"&gt;
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+&lt;/Directory&gt;
+
+# Directory Index default files
+DirectoryIndex index.php index.html index.htm</pre>
+    </div>
+</body>
+</html>

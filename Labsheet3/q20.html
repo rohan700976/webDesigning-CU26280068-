@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 20 - Dynamic Table Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f8fafc; }
+        .box { max-width: 650px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .controls { display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-end; }
+        .field { flex: 1; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
+        input { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
+        button { background: #0284c7; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; height: 38px; }
+        #tableContainer { margin-top: 25px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: center; }
+        th { background: #1e293b; color: white; }
+        tr:nth-child(even) { background-color: #f1f5f9; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 20:
+      Create a dynamic table generator in JavaScript that takes row and column counts from 
+      user inputs and renders a populated HTML table.
+    -->
+    <div class="box">
+        <h2>Dynamic HTML Table Generator</h2>
+
+        <div class="controls">
+            <div class="field">
+                <label for="rowsCount">Number of Rows:</label>
+                <input type="number" id="rowsCount" min="1" max="25" value="4">
+            </div>
+            <div class="field">
+                <label for="colsCount">Number of Columns:</label>
+                <input type="number" id="colsCount" min="1" max="10" value="4">
+            </div>
+            <button onclick="generateTable()">Generate Table</button>
+        </div>
+
+        <div id="tableContainer"></div>
+    </div>
+
+    <script>
+        function generateTable() {
+            const rows = parseInt(document.getElementById("rowsCount").value);
+            const cols = parseInt(document.getElementById("colsCount").value);
+            const container = document.getElementById("tableContainer");
+
+            container.innerHTML = "";
+
+            if (isNaN(rows) || isNaN(cols) || rows < 1 || cols < 1) {
+                alert("Please enter valid row and column counts greater than 0.");
+                return;
+            }
+
+            // Create table element
+            const table = document.createElement("table");
+
+            // Header row
+            const thead = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            for (let c = 1; c <= cols; c++) {
+                const th = document.createElement("th");
+                th.textContent = "Col " + c;
+                headerRow.appendChild(th);
+            }
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Body rows
+            const tbody = document.createElement("tbody");
+            for (let r = 1; r <= rows; r++) {
+                const tr = document.createElement("tr");
+                for (let c = 1; c <= cols; c++) {
+                    const td = document.createElement("td");
+                    td.textContent = `Cell (${r}, ${c})`;
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+            table.appendChild(tbody);
+
+            container.appendChild(table);
+        }
+
+        // Generate default on load
+        generateTable();
+    </script>
+</body>
+</html>

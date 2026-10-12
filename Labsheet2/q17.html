@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 17 - Hidden Input Fields for Session Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            padding: 30px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-bottom: 15px;
+            color: #0f172a;
+        }
+        .notice-box {
+            background-color: #f1f5f9;
+            border-left: 4px solid #3b82f6;
+            padding: 10px 14px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #475569;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 17:
+      Write an HTML form incorporating hidden input fields (`type='hidden'`) to pass 
+      session data securely.
+    -->
+    <div class="container">
+        <h2>Shopping Cart Checkout</h2>
+
+        <div class="notice-box">
+            <strong>Security Notice:</strong> Hidden inputs pass parameters like CSRF tokens, session IDs, and order numbers transparently without displaying them to the user interface.
+        </div>
+
+        <form action="#" method="POST">
+            <!-- Hidden Input Fields for Session & Security Data -->
+            <input type="hidden" name="sessionId" value="sess_9a8b7c6d5e4f3a2b1">
+            <input type="hidden" name="csrfToken" value="cf78d38290e29bca0918ef">
+            <input type="hidden" name="cartOrderId" value="ORD-2026-9941">
+            <input type="hidden" name="userId" value="usr_5501">
+
+            <!-- Visible user input fields -->
+            <div class="form-group">
+                <label for="shippingAddress">Shipping Delivery Address:</label>
+                <input type="text" id="shippingAddress" name="shippingAddress" placeholder="Street, City, Pincode" required>
+            </div>
+
+            <div class="form-group">
+                <label for="recipientPhone">Contact Phone Number:</label>
+                <input type="text" id="recipientPhone" name="recipientPhone" placeholder="Mobile number" required>
+            </div>
+
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+</body>
+</html>

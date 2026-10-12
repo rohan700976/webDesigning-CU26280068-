@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 7 - Student Object &amp; 'this' Keyword</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f8fafc; }
+        .box { max-width: 550px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        button { background: #059669; color: white; border: none; padding: 10px 18px; border-radius: 4px; cursor: pointer; margin-right: 8px; }
+        pre { background: #f1f5f9; padding: 15px; border-radius: 6px; font-size: 14px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 7:
+      Write a JavaScript program implementing a custom object representing a student with 
+      properties and methods, demonstrating `this` keyword usage.
+    -->
+    <div class="box">
+        <h2>Custom Student Object &amp; `this` Keyword</h2>
+        <p>Demonstrating how member methods use <code>this</code> to access and update student instance properties.</p>
+
+        <button onclick="displayStudentProfile()">Show Student Profile</button>
+        <button onclick="calculatePercentage()">Calculate Average Score</button>
+        <button onclick="addExtraCourse()">Enroll in Course</button>
+
+        <pre id="output">Click a button above to execute student methods...</pre>
+    </div>
+
+    <script>
+        // Custom Student Object Constructor / Definition
+        const student = {
+            name: "Aarav Sharma",
+            rollNumber: "CS-2026-104",
+            branch: "Computer Science & Engineering",
+            marks: [85, 92, 78, 88, 95],
+            enrolledCourses: ["Web Designing", "Data Structures", "Database Systems"],
+
+            // Method 1: Using 'this' to read properties
+            getDetails: function() {
+                return "Student Name: " + this.name + "\n" +
+                       "Roll Number : " + this.rollNumber + "\n" +
+                       "Branch      : " + this.branch + "\n" +
+                       "Enrolled In : " + this.enrolledCourses.join(", ");
+            },
+
+            // Method 2: Using 'this' to calculate based on internal array
+            calculateAverage: function() {
+                let total = this.marks.reduce((acc, score) => acc + score, 0);
+                let avg = (total / this.marks.length).toFixed(2);
+                return "Student " + this.name + " has an average score of " + avg + "% across " + this.marks.length + " subjects.";
+            },
+
+            // Method 3: Using 'this' to mutate internal properties
+            enrollCourse: function(courseName) {
+                this.enrolledCourses.push(courseName);
+                return "Course '" + courseName + "' successfully added for " + this.name + "!\nUpdated list: " + this.enrolledCourses.join(", ");
+            }
+        };
+
+        function displayStudentProfile() {
+            document.getElementById("output").textContent = student.getDetails();
+        }
+
+        function calculatePercentage() {
+            document.getElementById("output").textContent = student.calculateAverage();
+        }
+
+        function addExtraCourse() {
+            let course = prompt("Enter course to enroll:", "Artificial Intelligence");
+            if (course) {
+                document.getElementById("output").textContent = student.enrollCourse(course);
+            }
+        }
+    </script>
+</body>
+</html>

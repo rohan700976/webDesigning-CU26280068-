@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 20 - Multi-Step User Onboarding Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            padding: 30px;
+        }
+        .onboarding-card {
+            max-width: 500px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .step-indicators {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        .step-tab {
+            font-size: 13px;
+            font-weight: bold;
+            color: #94a3b8;
+            padding-bottom: 6px;
+            border-bottom: 3px solid #cbd5e1;
+            flex: 1;
+            text-align: center;
+        }
+        .step-tab.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+        /* CSS display properties controlling step simulation */
+        .step-content {
+            display: none; /* Hidden by default */
+        }
+        .step-content.active {
+            display: block; /* Active step visible */
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 9px;
+            box-sizing: border-box;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-prev {
+            background-color: #94a3b8;
+            color: white;
+        }
+        .btn-next {
+            background-color: #2563eb;
+            color: white;
+        }
+        .btn-submit {
+            background-color: #16a34a;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 20:
+      Build a multi-step user onboarding form layout using CSS display properties 
+      (`display: none` / `block`) to simulate step progression.
+    -->
+    <div class="onboarding-card">
+        <div class="step-indicators">
+            <span class="step-tab active" id="tab1">Step 1: Account</span>
+            <span class="step-tab" id="tab2">Step 2: Profile</span>
+            <span class="step-tab" id="tab3">Step 3: Finish</span>
+        </div>
+
+        <form action="#" method="POST">
+            <!-- Step 1: display: block -->
+            <div class="step-content active" id="step1">
+                <h3>Account Information</h3>
+                <div class="form-group">
+                    <label for="accEmail">Email Address</label>
+                    <input type="email" id="accEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="accPass">Create Password</label>
+                    <input type="password" id="accPass" required>
+                </div>
+                <div class="btn-group" style="justify-content: flex-end;">
+                    <button type="button" class="btn-next" onclick="goToStep(2)">Next &rarr;</button>
+                </div>
+            </div>
+
+            <!-- Step 2: display: none -->
+            <div class="step-content" id="step2">
+                <h3>Profile Details</h3>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="profession">Profession</label>
+                    <select id="profession">
+                        <option>Student</option>
+                        <option>Working Professional</option>
+                        <option>Researcher</option>
+                    </select>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-prev" onclick="goToStep(1)">&larr; Back</button>
+                    <button type="button" class="btn-next" onclick="goToStep(3)">Next &rarr;</button>
+                </div>
+            </div>
+
+            <!-- Step 3: display: none -->
+            <div class="step-content" id="step3">
+                <h3>Preferences &amp; Finish</h3>
+                <div class="form-group">
+                    <label><input type="checkbox" checked> Receive weekly technical updates</label>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" required> I agree to terms and conditions</label>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn-prev" onclick="goToStep(2)">&larr; Back</button>
+                    <button type="submit" class="btn-submit">Complete Setup</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Script toggling display: block / none for step progression simulation -->
+    <script>
+        function goToStep(stepNum) {
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('step' + i).classList.remove('active');
+                document.getElementById('tab' + i).classList.remove('active');
+            }
+            document.getElementById('step' + stepNum).classList.add('active');
+            document.getElementById('tab' + stepNum).classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 15 - Local vs External Images</title>
+</head>
+<body>
+    <!-- 
+      Question 15:
+      Write code demonstrating how to source images both from a local directory folder and 
+      from an external URL source.
+    -->
+    <h1>Sourcing Images in HTML</h1>
+
+    <h2>1. Image from External URL Source</h2>
+    <p>Loaded directly from a remote web server via an absolute URL:</p>
+    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500" 
+         alt="Code editor on monitor screen" 
+         width="350">
+
+    <h2>2. Image from a Local Directory Folder</h2>
+    <p>Loaded using a relative filepath within the project (e.g. <code>images/sample.jpg</code>):</p>
+    <!-- Note: Ensure the file exists at images/sample.jpg relative to this HTML file -->
+    <img src="images/sample.jpg" 
+         alt="Local image from project images folder" 
+         width="350">
+</body>
+</html>

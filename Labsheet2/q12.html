@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 12 - Responsive Payment Gateway Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f3f4f6;
+            padding: 30px 15px;
+        }
+        .checkout-box {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #111827;
+        }
+        .form-row {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        /* Desktop/Tablet side-by-side row */
+        .split-row {
+            display: flex;
+            gap: 15px;
+        }
+        .split-row .col-half {
+            flex: 1;
+        }
+        /* Media Query for mobile screens (screens <= 600px) */
+        @media (max-width: 600px) {
+            .split-row {
+                flex-direction: column; /* Stack input widths on mobile */
+                gap: 12px;
+            }
+            .checkout-box {
+                padding: 20px 15px;
+            }
+            input {
+                font-size: 16px; /* Better readability & tap target on phones */
+            }
+        }
+        .btn-pay {
+            width: 100%;
+            padding: 12px;
+            background-color: #059669;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-pay:hover {
+            background-color: #047857;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 12:
+      Create a responsive payment gateway checkout form using CSS media queries to 
+      adjust input widths on mobile screens.
+    -->
+    <div class="checkout-box">
+        <h2>Secure Payment Checkout</h2>
+        <form action="#" method="POST">
+            <div class="form-row">
+                <label for="cardName">Cardholder Name</label>
+                <input type="text" id="cardName" name="cardName" placeholder="Full Name as on card" required>
+            </div>
+
+            <div class="form-row">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="xxxx xxxx xxxx xxxx" maxlength="19" required>
+            </div>
+
+            <!-- Responsive row: Side-by-side on desktop, stacked on mobile -->
+            <div class="split-row form-row">
+                <div class="col-half">
+                    <label for="expiry">Expiry Date</label>
+                    <input type="text" id="expiry" name="expiry" placeholder="MM/YY" maxlength="5" required>
+                </div>
+                <div class="col-half">
+                    <label for="cvv">CVV Code</label>
+                    <input type="password" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-pay">Pay $99.00 Securely</button>
+        </form>
+    </div>
+</body>
+</html>

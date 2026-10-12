@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 18 - Responsive Contact Us Flexbox Layout</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f1f5f9;
+            padding: 40px 20px;
+        }
+        /* Outer flex container */
+        .contact-container {
+            max-width: 900px;
+            margin: auto;
+            display: flex; /* Flexbox */
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        /* Left side: Embedded contact form */
+        .form-side {
+            flex: 1.2;
+            padding: 35px;
+        }
+        .form-side h2 {
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .btn-send {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        /* Right side: Company location & contact details */
+        .info-side {
+            flex: 0.8;
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .info-side h2 {
+            margin-bottom: 18px;
+            color: #38bdf8;
+        }
+        .info-item {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .info-item strong {
+            display: block;
+            color: #94a3b8;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        /* Responsive Flexbox wrap for smaller screens */
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 18:
+      Design a responsive contact us page featuring an embedded form on one side 
+      and company location details on the other using CSS Flexbox.
+    -->
+    <div class="contact-container">
+        <!-- Form Side -->
+        <div class="form-side">
+            <h2>Get in Touch</h2>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="How can we help you?"></textarea>
+                </div>
+                <button type="submit" class="btn-send">Send Message</button>
+            </form>
+        </div>
+
+        <!-- Company Location Details Side -->
+        <div class="info-side">
+            <h2>Our Headquarters</h2>
+            <div class="info-item">
+                <strong>Address:</strong>
+                COER University Campus,<br/>
+                7 Km Roorkee-Haridwar Road (NH-58),<br/>
+                Post Box No. 27, Vardhman Puram,<br/>
+                Roorkee, Uttarakhand - 247667
+            </div>
+            <div class="info-item">
+                <strong>Email:</strong>
+                contact@coer.ac.in
+            </div>
+            <div class="info-item">
+                <strong>Phone:</strong>
+                +91 (01332) 282500
+            </div>
+            <div class="info-item">
+                <strong>Working Hours:</strong>
+                Monday - Saturday: 9:00 AM - 5:00 PM
+            </div>
+        </div>
+    </div>
+</body>
+</html>

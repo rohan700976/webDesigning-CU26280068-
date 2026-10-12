@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 22 - User Profile Form (Radio & Checkbox)</title>
+</head>
+<body>
+    <!-- 
+      Question 22:
+      Add gender selection using radio buttons and hobby selections using checkboxes to a 
+      user profile form.
+    -->
+    <h1>User Profile Details</h1>
+
+    <form action="#" method="POST">
+        <!-- Full Name -->
+        <p>
+            <label for="fullName">Full Name:</label><br/>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your name" required>
+        </p>
+
+        <!-- Gender selection using radio buttons -->
+        <p>
+            <strong>Select Gender:</strong><br/>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br/>
+
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br/>
+
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+        </p>
+
+        <!-- Hobby selection using checkboxes -->
+        <p>
+            <strong>Select Hobbies:</strong><br/>
+            <input type="checkbox" id="reading" name="hobbies" value="reading">
+            <label for="reading">Reading Books</label><br/>
+
+            <input type="checkbox" id="gaming" name="hobbies" value="gaming">
+            <label for="gaming">Gaming</label><br/>
+
+            <input type="checkbox" id="traveling" name="hobbies" value="traveling">
+            <label for="traveling">Traveling</label><br/>
+
+            <input type="checkbox" id="music" name="hobbies" value="music">
+            <label for="music">Listening to Music</label>
+        </p>
+
+        <p>
+            <input type="submit" value="Save Profile">
+        </p>
+    </form>
+</body>
+</html>

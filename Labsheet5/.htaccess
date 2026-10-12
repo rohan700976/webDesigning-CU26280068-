@@ -1,0 +1,15 @@
+# Apache Configuration Directives for executing Python scripts seamlessly
+
+# 1. Enable CGI Execution in this directory
+Options +ExecCGI +FollowSymLinks
+
+# 2. Add Handler to map .py files to Python CGI interpreter
+AddHandler cgi-script .py
+
+# 3. Default index files to look for
+DirectoryIndex index.py index.html
+
+# 4. Prevent direct browsing of sensitive server script files
+<FilesMatch "\.(log|sql|ini|env)$">
+    Require all denied
+</FilesMatch>

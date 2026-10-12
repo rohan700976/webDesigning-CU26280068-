@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 2 - Form Validation Attributes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            padding: 30px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .field {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input:invalid {
+            border-color: #ef4444;
+        }
+        input:valid {
+            border-color: #22c55e;
+        }
+        small {
+            color: #64748b;
+            font-size: 12px;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 2:
+      Design a student registration form incorporating HTML5 validation attributes 
+      (required, minlength, maxlength, pattern, type='email').
+    -->
+    <div class="container">
+        <h2>Student Registration Form</h2>
+        <form action="#" method="POST">
+            <!-- required, minlength, maxlength -->
+            <div class="field">
+                <label for="fullName">Full Name (Required, 3 to 30 chars):</label>
+                <input type="text" id="fullName" name="fullName" required minlength="3" maxlength="30" placeholder="e.g. Rahul Sharma">
+                <small>Min 3 and Max 30 characters required.</small>
+            </div>
+
+            <!-- type='email' and required -->
+            <div class="field">
+                <label for="email">Student Email (type="email"):</label>
+                <input type="email" id="email" name="email" required placeholder="student@college.edu">
+                <small>Must be a valid email format.</small>
+            </div>
+
+            <!-- pattern (Student ID: e.g. 2 alphanumeric + 4 digits like CS1001) -->
+            <div class="field">
+                <label for="studentId">Student ID (pattern: 2 uppercase letters + 4 digits):</label>
+                <input type="text" id="studentId" name="studentId" required pattern="[A-Z]{2}[0-9]{4}" placeholder="e.g. CS2026">
+                <small>Format: 2 uppercase letters followed by 4 numbers (e.g. CS2026).</small>
+            </div>
+
+            <!-- pattern for 10-digit mobile number -->
+            <div class="field">
+                <label for="phone">Phone Number (pattern: 10 digits):</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" maxlength="10" placeholder="10-digit phone number">
+                <small>Exactly 10 numeric digits.</small>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

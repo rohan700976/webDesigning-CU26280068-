@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 24 - Feedback Form</title>
+</head>
+<body>
+    <!-- 
+      Question 24:
+      Build a feedback form that includes a multi-line text input area (<textarea>) for 
+      comments and a file upload input type (<input type="file">).
+    -->
+    <h1>User Feedback &amp; Suggestions</h1>
+
+    <!-- enctype="multipart/form-data" is required for file uploads -->
+    <form action="#" method="POST" enctype="multipart/form-data">
+        <p>
+            <label for="userName">Your Name:</label><br/>
+            <input type="text" id="userName" name="userName" placeholder="Enter your name" required>
+        </p>
+
+        <!-- Multi-line text input area -->
+        <p>
+            <label for="userComments">Comments / Feedback:</label><br/>
+            <textarea id="userComments" name="comments" rows="6" cols="45" placeholder="Share your experience or suggestions here..." required></textarea>
+        </p>
+
+        <!-- File upload input type -->
+        <p>
+            <label for="attachmentFile">Upload Supporting File / Screenshot:</label><br/>
+            <input type="file" id="attachmentFile" name="attachment" accept=".png, .jpg, .jpeg, .pdf">
+        </p>
+
+        <p>
+            <input type="submit" value="Submit Feedback">
+        </p>
+    </form>
+</body>
+</html>

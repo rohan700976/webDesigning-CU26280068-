@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 8 - File Upload and Custom Animated Submit Button</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fdf2f8;
+            padding: 40px 20px;
+        }
+        .upload-container {
+            max-width: 480px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #9d174d;
+        }
+        .form-group {
+            margin-bottom: 22px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #f472b6;
+            background: #fff1f2;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        /* Custom Submit Button with CSS Transitions on :hover and :active */
+        .btn-custom {
+            display: inline-block;
+            background: #db2777;
+            color: white;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(219, 39, 119, 0.35);
+            /* CSS transitions */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* :hover state */
+        .btn-custom:hover {
+            background: #be185d;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(219, 39, 119, 0.5);
+            letter-spacing: 0.5px;
+        }
+        /* :active state (mouse click press) */
+        .btn-custom:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 6px rgba(219, 39, 119, 0.3);
+            background: #9d174d;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 8:
+      Create an HTML form featuring file upload (`type='file'`) and a styled custom 
+      submit button with CSS transitions on `:hover` and `:active` states.
+    -->
+    <div class="upload-container">
+        <h2>Assignment Submission</h2>
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="studentName">Student Name:</label>
+                <input type="text" id="studentName" name="studentName" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" required>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group">
+                <label for="projectFile">Select Project Document (PDF / ZIP):</label>
+                <input type="file" id="projectFile" name="projectFile" accept=".pdf, .zip, .docx" required>
+            </div>
+
+            <!-- Styled submit button with :hover and :active transitions -->
+            <button type="submit" class="btn-custom">Upload &amp; Submit</button>
+        </form>
+    </div>
+</body>
+</html>

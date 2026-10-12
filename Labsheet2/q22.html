@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 22 - Floating Label Newsletter Widget</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .newsletter-widget {
+            background: #ffffff;
+            padding: 35px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+        .newsletter-widget h2 {
+            color: #0f172a;
+            margin-bottom: 8px;
+            font-size: 22px;
+        }
+        .newsletter-widget p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        /* Floating Label Container */
+        .floating-group {
+            position: relative;
+            margin-bottom: 22px;
+            text-align: left;
+        }
+        /* Input inside floating container */
+        .floating-input {
+            width: 100%;
+            padding: 14px 12px 10px 12px;
+            font-size: 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.25s ease;
+        }
+        /* Positioned label inside input box */
+        .floating-label {
+            position: absolute;
+            left: 14px;
+            top: 13px;
+            color: #94a3b8;
+            font-size: 15px;
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #ffffff;
+            padding: 0 4px;
+        }
+        /* Floating effect triggered when input is focused or not placeholder-shown */
+        .floating-input:focus {
+            border-color: #2563eb;
+        }
+        .floating-input:focus ~ .floating-label,
+        .floating-input:not(:placeholder-shown) ~ .floating-label {
+            top: -10px;
+            font-size: 12px;
+            color: #2563eb;
+            font-weight: bold;
+        }
+        .btn-subscribe {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .btn-subscribe:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 22:
+      Design a newsletter subscription widget with a floating label effect using CSS 
+      positioning.
+    -->
+    <div class="newsletter-widget">
+        <h2>Subscribe to Tech Weekly</h2>
+        <p>Get the latest web dev tutorials and articles directly in your inbox.</p>
+
+        <form action="#" method="POST">
+            <!-- Floating Label Field 1: Name -->
+            <div class="floating-group">
+                <input type="text" id="subscriberName" class="floating-input" placeholder=" " required>
+                <label for="subscriberName" class="floating-label">Your Name</label>
+            </div>
+
+            <!-- Floating Label Field 2: Email -->
+            <div class="floating-group">
+                <input type="email" id="subscriberEmail" class="floating-input" placeholder=" " required>
+                <label for="subscriberEmail" class="floating-label">Email Address</label>
+            </div>
+
+            <button type="submit" class="btn-subscribe">Subscribe Now</button>
+        </form>
+    </div>
+</body>
+</html>

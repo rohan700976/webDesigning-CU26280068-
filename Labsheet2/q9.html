@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 9 - Grouped Form with Styled Fieldset &amp; Legend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            padding: 30px;
+        }
+        .survey-card {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+        /* Custom styled <fieldset> */
+        fieldset {
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 18px 22px; /* Custom padding */
+            margin-bottom: 25px; /* Custom margins */
+            background-color: #f8fafc;
+        }
+        /* Custom styled <legend> */
+        legend {
+            font-weight: bold;
+            color: #1d4ed8;
+            padding: 4px 12px; /* Custom padding */
+            background-color: #dbeafe;
+            border: 1px solid #bfdbfe;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .row {
+            margin-bottom: 12px;
+        }
+        label {
+            display: inline-block;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 9:
+      Implement a survey form utilizing grouped form controls using `<fieldset>` and 
+      `<legend>` tags, styled with custom padding and margins.
+    -->
+    <div class="survey-card">
+        <h2>Customer Satisfaction Survey</h2>
+        <form action="#" method="POST">
+            <!-- Group 1: Personal Details -->
+            <fieldset>
+                <legend>1. Respondent Information</legend>
+                <div class="row">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="row">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </fieldset>
+
+            <!-- Group 2: Product Rating -->
+            <fieldset>
+                <legend>2. Service Evaluation</legend>
+                <div class="row">
+                    <p>How would you rate our support service?</p>
+                    <label><input type="radio" name="support" value="5"> Excellent</label>&nbsp;&nbsp;
+                    <label><input type="radio" name="support" value="4"> Good</label>&nbsp;&nbsp;
+                    <label><input type="radio" name="support" value="3"> Average</label>&nbsp;&nbsp;
+                    <label><input type="radio" name="support" value="1"> Poor</label>
+                </div>
+                <div class="row">
+                    <p>Would you recommend us to a colleague?</p>
+                    <label><input type="radio" name="recommend" value="yes"> Yes</label>&nbsp;&nbsp;
+                    <label><input type="radio" name="recommend" value="no"> No</label>
+                </div>
+            </fieldset>
+
+            <button type="submit">Submit Survey</button>
+        </form>
+    </div>
+</body>
+</html>

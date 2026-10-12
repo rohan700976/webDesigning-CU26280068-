@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 10 - Apache Virtual Host Configuration</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; padding: 30px; color: #1e293b; }
+        .card { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-size: 24px; color: #0f172a; margin-bottom: 8px; }
+        .badge { background: #dbeafe; color: #1d4ed8; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold; }
+        pre { background: #1e293b; color: #38bdf8; padding: 15px; border-radius: 6px; font-size: 13px; line-height: 1.5; overflow-x: auto; }
+        .step { margin: 20px 0; }
+        .step h3 { font-size: 16px; color: #2563eb; margin-bottom: 8px; }
+        code { background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 10:
+      Configure Apache virtual hosts (`httpd-vhosts.conf`) to host a local development project 
+      directory under a custom domain name (e.g., `http://collegeweb.local`).
+    -->
+    <div class="card">
+        <h1>Apache Virtual Host Configuration Guide</h1>
+        <span class="badge">Target Domain: http://collegeweb.local</span>
+
+        <div class="step">
+            <h3>Step 1: Edit Windows Hosts File (<code>C:\Windows\System32\drivers\etc\hosts</code>)</h3>
+            <p>Open Notepad as Administrator and append the mapping at the bottom:</p>
+            <pre># Custom local development domain mapping
+127.0.0.1       collegeweb.local
+127.0.0.1       www.collegeweb.local</pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Enable Virtual Hosts in Apache (<code>httpd.conf</code>)</h3>
+            <p>Ensure the virtual hosts include line is uncommented (remove the leading <code>#</code>):</p>
+            <pre># Virtual hosts
+Include conf/extra/httpd-vhosts.conf</pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Configure Virtual Host in <code>httpd-vhosts.conf</code></h3>
+            <p>File path: <code>C:/xampp/apache/conf/extra/httpd-vhosts.conf</code></p>
+            <pre>&lt;VirtualHost *:80&gt;
+    ServerAdmin admin@collegeweb.local
+    DocumentRoot "E:/webDesigning"
+    ServerName collegeweb.local
+    ServerAlias www.collegeweb.local
+
+    &lt;Directory "E:/webDesigning"&gt;
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog "logs/collegeweb-error.log"
+    CustomLog "logs/collegeweb-access.log" common
+&lt;/VirtualHost&gt;</pre>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Restart Apache and Test</h3>
+            <p>Restart Apache web server in the Control Panel and open <code>http://collegeweb.local</code> in your web browser.</p>
+        </div>
+    </div>
+</body>
+</html>

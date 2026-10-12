@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 19 - Keyboard Event Inspector</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 40px; background: #0f172a; color: white; text-align: center; }
+        .box { max-width: 550px; margin: auto; background: #1e293b; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .press-prompt { padding: 15px; border: 2px dashed #475569; border-radius: 8px; color: #94a3b8; font-size: 15px; margin-bottom: 25px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .card { background: #334155; padding: 18px 10px; border-radius: 8px; }
+        .card .label { font-size: 12px; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px; }
+        .card .value { font-size: 22px; font-weight: bold; color: #38bdf8; font-family: monospace; word-break: break-all; }
+        .event-type { margin-top: 15px; font-size: 14px; color: #a7f3d0; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 19:
+      Write a script that captures keyboard events (`keydown`, `keyup`) and displays the 
+      pressed key code and character on the screen.
+    -->
+    <div class="box">
+        <h2>Keyboard Event Inspector</h2>
+        <div class="press-prompt">
+            Press any key on your keyboard to capture <code>keydown</code> &amp; <code>keyup</code> events.
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="label">Key Character</div>
+                <div class="value" id="valKey">-</div>
+            </div>
+            <div class="card">
+                <div class="label">Key Code</div>
+                <div class="value" id="valCode">-</div>
+            </div>
+            <div class="card">
+                <div class="label">Numeric Which</div>
+                <div class="value" id="valWhich">-</div>
+            </div>
+        </div>
+
+        <div class="event-type" id="eventTypeDisplay">Event: Waiting for keystroke...</div>
+    </div>
+
+    <script>
+        const valKey = document.getElementById("valKey");
+        const valCode = document.getElementById("valCode");
+        const valWhich = document.getElementById("valWhich");
+        const eventTypeDisplay = document.getElementById("eventTypeDisplay");
+
+        // Capturing 'keydown' event
+        window.addEventListener("keydown", function(event) {
+            valKey.textContent = event.key === " " ? "Space" : event.key;
+            valCode.textContent = event.code;
+            valWhich.textContent = event.keyCode || event.which;
+            eventTypeDisplay.textContent = "Status: Key Pressed Down (keydown event triggered)";
+            eventTypeDisplay.style.color = "#34d399";
+        });
+
+        // Capturing 'keyup' event
+        window.addEventListener("keyup", function(event) {
+            eventTypeDisplay.textContent = "Status: Key Released (keyup event triggered for '" + (event.key === " " ? "Space" : event.key) + "')";
+            eventTypeDisplay.style.color = "#60a5fa";
+        });
+    </script>
+</body>
+</html>

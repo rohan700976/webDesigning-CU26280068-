@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 9 - Dynamic DOM Creation &amp; Appending</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f8fafc; }
+        .box { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .input-group { display: flex; gap: 8px; margin-bottom: 20px; }
+        input { flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px; }
+        button { background: #2563eb; color: white; border: none; padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .comment-card { background: #f1f5f9; border-left: 4px solid #2563eb; padding: 12px 15px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-del { background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 9:
+      Write a script that dynamically creates and appends new DOM elements 
+      (`createElement`, `appendChild`) based on user text input.
+    -->
+    <div class="box">
+        <h2>Dynamic DOM Element Creator</h2>
+        <p>Type text below and click Add to dynamically create and append HTML nodes.</p>
+
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="Enter an item or note...">
+            <button onclick="createAndAppendNode()">Add Item</button>
+        </div>
+
+        <h3>Appended Elements Container:</h3>
+        <div id="elementsContainer">
+            <!-- Dynamically created items will be appended here -->
+        </div>
+    </div>
+
+    <script>
+        function createAndAppendNode() {
+            const inputField = document.getElementById("userInput");
+            const textValue = inputField.value.trim();
+
+            if (textValue === "") {
+                alert("Please enter some text!");
+                return;
+            }
+
+            const container = document.getElementById("elementsContainer");
+
+            // 1. createElement for the item wrapper
+            const card = document.createElement("div");
+            card.className = "comment-card";
+
+            // 2. createElement for the content span
+            const textSpan = document.createElement("span");
+            textSpan.textContent = textValue; // Safe text insertion
+
+            // 3. createElement for a delete button inside each item
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "btn-del";
+            deleteBtn.textContent = "Remove";
+            deleteBtn.onclick = function() {
+                container.removeChild(card); // Removing child node from DOM
+            };
+
+            // 4. appendChild methods
+            card.appendChild(textSpan);
+            card.appendChild(deleteBtn);
+            container.appendChild(card);
+
+            // Clear input and refocus
+            inputField.value = "";
+            inputField.focus();
+        }
+    </script>
+</body>
+</html>

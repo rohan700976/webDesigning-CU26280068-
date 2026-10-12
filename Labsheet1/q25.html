@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 25 - Survey Form with Fieldset &amp; Legend</title>
+</head>
+<body>
+    <!-- 
+      Question 25:
+      Design a structured survey form that groups related fields using <fieldset> and 
+      <legend> tags.
+    -->
+    <h1>Student Campus Experience Survey</h1>
+
+    <form action="#" method="POST">
+        <!-- Personal Information Group -->
+        <fieldset>
+            <legend><strong>Personal Information</strong></legend>
+            <p>
+                <label for="fullName">Full Name:</label><br/>
+                <input type="text" id="fullName" name="fullName" required>
+            </p>
+            <p>
+                <label for="rollNo">Student ID / Roll No:</label><br/>
+                <input type="text" id="rollNo" name="rollNo" required>
+            </p>
+            <p>
+                <label for="email">College Email:</label><br/>
+                <input type="email" id="email" name="email" required>
+            </p>
+        </fieldset>
+
+        <br/>
+
+        <!-- Academic & Campus Feedback Group -->
+        <fieldset>
+            <legend><strong>Academic &amp; Infrastructure Feedback</strong></legend>
+            <p>
+                <label for="rating">How would you rate the campus Wi-Fi &amp; Labs?</label><br/>
+                <select id="rating" name="rating">
+                    <option value="excellent">Excellent</option>
+                    <option value="good">Good</option>
+                    <option value="average">Average</option>
+                    <option value="poor">Poor</option>
+                </select>
+            </p>
+            <p>
+                <strong>Which facilities do you use most?</strong><br/>
+                <input type="checkbox" id="library" name="facilities" value="library">
+                <label for="library">Central Library</label><br/>
+
+                <input type="checkbox" id="canteen" name="facilities" value="canteen">
+                <label for="canteen">Cafeteria</label><br/>
+
+                <input type="checkbox" id="sports" name="facilities" value="sports">
+                <label for="sports">Sports Complex</label>
+            </p>
+            <p>
+                <label for="remarks">Any additional suggestions:</label><br/>
+                <textarea id="remarks" name="remarks" rows="4" cols="40" placeholder="Your feedback here..."></textarea>
+            </p>
+        </fieldset>
+
+        <br/>
+        <input type="submit" value="Submit Survey">
+    </form>
+</body>
+</html>

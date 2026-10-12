@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 7 - Form Field Focus Pseudo-Class Styling</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0fdf4;
+            padding: 30px;
+        }
+        .feedback-box {
+            max-width: 480px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #166534;
+        }
+        .form-row {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #374151;
+        }
+        /* Default state of inputs */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            background-color: #f9fafb;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.25s ease, background-color 0.25s ease;
+        }
+        /* :focus pseudo-class changing border color and background tint */
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #16a34a; /* Green border on focus */
+            background-color: #ecfdf5; /* Light green background tint on focus */
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+        }
+        button {
+            background-color: #16a34a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 7:
+      Build an interactive feedback form where input fields change border color and 
+      background tint on `:focus` pseudo-class.
+    -->
+    <div class="feedback-box">
+        <h2>Interactive Feedback Form</h2>
+        <form action="#" method="POST">
+            <div class="form-row">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" placeholder="Click here to focus">
+            </div>
+
+            <div class="form-row">
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" placeholder="Click here to focus">
+            </div>
+
+            <div class="form-row">
+                <label for="message">Feedback Message:</label>
+                <textarea id="message" name="message" rows="4" placeholder="Notice the border color &amp; background tint on focus..."></textarea>
+            </div>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</body>
+</html>

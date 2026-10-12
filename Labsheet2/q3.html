@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 3 - HTML Frameset Multi-Column Layout</title>
+</head>
+<!-- 
+  Question 3:
+  Implement a multi-column layout using HTML `<frameset>` and `<frame>` 
+  tags (Note: legacy support practice), containing a navigation frame, header 
+  frame, and content frame.
+  (Note: In HTML frameset documents, <frameset> replaces the <body> tag)
+-->
+<frameset rows="80px, *">
+    <!-- Header Frame -->
+    <frame src="q3_header.html" name="headerFrame" noresize scrolling="no">
+    
+    <!-- Nested horizontal frameset for Nav and Content -->
+    <frameset cols="220px, *">
+        <!-- Navigation Frame -->
+        <frame src="q3_nav.html" name="navFrame">
+        <!-- Content Frame -->
+        <frame src="q3_content.html" name="contentFrame">
+    </frameset>
+
+    <noframes>
+        <body>
+            <p>Your browser does not support frames. Please upgrade to a modern browser.</p>
+        </body>
+    </noframes>
+</frameset>
+</html>

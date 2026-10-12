@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COER University - Web Designing Lab Sheet 5 Solutions</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        h1 {
+            color: #0f172a;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            color: #64748b;
+            font-size: 15px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        .card-num {
+            font-weight: 700;
+            color: #2563eb;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .card-title {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+        .card a {
+            display: inline-block;
+            text-align: center;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .card a:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>COER UNIVERSITY - LAB SHEET 5</h1>
+            <p class="subtitle">Complete Python, MySQL &amp; Apache CGI Solutions Index (Questions 1 to 21)</p>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-num">Question 1</div>
+                <div class="card-title">Configure Apache for Python CGI/WSGI and test with Hello World.</div>
+                <a href="q1.py" target="_blank">View Script (q1.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 2</div>
+                <div class="card-title">Install and verify mysql-connector-python &amp; PyMySQL libraries.</div>
+                <a href="q2.py" target="_blank">View Script (q2.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 3</div>
+                <div class="card-title">Connect Python to MySQL and query database server version.</div>
+                <a href="q3.py" target="_blank">View Script (q3.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 4</div>
+                <div class="card-title">Create database `python_web_db` and table `users` in Python.</div>
+                <a href="q4.py" target="_blank">View Script (q4.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 5</div>
+                <div class="card-title">Batch insert multiple records into MySQL using executemany().</div>
+                <a href="q5.py" target="_blank">View Script (q5.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 6</div>
+                <div class="card-title">Retrieve MySQL records and format into an HTML table response.</div>
+                <a href="q6.py" target="_blank">View Script (q6.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 7</div>
+                <div class="card-title">Read web form input via `cgi` module and insert into MySQL.</div>
+                <a href="q7.py" target="_blank">View Script (q7.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 8</div>
+                <div class="card-title">Update user profile information in MySQL based on given user ID.</div>
+                <a href="q8.py" target="_blank">View Script (q8.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 9</div>
+                <div class="card-title">Delete record and handle database exceptions via try-except.</div>
+                <a href="q9.py" target="_blank">View Script (q9.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 10</div>
+                <div class="card-title">Configure Apache `.htaccess` directives for seamless Python execution.</div>
+                <a href="q10.html" target="_blank">View Guide (q10.html)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 11</div>
+                <div class="card-title">Parameterized queries preventing SQL injection with filtered results.</div>
+                <a href="q11.py" target="_blank">View Script (q11.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 12</div>
+                <div class="card-title">Database connection pooling for high concurrency web traffic.</div>
+                <a href="q12.py" target="_blank">View Script (q12.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 13</div>
+                <div class="card-title">Log database error messages and timestamps to dedicated log file.</div>
+                <a href="q13.py" target="_blank">View Script (q13.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 14</div>
+                <div class="card-title">Read CSV data and bulk-insert rows into MySQL table.</div>
+                <a href="q14.py" target="_blank">View Script (q14.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 15</div>
+                <div class="card-title">SQLAlchemy ORM mapping Python classes to MySQL database tables.</div>
+                <a href="q15.py" target="_blank">View Script (q15.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 16</div>
+                <div class="card-title">Dynamic JSON response web endpoint from MySQL queries.</div>
+                <a href="q16.py" target="_blank">View Script (q16.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 17</div>
+                <div class="card-title">Programmatically backup database schema &amp; data to `.sql` file.</div>
+                <a href="q17.py" target="_blank">View Script (q17.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 18</div>
+                <div class="card-title">User session handling with MySQL backend persistent storage.</div>
+                <a href="q18.py" target="_blank">View Script (q18.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 19</div>
+                <div class="card-title">Verify &amp; sanitize form inputs before executing SQL write operations.</div>
+                <a href="q19.py" target="_blank">View Script (q19.py)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 20</div>
+                <div class="card-title">Python virtual environments (`venv`) and Apache deployment integration.</div>
+                <a href="q20.html" target="_blank">View Guide (q20.html)</a>
+            </div>
+            <div class="card">
+                <div class="card-num">Question 21</div>
+                <div class="card-title">Analytical summary reports (counts, percentages) for dashboards.</div>
+                <a href="q21.py" target="_blank">View Script (q21.py)</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

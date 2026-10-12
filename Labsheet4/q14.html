@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 14 - MySQL User Privileges Configuration</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8fafc; padding: 30px; color: #1e293b; }
+        .card { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-size: 24px; color: #0f172a; margin-bottom: 8px; }
+        .badge { background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 13px; }
+        pre { background: #1e293b; color: #38bdf8; padding: 15px; border-radius: 6px; font-size: 13px; line-height: 1.5; overflow-x: auto; }
+        .box-info { background: #f1f5f9; padding: 15px; border-left: 4px solid #2563eb; border-radius: 4px; margin: 15px 0; }
+        p { line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 14:
+      Configure MySQL user privileges by creating a dedicated database user with restricted 
+      permissions (`SELECT, INSERT, UPDATE`) for the web application.
+    -->
+    <div class="card">
+        <h1>MySQL User Privileges Configuration Guide</h1>
+        <span class="badge">Principle of Least Privilege (PoLP)</span>
+
+        <div class="box-info">
+            <strong>Security Best Practice:</strong> Web applications should never use the <code>root</code> administrative account for standard database operations. Creating a dedicated application user with restricted permissions (<code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>) prevents malicious queries from executing administrative commands like <code>DROP DATABASE</code> or altering table structures.
+        </div>
+
+        <h3>SQL Commands to Create User &amp; Grant Permissions:</h3>
+        <pre>-- 1. Create a dedicated application user
+CREATE USER 'college_app_user'@'localhost' IDENTIFIED BY 'SecureAppPass2026!';
+
+-- 2. Grant restricted permissions on `college_db`
+GRANT SELECT, INSERT, UPDATE ON college_db.* TO 'college_app_user'@'localhost';
+
+-- 3. Flush privileges to apply changes immediately
+FLUSH PRIVILEGES;
+
+-- 4. Verify assigned permissions for the new user
+SHOW GRANTS FOR 'college_app_user'@'localhost';</pre>
+
+        <h3>Updated PHP PDO Connection String:</h3>
+        <pre>&lt;?php
+// Connecting with the restricted database user
+$host = 'localhost';
+$db   = 'college_db';
+$user = 'college_app_user';     // Dedicated restricted user
+$pass = 'SecureAppPass2026!';   // Dedicated password
+
+$pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
+?&gt;</pre>
+    </div>
+</body>
+</html>

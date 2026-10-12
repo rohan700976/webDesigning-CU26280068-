@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 19 - Complex Data Table with Rowspan</title>
+</head>
+<body>
+    <!-- 
+      Question 19:
+      Build a complex data table that uses the rowspan attribute to merge cells vertically 
+      across multiple rows.
+    -->
+    <h1>Employee Shift Schedule</h1>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <caption><strong>Department Shift and Task Allocation</strong></caption>
+        <tr bgcolor="#f2f2f2">
+            <th>Department</th>
+            <th>Employee Name</th>
+            <th>Shift</th>
+            <th>Assigned Task</th>
+        </tr>
+        <tr>
+            <!-- Merging 3 rows vertically for IT Support -->
+            <td rowspan="3" align="center"><strong>IT Support</strong></td>
+            <td>Rahul Sharma</td>
+            <td>Morning (08:00 - 16:00)</td>
+            <td>Network Maintenance</td>
+        </tr>
+        <tr>
+            <td>Sneha Patil</td>
+            <td>Evening (16:00 - 00:00)</td>
+            <td>Helpdesk &amp; Ticketing</td>
+        </tr>
+        <tr>
+            <td>Amit Singh</td>
+            <td>Night (00:00 - 08:00)</td>
+            <td>Server Monitoring</td>
+        </tr>
+        <tr>
+            <!-- Merging 2 rows vertically for Development -->
+            <td rowspan="2" align="center"><strong>Development</strong></td>
+            <td>Pooja Nair</td>
+            <td>Regular (09:00 - 18:00)</td>
+            <td>Frontend UI Design</td>
+        </tr>
+        <tr>
+            <td>Vikram Verma</td>
+            <td>Regular (09:00 - 18:00)</td>
+            <td>API &amp; Backend Integration</td>
+        </tr>
+    </table>
+</body>
+</html>

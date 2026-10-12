@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 1 - Prompt Dialogs &amp; Arithmetic Operations</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f8fafc; }
+        .box { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        button { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 15px; }
+        button:hover { background: #1d4ed8; }
+        pre { background: #f1f5f9; padding: 15px; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 1:
+      Write a JavaScript program to accept two numbers via prompt dialogs, perform 
+      arithmetic operations, and display the result using `console.log` and `alert`.
+    -->
+    <div class="box">
+        <h2>Arithmetic Operations via Prompt Dialogs</h2>
+        <p>Click the button below to enter two numbers using browser prompts.</p>
+        <button onclick="calculate()">Start Calculation</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            let num1Str = prompt("Enter the first number:");
+            let num2Str = prompt("Enter the second number:");
+
+            if (num1Str === null || num2Str === null || num1Str.trim() === "" || num2Str.trim() === "") {
+                alert("Operation cancelled or invalid input.");
+                return;
+            }
+
+            let num1 = parseFloat(num1Str);
+            let num2 = parseFloat(num2Str);
+
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("Please enter valid numeric values!");
+                return;
+            }
+
+            let sum = num1 + num2;
+            let diff = num1 - num2;
+            let prod = num1 * num2;
+            let div = num2 !== 0 ? (num1 / num2).toFixed(2) : "Cannot divide by zero";
+            let mod = num2 !== 0 ? (num1 % num2) : "Undefined";
+
+            let resultMsg = 
+                "Results for " + num1 + " and " + num2 + ":\n" +
+                "Addition: " + sum + "\n" +
+                "Subtraction: " + diff + "\n" +
+                "Multiplication: " + prod + "\n" +
+                "Division: " + div + "\n" +
+                "Modulus: " + mod;
+
+            // Display using console.log
+            console.log("=== Arithmetic Results ===");
+            console.log(resultMsg);
+
+            // Display using alert
+            alert(resultMsg);
+
+            // Display on webpage
+            document.getElementById("output").innerHTML = "<h3>Output:</h3><pre>" + resultMsg + "</pre>";
+        }
+    </script>
+</body>
+</html>

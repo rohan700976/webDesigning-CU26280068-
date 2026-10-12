@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 21 - Accessible Form with Label-Input Linking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            padding: 30px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        h2 {
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+        .tip {
+            font-size: 13px;
+            color: #059669;
+            background-color: #ecfdf5;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .form-row {
+            margin-bottom: 16px;
+        }
+        /* Clicking label activates/focuses input */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 9px;
+            box-sizing: border-box;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+        }
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .checkbox-row label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        button {
+            margin-top: 15px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 21:
+      Create an accessible form where every `<input>` is explicitly linked to its 
+      corresponding `<label>` using the `for` and `id` attributes.
+    -->
+    <div class="container">
+        <h2>Accessible Contact Information</h2>
+        <div class="tip">
+            <strong>Accessibility Feature:</strong> Click on any label text, and the corresponding input field will automatically receive focus!
+        </div>
+
+        <form action="#" method="POST">
+            <!-- Explicit link 1: for="userFullName" -> id="userFullName" -->
+            <div class="form-row">
+                <label for="userFullName">Full Legal Name:</label>
+                <input type="text" id="userFullName" name="fullName" required>
+            </div>
+
+            <!-- Explicit link 2: for="userEmailAddress" -> id="userEmailAddress" -->
+            <div class="form-row">
+                <label for="userEmailAddress">Email Address:</label>
+                <input type="email" id="userEmailAddress" name="email" required>
+            </div>
+
+            <!-- Explicit link 3: for="userPhoneNumber" -> id="userPhoneNumber" -->
+            <div class="form-row">
+                <label for="userPhoneNumber">Contact Mobile Number:</label>
+                <input type="tel" id="userPhoneNumber" name="phone">
+            </div>
+
+            <!-- Explicit link 4: for="agreeTerms" -> id="agreeTerms" -->
+            <div class="checkbox-row">
+                <input type="checkbox" id="agreeTerms" name="terms" required>
+                <label for="agreeTerms">I confirm that all provided information is accurate.</label>
+            </div>
+
+            <button type="submit">Submit Information</button>
+        </form>
+    </div>
+</body>
+</html>

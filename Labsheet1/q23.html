@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 23 - City Dropdown Selection</title>
+</head>
+<body>
+    <!-- 
+      Question 23:
+      Create a selection dropdown menu using <select> and <option> tags allowing users to 
+      choose their city of residence.
+    -->
+    <h1>Location Selection</h1>
+
+    <form action="#" method="POST">
+        <p>
+            <label for="citySelect">Choose your City of Residence:</label><br/><br/>
+            <select id="citySelect" name="city" required>
+                <option value="" disabled selected>-- Select a City --</option>
+                <option value="roorkee">Roorkee</option>
+                <option value="dehradun">Dehradun</option>
+                <option value="delhi">New Delhi</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="bengaluru">Bengaluru</option>
+                <option value="kolkata">Kolkata</option>
+                <option value="chandigarh">Chandigarh</option>
+            </select>
+        </p>
+
+        <p>
+            <input type="submit" value="Confirm Location">
+        </p>
+    </form>
+</body>
+</html>

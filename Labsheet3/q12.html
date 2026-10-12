@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 12 - Live Digital Clock</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .clock-card { background: #1e293b; padding: 40px; border-radius: 16px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #334155; }
+        .title { color: #94a3b8; font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        .time-display { font-size: 48px; font-weight: bold; font-family: monospace; color: #38bdf8; text-shadow: 0 0 20px rgba(56, 189, 248, 0.4); margin-bottom: 10px; }
+        .date-display { font-size: 16px; color: #cbd5e1; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 12:
+      Create a digital clock web page using JavaScript `setInterval` and `Date` object to 
+      display live time updating every second.
+    -->
+    <div class="clock-card">
+        <div class="title">Live Digital Clock</div>
+        <div class="time-display" id="timeBox">00:00:00 AM</div>
+        <div class="date-display" id="dateBox">Loading date...</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            // Using the Date object
+            const now = new Date();
+
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            // AM / PM format
+            const period = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12;
+            hours = hours ? hours : 12; // 0 becomes 12
+
+            // Leading zero formatting
+            hours = String(hours).padStart(2, "0");
+            minutes = String(minutes).padStart(2, "0");
+            seconds = String(seconds).padStart(2, "0");
+
+            document.getElementById("timeBox").textContent = `${hours}:${minutes}:${seconds} ${period}`;
+
+            // Optional full date representation
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("dateBox").textContent = now.toLocaleDateString(undefined, options);
+        }
+
+        // Initial call
+        updateClock();
+
+        // setInterval updating every 1000 milliseconds (1 second)
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 5 - String Reverse &amp; Palindrome Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #f8fafc; }
+        .box { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
+        button { background: #7c3aed; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 6px; line-height: 1.6; }
+        .is-pal { background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; }
+        .not-pal { background: #fff1f2; border: 1px solid #fecdd3; color: #9f1239; }
+    </style>
+</head>
+<body>
+    <!-- 
+      Question 5:
+      Write a JavaScript function that takes a string as input, reverses it, and checks if it is a 
+      palindrome.
+    -->
+    <div class="box">
+        <h2>Palindrome Checker</h2>
+        <label for="strInput">Enter a word or phrase:</label>
+        <input type="text" id="strInput" placeholder="e.g. Madam, Racecar, Hello">
+        <button onclick="handleStringCheck()">Reverse &amp; Check</button>
+
+        <div id="output" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        function checkPalindrome(inputStr) {
+            // Function that reverses a string and checks if it's a palindrome
+            let cleanedStr = inputStr.toLowerCase().replace(/[^a-z0-9]/g, ""); // Clean alphanumeric characters for accurate palindrome comparison
+            let reversedCleaned = cleanedStr.split("").reverse().join("");
+            
+            // Reversing the original string for display
+            let originalReversed = inputStr.split("").reverse().join("");
+
+            let isPalindrome = (cleanedStr.length > 0 && cleanedStr === reversedCleaned);
+
+            return {
+                original: inputStr,
+                reversed: originalReversed,
+                isPalindrome: isPalindrome
+            };
+        }
+
+        function handleStringCheck() {
+            let text = document.getElementById("strInput").value;
+            let outDiv = document.getElementById("output");
+            outDiv.style.display = "block";
+
+            if (text.trim() === "") {
+                outDiv.className = "result not-pal";
+                outDiv.innerHTML = "Please enter some text.";
+                return;
+            }
+
+            let result = checkPalindrome(text);
+
+            if (result.isPalindrome) {
+                outDiv.className = "result is-pal";
+                outDiv.innerHTML = 
+                    "<strong>Original String:</strong> " + result.original + "<br/>" +
+                    "<strong>Reversed String:</strong> " + result.reversed + "<br/>" +
+                    "<strong>Status:</strong> It IS a Palindrome! (Reads the same forwards and backwards)";
+            } else {
+                outDiv.className = "result not-pal";
+                outDiv.innerHTML = 
+                    "<strong>Original String:</strong> " + result.original + "<br/>" +
+                    "<strong>Reversed String:</strong> " + result.reversed + "<br/>" +
+                    "<strong>Status:</strong> NOT a Palindrome.";
+            }
+        }
+    </script>
+</body>
+</html>
