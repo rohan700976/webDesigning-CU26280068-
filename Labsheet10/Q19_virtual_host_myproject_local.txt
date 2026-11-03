@@ -1,0 +1,39 @@
+# Q19: Apache virtual host for myproject.local + hosts file mapping
+
+# ===== STEP 1: Virtual host file =====
+# Linux:   /etc/apache2/sites-available/myproject.conf
+# XAMPP:   C:\xampp\apache\conf\extra\httpd-vhosts.conf
+
+<VirtualHost *:80>
+    ServerName myproject.local
+    ServerAlias www.myproject.local
+    DocumentRoot "/var/www/myproject/public"
+
+    <Directory "/var/www/myproject/public">
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog  ${APACHE_LOG_DIR}/myproject_error.log
+    CustomLog ${APACHE_LOG_DIR}/myproject_access.log combined
+</VirtualHost>
+
+# ===== STEP 2: Enable it (Linux) =====
+#   sudo a2ensite myproject.conf
+#   sudo a2enmod rewrite
+#   sudo apache2ctl configtest
+#   sudo systemctl reload apache2
+#
+# XAMPP: uncomment "Include conf/extra/httpd-vhosts.conf" in httpd.conf, restart Apache
+
+# ===== STEP 3: Map in the hosts file =====
+# Linux/macOS: sudo nano /etc/hosts
+# Windows:     open Notepad as Administrator -> C:\Windows\System32\drivers\etc\hosts
+# Add this line:
+127.0.0.1    myproject.local www.myproject.local
+
+# ===== STEP 4: Test =====
+#   ping myproject.local          (should reply from 127.0.0.1)
+#   Open http://myproject.local in the browser
+# Windows: run "ipconfig /flushdns" if the name does not resolve.

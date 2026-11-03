@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Q8 (part 2): JavaScript front end consuming the secured API with fetch() -->
+<html lang="en"><head><meta charset="UTF-8"><title>Products API Client</title></head>
+<body>
+<h2>Login</h2>
+<input id="email" placeholder="email"> <input id="password" type="password" placeholder="password">
+<button onclick="login()">Login</button>
+
+<h2>Products</h2>
+<input id="pname" placeholder="name"> <input id="pprice" placeholder="price" type="number">
+<button onclick="addProduct()">Add</button>
+<ul id="list"></ul>
+
+<script>
+const API = '/api/products.php';
+let token = sessionStorage.getItem('token');
+
+const headers = () => ({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token });
+
+async function login() {
+  const res = await fetch('/api/login.php', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email.value, password: password.value })
+  });
+  const data = await res.json();
+  if (!res.ok) return alert(data.error);
+  token = data.token; sessionStorage.setItem('token', token);
+  loadProducts();
+}
+async function loadProducts() {
+  const res = await fetch(API, { headers: headers() });
+  if (!res.ok) return alert((await res.json()).error);
+  const items = await res.json();
+  list.innerHTML = '';
+  items.forEach(p => {
+    const li = document.createElement('li');
+    li.textContent = `${p.name} - ${p.price} `;
+    const del = document.createElement('button');
+    del.textContent = 'Delete';
+    del.onclick = () => deleteProduct(p.id);
+    li.appendChild(del); list.appendChild(li);
+  });
+}
+async function addProduct() {
+  await fetch(API, { method: 'POST', headers: headers(),
+    body: JSON.stringify({ name: pname.value, price: pprice.value }) });
+  loadProducts();
+}
+async function deleteProduct(id) {
+  await fetch(`${API}?id=${id}`, { method: 'DELETE', headers: headers() });
+  loadProducts();
+}
+if (token) loadProducts();
+</script>
+</body></html>
