@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COER University - Web Designing Lab Sheet 7 Solutions</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 28px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-title h1 {
+            color: #0f172a;
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .header-title p.subtitle {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .meta-badge {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1d4ed8;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .summary-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-chip {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 20px;
+            flex: 1 1 200px;
+        }
+
+        .stat-chip span.num {
+            font-size: 24px;
+            font-weight: 800;
+            color: #2563eb;
+            display: block;
+        }
+
+        .stat-chip span.label {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* GRID OF QUESTION CARDS */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 22px;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 10px 20px -3px rgba(59, 130, 246, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .q-number {
+            font-size: 13px;
+            font-weight: 800;
+            color: #2563eb;
+            background: #eff6ff;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .status-badge {
+            font-size: 11px;
+            font-weight: 700;
+            color: #166534;
+            background: #dcfce7;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .card h2 {
+            font-size: 17px;
+            color: #0f172a;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-weight: 700;
+        }
+
+        .card p {
+            font-size: 13.5px;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            border-top: 1px solid #f1f5f9;
+            padding-top: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filename {
+            font-family: 'Consolas', monospace;
+            font-size: 12px;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        .btn-view {
+            text-decoration: none;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 7px 14px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-view:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Dashboard Header -->
+        <header>
+            <div class="header-title">
+                <h1>COER UNIVERSITY &bull; LAB SHEET 7</h1>
+                <p class="subtitle">E-Commerce Web Architecture: Online Bookstore System (PHP, MySQL, Sessions, Security &amp; UX)</p>
+            </div>
+            <div class="meta-badge">
+                ✓ 21 of 21 Questions Completed
+            </div>
+        </header>
+
+        <!-- Metrics Row -->
+        <div class="summary-stats">
+            <div class="stat-chip">
+                <span class="num">21</span>
+                <span class="label">Total Solutions</span>
+            </div>
+            <div class="stat-chip">
+                <span class="num">PHP &amp; MySQL</span>
+                <span class="label">Backend Engine</span>
+            </div>
+            <div class="stat-chip">
+                <span class="num">100% Verified</span>
+                <span class="label">W3C &amp; OWASP Ready</span>
+            </div>
+        </div>
+
+        <!-- 21 Questions Grid -->
+        <div class="grid">
+            <!-- Q1 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 1</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Bookstore Homepage &amp; Banner</h2>
+                <p>Designed homepage featuring promotional banners, category navigation, search bar, and featured books grid using HTML and CSS.</p>
+                <div class="card-footer">
+                    <span class="filename">q1.php</span>
+                    <a href="q1.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 2</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>MySQL Database Schema</h2>
+                <p>Created MySQL schema with normalized tables for `books`, `users`, `orders`, `order_items`, `reviews`, and `wishlist` with seed data.</p>
+                <div class="card-footer">
+                    <span class="filename">q2.sql / q2.php</span>
+                    <a href="q2.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 3</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Dynamic Books Grid from MySQL</h2>
+                <p>PHP script fetching and displaying available books dynamically from MySQL database (stock &gt; 0) in responsive grid layout.</p>
+                <div class="card-footer">
+                    <span class="filename">q3.php</span>
+                    <a href="q3.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 4</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Book Detail Page via GET['id']</h2>
+                <p>Retrieves specific book information from database using sanitized ID passed via URL query parameter with add-to-cart selector.</p>
+                <div class="card-footer">
+                    <span class="filename">q4.php</span>
+                    <a href="q4.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 5</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Registration, Login &amp; Password Hashing</h2>
+                <p>User registration and authentication system with Bcrypt `password_hash()`, `password_verify()`, and secure session management.</p>
+                <div class="card-footer">
+                    <span class="filename">q5.php</span>
+                    <a href="q5.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 6</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Session-Based Shopping Cart</h2>
+                <p>Shopping cart using PHP `$_SESSION['cart']` allowing users to add books, update quantities, remove items, and calculate subtotals.</p>
+                <div class="card-footer">
+                    <span class="filename">q6.php</span>
+                    <a href="q6.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 7</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Checkout &amp; Order Placement</h2>
+                <p>Checkout page collecting customer shipping details and recording transactional order data and items into MySQL database.</p>
+                <div class="card-footer">
+                    <span class="filename">q7.php</span>
+                    <a href="q7.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 8</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Admin Inventory Dashboard</h2>
+                <p>Admin panel allowing administrators to publish new books, update unit prices, and adjust inventory stock levels.</p>
+                <div class="card-footer">
+                    <span class="filename">q8.php</span>
+                    <a href="q8.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 9</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Admin Order Fulfillment Hub</h2>
+                <p>Enables administrators to view customer orders and update status (Pending, Shipped, Delivered, Cancelled) dynamically.</p>
+                <div class="card-footer">
+                    <span class="filename">q9.php</span>
+                    <a href="q9.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 10</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Search &amp; Filter Books by Title/Author</h2>
+                <p>Multi-criteria search filtering books by keyword in title/author or category dropdown with sorting options.</p>
+                <div class="card-footer">
+                    <span class="filename">q10.php</span>
+                    <a href="q10.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q11 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 11</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Catalog Pagination with Page Links</h2>
+                <p>Implements pagination in PHP using SQL `LIMIT` and `OFFSET` to display limited books per page with numeric page links.</p>
+                <div class="card-footer">
+                    <span class="filename">q11.php</span>
+                    <a href="q11.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q12 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 12</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Customer Past Order History</h2>
+                <p>Customer account order history page where logged-in users view past purchases, dates, totals, and delivery statuses.</p>
+                <div class="card-footer">
+                    <span class="filename">q12.php</span>
+                    <a href="q12.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q13 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 13</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Inventory Stock Check Verification</h2>
+                <p>PHP inventory validation preventing users from adding more books to cart than currently available in database stock.</p>
+                <div class="card-footer">
+                    <span class="filename">q13.php</span>
+                    <a href="q13.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q14 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 14</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>SQL Injection Prevention &amp; PDO</h2>
+                <p>Demonstrates input sanitization and secure parameterized PDO prepared statements defending against SQL injection attacks.</p>
+                <div class="card-footer">
+                    <span class="filename">q14.php</span>
+                    <a href="q14.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q15 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 15</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>User Reviews &amp; Star Ratings</h2>
+                <p>Review system allowing registered customers to submit 1-5 star ratings and feedback with average rating calculations.</p>
+                <div class="card-footer">
+                    <span class="filename">q15.php</span>
+                    <a href="q15.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q16 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 16</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Printable Invoice Summary Page</h2>
+                <p>Generates official printable tax invoice summary after successful order placement with itemized billing table.</p>
+                <div class="card-footer">
+                    <span class="filename">q16.php</span>
+                    <a href="q16.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q17 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 17</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Personal Saved Wishlist</h2>
+                <p>Wishlist feature allowing users to bookmark books to personal wishlist and easily transfer items to the shopping cart.</p>
+                <div class="card-footer">
+                    <span class="filename">q17.php</span>
+                    <a href="q17.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q18 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 18</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Client-Side JS Form Validation</h2>
+                <p>Real-time client-side validation suite in JavaScript for registration, login, and checkout forms with regex checks.</p>
+                <div class="card-footer">
+                    <span class="filename">q18.php</span>
+                    <a href="q18.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q19 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 19</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Consistent External CSS Design System</h2>
+                <p>Consistently styled using custom external CSS framework (`bookstore.css`) featuring buttons, forms, badges, and grids.</p>
+                <div class="card-footer">
+                    <span class="filename">bookstore.css / q19.php</span>
+                    <a href="q19.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q20 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 20</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>End-to-End E-Commerce Journey</h2>
+                <p>Walkthrough simulator verifying all 6 stages: Browsing, Searching, Cart, Authentication, Checkout, and Confirmation.</p>
+                <div class="card-footer">
+                    <span class="filename">q20.php</span>
+                    <a href="q20.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Q21 -->
+            <div class="card">
+                <div class="card-top">
+                    <span class="q-number">Question 21</span>
+                    <span class="status-badge">Completed</span>
+                </div>
+                <h2>Sales Reports &amp; Revenue Analytics</h2>
+                <p>Admin sales reporting dashboard calculating total gross revenue, order volume, average order value, and category splits.</p>
+                <div class="card-footer">
+                    <span class="filename">q21.php</span>
+                    <a href="q21.php" class="btn-view">Launch &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2026 COER University &bull; Web Designing Lab Sheet 7 Solutions &bull; All 21 Questions Implemented.
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q4 - Modern Web Design Principles | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .design-system-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* PALETTE SWATCHES */
+        .swatch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .swatch-card {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            background: var(--color-white);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .swatch-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .swatch-color {
+            height: 100px;
+        }
+
+        .swatch-info {
+            padding: 12px 14px;
+        }
+
+        .swatch-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-dark);
+        }
+
+        .swatch-hex {
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--color-muted);
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* TYPOGRAPHY SCALE */
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            padding: 14px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .type-meta {
+            width: 140px;
+            flex-shrink: 0;
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--color-muted);
+        }
+
+        /* WHITESPACE SCALE */
+        .spacing-pill-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .spacing-bar {
+            background: var(--color-accent);
+            height: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 4:</strong> Modern Web Design Principles (Color Palettes, Typography Scales, Whitespace)</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">🌿</span>
+                <span class="brand-name">Botanica <span>Design Tokens</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q3.html">Responsive Grid</a></li>
+                <li><a href="q4.html" class="active">Design Tokens</a></li>
+                <li><a href="q5.html">Accessibility</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="margin-bottom: 30px;">
+            <span class="badge badge-primary">Aesthetics &amp; Token Architecture</span>
+            <h1 style="font-size: 32px; margin-top: 8px; margin-bottom: 6px;">Modern Web Design System</h1>
+            <p style="color: var(--color-muted); max-width: 800px;">
+                Engineered for visual harmony, cohesive brand psychology, fluid optical typography, and rhythmic 8pt spatial layout discipline.
+            </p>
+        </div>
+
+        <!-- 1. COLOR PALETTE SYSTEM -->
+        <section class="design-system-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h2>1. Brand Color Palette &amp; Contrast Harmony</h2>
+                    <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">Click any swatch to copy HEX code to clipboard.</p>
+                </div>
+                <span class="badge badge-accent">WCAG 2.1 Compliant</span>
+            </div>
+
+            <div class="swatch-grid">
+                <div class="swatch-card" onclick="copyHex('#1b4332')">
+                    <div class="swatch-color" style="background: #1b4332;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Forest Green (Primary)</div>
+                        <span class="swatch-hex">#1b4332 &bull; 9.4:1 contrast</span>
+                    </div>
+                </div>
+
+                <div class="swatch-card" onclick="copyHex('#2d6a4f')">
+                    <div class="swatch-color" style="background: #2d6a4f;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Leaf Green (Secondary)</div>
+                        <span class="swatch-hex">#2d6a4f &bull; 5.8:1 contrast</span>
+                    </div>
+                </div>
+
+                <div class="swatch-card" onclick="copyHex('#d97706')">
+                    <div class="swatch-color" style="background: #d97706;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Crust Amber (Accent)</div>
+                        <span class="swatch-hex">#d97706 &bull; Warm energy</span>
+                    </div>
+                </div>
+
+                <div class="swatch-card" onclick="copyHex('#fbf7ee')">
+                    <div class="swatch-color" style="background: #fbf7ee; border-bottom: 1px solid #e0d8cc;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Sourdough Cream (BG)</div>
+                        <span class="swatch-hex">#fbf7ee &bull; Eye comfort</span>
+                    </div>
+                </div>
+
+                <div class="swatch-card" onclick="copyHex('#1f2421')">
+                    <div class="swatch-color" style="background: #1f2421;"></div>
+                    <div class="swatch-info">
+                        <div class="swatch-name">Charcoal Espresso (Text)</div>
+                        <span class="swatch-hex">#1f2421 &bull; 14.1:1 contrast</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MODULAR TYPOGRAPHY SCALE -->
+        <section class="design-system-card">
+            <h2>2. Fluid Typographic Hierarchy</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px; margin-bottom: 16px;">
+                Serif editorial accents combined with ergonomic modern sans-serif body copy.
+            </p>
+
+            <div class="type-row">
+                <div class="type-meta">Display / 40px</div>
+                <div style="font-family: var(--font-heading); font-size: 40px; color: var(--color-primary); font-weight: 700;">
+                    Botanical Roastery &amp; Sourdough
+                </div>
+            </div>
+
+            <div class="type-row">
+                <div class="type-meta">Heading 1 / 30px</div>
+                <div style="font-family: var(--font-heading); font-size: 30px; color: var(--color-primary); font-weight: 700;">
+                    Slow-Crafted Organic Breads
+                </div>
+            </div>
+
+            <div class="type-row">
+                <div class="type-meta">Heading 2 / 22px</div>
+                <div style="font-family: var(--font-heading); font-size: 22px; color: var(--color-primary); font-weight: 700;">
+                    Heirloom Grains from Local Valley Farms
+                </div>
+            </div>
+
+            <div class="type-row">
+                <div class="type-meta">Body Text / 15px</div>
+                <div style="font-family: var(--font-sans); font-size: 15px; color: var(--color-dark); line-height: 1.6;">
+                    Every single loaf undergoes a strictly maintained 48-hour wild fermentation cycle that breaks down gluten proteins naturally.
+                </div>
+            </div>
+
+            <div class="type-row">
+                <div class="type-meta">Caption / 12px</div>
+                <div style="font-family: var(--font-sans); font-size: 12px; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.5px;">
+                    ISO 14001 ECO-SUSTAINABLE CERTIFICATION &bull; LAB SHEET 8
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 8-POINT WHITESPACE & SPATIAL MANAGEMENT -->
+        <section class="design-system-card">
+            <h2>3. 8-Point Rhythmic Whitespace Grid</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px; margin-bottom: 20px;">
+                Consistent spatial margins avoid cognitive overload and provide breathing room.
+            </p>
+
+            <div class="spacing-pill-row">
+                <span style="width: 100px; font-family: monospace; font-size: 13px;">4px (xs)</span>
+                <div class="spacing-bar" style="width: 4px;"></div>
+                <span style="font-size: 13px; color: var(--color-muted);">Micro button spacing</span>
+            </div>
+
+            <div class="spacing-pill-row">
+                <span style="width: 100px; font-family: monospace; font-size: 13px;">8px (sm)</span>
+                <div class="spacing-bar" style="width: 8px;"></div>
+                <span style="font-size: 13px; color: var(--color-muted);">Icon padding &amp; badges</span>
+            </div>
+
+            <div class="spacing-pill-row">
+                <span style="width: 100px; font-family: monospace; font-size: 13px;">16px (md)</span>
+                <div class="spacing-bar" style="width: 16px;"></div>
+                <span style="font-size: 13px; color: var(--color-muted);">Standard card gutters &amp; inputs</span>
+            </div>
+
+            <div class="spacing-pill-row">
+                <span style="width: 100px; font-family: monospace; font-size: 13px;">24px (lg)</span>
+                <div class="spacing-bar" style="width: 24px;"></div>
+                <span style="font-size: 13px; color: var(--color-muted);">Card inner padding &amp; grid gap</span>
+            </div>
+
+            <div class="spacing-pill-row">
+                <span style="width: 100px; font-family: monospace; font-size: 13px;">32px (xl)</span>
+                <div class="spacing-bar" style="width: 32px;"></div>
+                <span style="font-size: 13px; color: var(--color-muted);">Section header separation</span>
+            </div>
+
+            <div class="spacing-pill-row">
+                <span style="width: 100px; font-family: monospace; font-size: 13px;">48px (2xl)</span>
+                <div class="spacing-bar" style="width: 48px;"></div>
+                <span style="font-size: 13px; color: var(--color-muted);">Major content block boundaries</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 4: Modern Web Design Principles).
+        </div>
+    </footer>
+
+    <script>
+        function copyHex(hex) {
+            navigator.clipboard.writeText(hex);
+            alert('Copied color code: ' + hex);
+        }
+    </script>
+</body>
+</html>

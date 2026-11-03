@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q19 - Newsletter Signup &amp; localStorage Persistence | Botanica</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .newsletter-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .status-subscribed {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-unsubscribed {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .active-sub-panel {
+            background: var(--color-sand);
+            border: 1px solid #e2d9cc;
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .pref-tag {
+            display: inline-block;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-right: 6px;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 19:</strong> Newsletter Signup (localStorage Persistence &amp; Unsubscribe Options)</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">📬</span>
+                <span class="brand-name">Botanica <span>Dispatch</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q7.html">Reservations</a></li>
+                <li><a href="q19.html" class="active">Newsletter</a></li>
+                <li><a href="q20.html">Lighthouse</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <span class="badge badge-accent">Bakery &amp; Roastery Chronicles</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">Botanica Morning Dispatch</h1>
+            <p style="color: var(--color-muted); max-width: 600px; margin: 0 auto;">
+                Receive weekly sourdough baking secrets, cupping lab invites, and exclusive valley harvest specials. Fully persistent in your browser via <code>localStorage</code>.
+            </p>
+        </div>
+
+        <div class="newsletter-card">
+            
+            <!-- Dynamic Status Badge -->
+            <div id="statusIndicator">
+                <span class="status-pill status-unsubscribed">
+                    ⚪ No Active Subscription Found
+                </span>
+            </div>
+
+            <!-- SUBSCRIPTION FORM (Displayed when not subscribed) -->
+            <div id="signupSection">
+                <form id="newsletterForm" onsubmit="return handleSubscribe(event)">
+                    <div class="form-group">
+                        <label for="subName">First Name *</label>
+                        <input type="text" id="subName" class="form-control" placeholder="e.g. Aarav" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subEmail">Email Address *</label>
+                        <input type="email" id="subEmail" class="form-control" placeholder="aarav@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="margin-bottom: 10px; display: block;">Select Your Reading Topics:</label>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13.5px;">
+                            <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="prefBread" checked> 🥖 Weekly Fresh Loaf Out-of-Oven Alerts
+                            </label>
+                            <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="prefCoffee" checked> ☕ Single-Origin Roaster Cupping Notes
+                            </label>
+                            <label style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="prefDiscounts"> 🎁 15% Member-Only Bakery Discounts
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; margin-top: 10px;">
+                        Subscribe to Dispatch &rarr;
+                    </button>
+                </form>
+            </div>
+
+            <!-- ACTIVE SUBSCRIPTION DETAILS (Displayed when subscribed) -->
+            <div id="activeSection" style="display: none;">
+                <div class="active-sub-panel">
+                    <h3 style="color: var(--color-primary); font-size: 18px; margin-bottom: 8px;">Subscription Details</h3>
+                    <div style="font-size: 14px; line-height: 1.8;">
+                        <div><strong>Subscriber Name:</strong> <span id="dispName"></span></div>
+                        <div><strong>Subscribed Email:</strong> <span id="dispEmail"></span></div>
+                        <div><strong>Member Since:</strong> <span id="dispDate"></span></div>
+                        <div style="margin-top: 6px;">
+                            <strong>Topics:</strong>
+                            <div id="dispTopics" style="margin-top: 4px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 24px; display: flex; gap: 14px; justify-content: flex-end;">
+                    <button class="btn btn-secondary" onclick="editPreferences()">
+                        Edit Preferences
+                    </button>
+                    <button class="btn btn-danger" onclick="handleUnsubscribe()" style="background: #ef4444; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                        Unsubscribe
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 19: Newsletter &amp; localStorage).
+        </div>
+    </footer>
+
+    <script>
+        const STORAGE_KEY = 'botanica_newsletter_subscription';
+
+        function loadSubscriptionState() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            const statusInd = document.getElementById('statusIndicator');
+            const signupSec = document.getElementById('signupSection');
+            const activeSec = document.getElementById('activeSection');
+
+            if (raw) {
+                const sub = JSON.parse(raw);
+                if (sub.isSubscribed) {
+                    statusInd.innerHTML = `
+                        <span class="status-pill status-subscribed">
+                            🟢 Active Subscriber (${sub.email})
+                        </span>
+                    `;
+                    signupSec.style.display = 'none';
+                    activeSec.style.display = 'block';
+
+                    document.getElementById('dispName').innerText = sub.name;
+                    document.getElementById('dispEmail').innerText = sub.email;
+                    document.getElementById('dispDate').innerText = sub.subscribedAt;
+
+                    const topicsDiv = document.getElementById('dispTopics');
+                    topicsDiv.innerHTML = sub.topics.map(t => `<span class="pref-tag">${t}</span>`).join('');
+                    return;
+                }
+            }
+
+            statusInd.innerHTML = `
+                <span class="status-pill status-unsubscribed">
+                    ⚪ Not Subscribed (Zero data stored)
+                </span>
+            `;
+            signupSec.style.display = 'block';
+            activeSec.style.display = 'none';
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const name = document.getElementById('subName').value.trim();
+            const email = document.getElementById('subEmail').value.trim();
+
+            const topics = [];
+            if (document.getElementById('prefBread').checked) topics.push('Artisan Sourdough Alerts');
+            if (document.getElementById('prefCoffee').checked) topics.push('Specialty Roastery Notes');
+            if (document.getElementById('prefDiscounts').checked) topics.push('Member Discounts');
+
+            const payload = {
+                name: name,
+                email: email,
+                topics: topics,
+                isSubscribed: true,
+                subscribedAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+            };
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+            alert('🎉 Welcome to Botanica Morning Dispatch! Subscription saved to localStorage.');
+            loadSubscriptionState();
+            return false;
+        }
+
+        function handleUnsubscribe() {
+            if (confirm('Are you sure you want to unsubscribe from Botanica Dispatch?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                alert('You have been successfully unsubscribed and your details removed from localStorage.');
+                loadSubscriptionState();
+            }
+        }
+
+        function editPreferences() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                const sub = JSON.parse(raw);
+                document.getElementById('subName').value = sub.name;
+                document.getElementById('subEmail').value = sub.email;
+            }
+            document.getElementById('signupSection').style.display = 'block';
+            document.getElementById('activeSection').style.display = 'none';
+        }
+
+        loadSubscriptionState();
+    </script>
+</body>
+</html>

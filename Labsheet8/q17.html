@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q17 - Dynamic Testimonial Slider | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .testimonial-slider-container {
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 44px 50px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            position: relative;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        .quote-icon {
+            font-size: 60px;
+            line-height: 1;
+            color: var(--color-accent);
+            opacity: 0.3;
+            margin-bottom: -10px;
+        }
+
+        .star-rating {
+            color: #f59e0b;
+            font-size: 20px;
+            margin-bottom: 16px;
+            letter-spacing: 3px;
+        }
+
+        .review-text {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .reviewer-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--color-sand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 2px solid var(--color-accent);
+        }
+
+        .reviewer-info {
+            text-align: left;
+        }
+
+        .reviewer-name {
+            font-weight: 700;
+            color: var(--color-primary);
+            font-size: 15px;
+        }
+
+        .reviewer-title {
+            font-size: 12.5px;
+            color: var(--color-muted);
+        }
+
+        /* Controls */
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .slider-nav-btn {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .slider-nav-btn:hover {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+
+        .dots-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot-ind {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .dot-ind.active {
+            background: var(--color-accent);
+            transform: scale(1.3);
+        }
+
+        /* Review Submission Drawer */
+        .review-form-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: var(--shadow-sm);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 17:</strong> Dynamic Testimonial Slider with Customer Reviews &amp; Star Ratings</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">🌿</span>
+                <span class="brand-name">Botanica <span>Reviews</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q6.html">Hero Slider</a></li>
+                <li><a href="q17.html" class="active">Customer Reviews</a></li>
+                <li><a href="q18.html">Pricing Tiers</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <span class="badge badge-accent">Community Voices</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">What Our Patrons Are Saying</h1>
+            <p style="color: var(--color-muted); max-width: 600px; margin: 0 auto;">
+                Authentic testimonials from food critics, scholars, and daily coffee enthusiasts in Roorkee.
+            </p>
+        </div>
+
+        <!-- TESTIMONIAL SLIDER CONTAINER -->
+        <div class="testimonial-slider-container">
+            <div class="testimonial-card" id="testimonialCard">
+                <div class="quote-icon">&ldquo;</div>
+                <div class="star-rating" id="cardStars">★★★★★</div>
+                <p class="review-text" id="cardText">
+                    "The 48-hour fermented sourdough is the best bread in the state. Crispy crust, perfect custard crumb, and zero bloating."
+                </p>
+                <div class="reviewer-meta">
+                    <div class="reviewer-avatar" id="cardAvatar">👨‍🍳</div>
+                    <div class="reviewer-info">
+                        <div class="reviewer-name" id="cardName">Chef Vikramaditya</div>
+                        <div class="reviewer-title" id="cardTitle">Executive Chef &amp; Culinary Critic</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider Navigation -->
+            <div class="slider-controls">
+                <button class="slider-nav-btn" onclick="prevTestimonial()" aria-label="Previous Review">&larr;</button>
+                <div class="dots-group" id="dotsGroup">
+                    <span class="dot-ind active" onclick="jumpTo(0)"></span>
+                    <span class="dot-ind" onclick="jumpTo(1)"></span>
+                    <span class="dot-ind" onclick="jumpTo(2)"></span>
+                    <span class="dot-ind" onclick="jumpTo(3)"></span>
+                </div>
+                <button class="slider-nav-btn" onclick="nextTestimonial()" aria-label="Next Review">&rarr;</button>
+            </div>
+        </div>
+
+        <!-- SUBMIT A NEW REVIEW FORM -->
+        <div class="review-form-card" style="max-width: 850px; margin-left: auto; margin-right: auto;">
+            <h3 style="font-size: 20px; margin-bottom: 14px;">Leave Your Testimonial</h3>
+            <form onsubmit="return handleNewReview(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="form-group">
+                        <label for="revAuthor">Your Name</label>
+                        <input type="text" id="revAuthor" class="form-control" placeholder="e.g. Meera Kapoor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="revRole">Your Profession or Tag</label>
+                        <input type="text" id="revRole" class="form-control" placeholder="e.g. COER Engineering Student" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="revRating">Rating</label>
+                    <select id="revRating" class="form-control">
+                        <option value="5">⭐⭐⭐⭐⭐ 5 Stars (Exceptional)</option>
+                        <option value="4">⭐⭐⭐⭐ 4 Stars (Very Good)</option>
+                        <option value="3">⭐⭐⭐ 3 Stars (Good)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="revComment">Your Experience Review</label>
+                    <textarea id="revComment" class="form-control" rows="3" placeholder="Share your experience with our breads, roastery, or atmosphere..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="padding: 10px 24px;">
+                    Submit &amp; Post Review &rarr;
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 17: Testimonial Slider).
+        </div>
+    </footer>
+
+    <script>
+        const testimonials = [
+            {
+                name: "Chef Vikramaditya",
+                title: "Executive Chef & Culinary Critic",
+                avatar: "👨‍🍳",
+                stars: "★★★★★",
+                text: "The 48-hour fermented sourdough is easily the best bread in the state. Crispy blistered crust, custard crumb, and zero bloating."
+            },
+            {
+                name: "Dr. Ananya Sen",
+                title: "IIT Roorkee Postdoc Researcher",
+                avatar: "👩‍🔬",
+                stars: "★★★★★",
+                text: "Botanica is my favorite quiet sanctuary to study and write papers. The pour-over Ethiopian single-origin roast is pure magic."
+            },
+            {
+                name: "Priya Malhotra",
+                title: "COER University Faculty Member",
+                avatar: "👩‍🏫",
+                stars: "★★★★★",
+                text: "Hosted our department brunch in the Greenhouse Atrium. The Damask Rose pastries blew everyone away! Remarkable eco-hospitality."
+            },
+            {
+                name: "Kabir Mehta",
+                title: "Organic Farmer & Regular Patron",
+                avatar: "🌾",
+                stars: "★★★★★",
+                text: "Finally, a cafe that cares about true heirloom grains, zero-plastic packaging, and living wages for coffee growers. 10/10."
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function renderTestimonial() {
+            const item = testimonials[currentIndex];
+            const card = document.getElementById('testimonialCard');
+
+            card.style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('cardName').innerText = item.name;
+                document.getElementById('cardTitle').innerText = item.title;
+                document.getElementById('cardAvatar').innerText = item.avatar;
+                document.getElementById('cardStars').innerText = item.stars;
+                document.getElementById('cardText').innerText = `"${item.text}"`;
+
+                // Update dots
+                const dotsGroup = document.getElementById('dotsGroup');
+                dotsGroup.innerHTML = testimonials.map((_, idx) => `
+                    <span class="dot-ind ${idx === currentIndex ? 'active' : ''}" onclick="jumpTo(${idx})"></span>
+                `).join('');
+
+                card.style.opacity = '1';
+            }, 200);
+        }
+
+        function nextTestimonial() {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            renderTestimonial();
+        }
+
+        function prevTestimonial() {
+            currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+            renderTestimonial();
+        }
+
+        function jumpTo(idx) {
+            currentIndex = idx;
+            renderTestimonial();
+        }
+
+        function handleNewReview(e) {
+            e.preventDefault();
+            const author = document.getElementById('revAuthor').value.trim();
+            const role = document.getElementById('revRole').value.trim();
+            const rating = parseInt(document.getElementById('revRating').value);
+            const comment = document.getElementById('revComment').value.trim();
+
+            const starsStr = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+            testimonials.push({
+                name: author,
+                title: role,
+                avatar: "⭐",
+                stars: starsStr,
+                text: comment
+            });
+
+            alert("Thank you! Your testimonial has been posted to our dynamic slider.");
+            e.target.reset();
+            currentIndex = testimonials.length - 1;
+            renderTestimonial();
+            return false;
+        }
+
+        renderTestimonial();
+    </script>
+</body>
+</html>

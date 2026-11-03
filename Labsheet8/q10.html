@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q10 - Asset Optimization &amp; Performance | Botanica Eco-Cafe</title>
+    <!-- RESOURCE HINTS FOR OPTIMAL SPEED -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .opt-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .comparison-metric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-metric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .metric-box {
+            padding: 24px;
+            border-radius: var(--radius-md);
+            border: 2px solid;
+        }
+
+        .metric-box.before {
+            border-color: #fca5a5;
+            background: #fff5f5;
+        }
+
+        .metric-box.after {
+            border-color: #86efac;
+            background: #f0fdf4;
+        }
+
+        .metric-stat {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 10px 0;
+            display: block;
+        }
+
+        /* Minification Code Comparison */
+        .code-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .code-split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .code-display {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            font-family: 'Consolas', monospace;
+            font-size: 12.5px;
+            overflow-x: auto;
+            max-height: 220px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 10:</strong> Asset Optimization (Compression, Minification, Fast Loading)</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">⚡</span>
+                <span class="brand-name">Botanica <span>Performance</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q4.html">Design Tokens</a></li>
+                <li><a href="q10.html" class="active">Asset Optimization</a></li>
+                <li><a href="q20.html">Lighthouse Audit</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="margin-bottom: 30px;">
+            <span class="badge badge-success">High-Performance Pipeline</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">Asset Optimization &amp; Delivery Suite</h1>
+            <p style="color: var(--color-muted); max-width: 800px;">
+                Accelerating core web vitals through next-gen WebP/AVIF compression, CSS/JS minification, resource preconnecting, and lazy rendering.
+            </p>
+        </div>
+
+        <!-- 1. BEFORE & AFTER PERFORMANCE IMPACT -->
+        <section class="opt-card">
+            <h2>1. Performance Optimization Impact (Core Web Vitals)</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">Measured over 4G simulated cellular connection.</p>
+
+            <div class="comparison-metric-grid">
+                <div class="metric-box before">
+                    <span class="badge" style="background: #fee2e2; color: #991b1b;">Unoptimized Assets (Raw)</span>
+                    <span class="metric-stat" style="color: #b91c1c;">4.85 MB</span>
+                    <p style="color: #7f1d1d; font-size: 14px; line-height: 1.6;">
+                        &bull; Uncompressed PNG &amp; JPEG hero graphics (3.8 MB)<br>
+                        &bull; Render-blocking unminified CSS &amp; JS (850 KB)<br>
+                        &bull; Page Load Time: <strong>3.42 seconds</strong><br>
+                        &bull; Cumulative Layout Shift: <strong>0.24 (Poor)</strong>
+                    </p>
+                </div>
+
+                <div class="metric-box after">
+                    <span class="badge" style="background: #dcfce7; color: #166534;">Optimized Assets (Pipeline)</span>
+                    <span class="metric-stat" style="color: #15803d;">410 KB (-91.5%)</span>
+                    <p style="color: #14532d; font-size: 14px; line-height: 1.6;">
+                        &bull; Next-Gen WebP/AVIF + native <code>loading="lazy"</code> (280 KB)<br>
+                        &bull; Gzip-compressed &amp; Minified CSS/JS bundle (45 KB)<br>
+                        &bull; Page Load Time: <strong>0.38 seconds (Lightning)</strong><br>
+                        &bull; Cumulative Layout Shift: <strong>0.00 (Zero Shift)</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MINIFICATION LIVE DEMO -->
+        <section class="opt-card">
+            <h2>2. CSS &amp; JavaScript Minification Engine</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">
+                Eliminating comments, newline indentations, and whitespace tokens while preserving AST semantics.
+            </p>
+
+            <div class="code-split">
+                <div>
+                    <strong style="font-size: 13.5px; color: var(--color-primary);">Original Formatted Code (720 Bytes)</strong>
+                    <div class="code-display">
+/* Botanica Cafe Card Component */
+.card-hero {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 32px;
+    margin: 16px 0px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.card-hero:hover {
+    transform: translateY(-4px);
+}
+                    </div>
+                </div>
+
+                <div>
+                    <strong style="font-size: 13.5px; color: var(--color-success);">Minified &amp; Tree-Shaken (192 Bytes &bull; 73% Saved)</strong>
+                    <div class="code-display" style="color: #86efac;">
+.card-hero{display:flex;flex-direction:column;padding:24px 32px;margin:16px 0;background:#fff;border-radius:12px;box-shadow:0 4px 6px rgba(0,0,0,.1);transition:transform .3s ease}.card-hero:hover{transform:translateY(-4px)}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. RESPONSIVE IMAGES (WEBP & SRCSET) -->
+        <section class="opt-card">
+            <h2>3. Next-Gen Modern Image Pipeline</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">
+                Demonstration of the HTML5 <code>&lt;picture&gt;</code> element serving responsive WebP variants with fallback and explicit layout dimensions.
+            </p>
+
+            <div class="code-display" style="margin-top: 14px;">
+&lt;picture&gt;
+    &lt;!-- Modern ultra-compact AVIF format for supporting browsers --&gt;
+    &lt;source srcset="images/sourdough-400w.avif 400w, images/sourdough-800w.avif 800w" type="image/avif"&gt;
+    &lt;!-- Compact WebP format for modern browsers --&gt;
+    &lt;source srcset="images/sourdough-400w.webp 400w, images/sourdough-800w.webp 800w" type="image/webp"&gt;
+    &lt;!-- Fallback JPEG with native lazy loading &amp; fixed aspect-ratio preventing CLS --&gt;
+    &lt;img src="images/sourdough-fallback.jpg" 
+         alt="Fresh wood-fired artisan sourdough loaf" 
+         width="800" 
+         height="500" 
+         loading="lazy" 
+         decoding="async"&gt;
+&lt;/picture&gt;
+            </div>
+        </section>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 10: Asset Optimization).
+        </div>
+    </footer>
+
+</body>
+</html>

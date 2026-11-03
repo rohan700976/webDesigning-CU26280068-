@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 1. PRIMARY SEO META TAGS -->
+    <title>Botanica Eco-Cafe &amp; Artisan Bakery | Organic Sourdough &amp; Specialty Coffee Roastery</title>
+    <meta name="title" content="Botanica Eco-Cafe &amp; Artisan Bakery | Organic Sourdough &amp; Specialty Coffee Roastery">
+    <meta name="description" content="Discover Botanica Eco-Cafe &amp; Artisan Bakery near COER University, Roorkee. Featuring 48-hour fermented organic sourdough, ethically sourced micro-lot coffees, and zero-waste botanical patisserie.">
+    <meta name="keywords" content="eco cafe roorkee, artisan bakery coer university, organic sourdough bread, specialty coffee v60, sustainable cafe uttarakhand">
+    <meta name="author" content="Botanica Culinary Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://botanicacafe.in/">
+
+    <!-- 2. OPEN GRAPH / FACEBOOK SOCIAL META TAGS -->
+    <meta property="og:type" content="restaurant.restaurant">
+    <meta property="og:url" content="https://botanicacafe.in/">
+    <meta property="og:title" content="Botanica Eco-Cafe &amp; Artisan Bakery | Farm-to-Table Goodness">
+    <meta property="og:description" content="Slow-fermented artisan sourdough, direct-trade pour overs, and lush greenhouse dining near COER University.">
+    <meta property="og:image" content="https://botanicacafe.in/images/botanica-og-banner.jpg">
+    <meta property="og:site_name" content="Botanica Eco-Cafe">
+
+    <!-- 3. TWITTER CARD META TAGS -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://botanicacafe.in/">
+    <meta name="twitter:title" content="Botanica Eco-Cafe &amp; Artisan Bakery">
+    <meta name="twitter:description" content="Fresh morning bake, single-origin roasts, and zero-waste dining in Roorkee.">
+    <meta name="twitter:image" content="https://botanicacafe.in/images/botanica-twitter-card.jpg">
+
+    <!-- 4. SCHEMA.ORG JSON-LD STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["Bakery", "CafeOrCoffeeShop"],
+      "name": "Botanica Eco-Cafe & Artisan Bakery",
+      "image": "https://botanicacafe.in/images/hero-sourdough.webp",
+      "@id": "https://botanicacafe.in/#store",
+      "url": "https://botanicacafe.in",
+      "telephone": "+91-1332-280000",
+      "priceRange": "$$",
+      "servesCuisine": ["Artisan Bakery", "Organic Coffee", "Botanical Brunch", "Vegan"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "7th Km Milestone, Roorkee-Haridwar Highway",
+        "addressLocality": "Roorkee",
+        "addressRegion": "Uttarakhand",
+        "postalCode": "247667",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 29.8543,
+        "longitude": 77.8880
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "07:30",
+          "closes": "22:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday", "Sunday"],
+          "opens": "07:00",
+          "closes": "23:00"
+        }
+      ]
+    }
+    </script>
+
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .seo-panel {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Google SERP Snippet Preview Simulator */
+        .google-serp {
+            background: #ffffff;
+            border: 1px solid #dfe1e5;
+            border-radius: 8px;
+            padding: 18px;
+            max-width: 650px;
+            margin-top: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        .serp-url {
+            font-size: 13px;
+            color: #202124;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .serp-title {
+            color: #1a0dab;
+            font-size: 20px;
+            line-height: 1.3;
+            margin: 6px 0;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        .serp-title:hover {
+            text-decoration: underline;
+        }
+
+        .serp-snippet {
+            color: #4d5156;
+            font-size: 14px;
+            line-height: 1.58;
+        }
+
+        /* Open Graph Preview Card */
+        .og-preview-card {
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 500px;
+            margin-top: 16px;
+            background: #ffffff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .og-image-placeholder {
+            height: 220px;
+            background: linear-gradient(135deg, #1b4332, #d97706);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 54px;
+        }
+
+        .og-card-info {
+            padding: 16px;
+        }
+
+        .og-domain {
+            text-transform: uppercase;
+            font-size: 11px;
+            color: #64748b;
+            letter-spacing: 0.5px;
+        }
+
+        .og-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 4px 0 6px;
+        }
+
+        .og-card-desc {
+            font-size: 13.5px;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .json-code {
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            font-family: 'Consolas', monospace;
+            font-size: 12.5px;
+            overflow-x: auto;
+            max-height: 280px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 11:</strong> On-Page SEO Essentials (Meta, Open Graph, Schema JSON-LD)</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">🔍</span>
+                <span class="brand-name">Botanica <span>SEO Suite</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q2.html">HTML5</a></li>
+                <li><a href="q11.html" class="active">On-Page SEO</a></li>
+                <li><a href="q12.html">Micro-Interactions</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="margin-bottom: 24px;">
+            <span class="badge badge-primary">Search Engine Optimization</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">On-Page SEO &amp; Structured Data Architecture</h1>
+            <p style="color: var(--color-muted);">
+                Engineered for maximum search engine crawlability, rich snippet eligibility on Google Search, and rich card previews when shared on Facebook, WhatsApp, and Twitter.
+            </p>
+        </div>
+
+        <!-- 1. GOOGLE SERP PREVIEW -->
+        <section class="seo-panel">
+            <h2>1. Google Search Engine Results Page (SERP) Simulator</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">
+                How your website appears to users searching on Google for organic sourdough or eco cafes:
+            </p>
+
+            <div class="google-serp">
+                <div class="serp-url">
+                    <span>🌐 https://botanicacafe.in</span> &rsaquo; <span>menu &bull; roorkee</span>
+                </div>
+                <a href="#" class="serp-title">
+                    Botanica Eco-Cafe &amp; Artisan Bakery | Organic Sourdough &amp; Specialty Coffee
+                </a>
+                <div class="serp-snippet">
+                    Discover Botanica Eco-Cafe &amp; Artisan Bakery near COER University, Roorkee. Featuring 48-hour fermented organic sourdough, ethically sourced micro-lot coffees, and zero-waste botanical patisserie.
+                </div>
+                <div style="margin-top: 10px; font-size: 12px; color: #70757a;">
+                    ⭐⭐⭐⭐⭐ Rating: 4.9 &bull; 412 reviews &bull; Price: $$ &bull; Bakery &amp; Cafe
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SOCIAL SHARE OPEN GRAPH PREVIEW -->
+        <section class="seo-panel">
+            <h2>2. Open Graph &amp; Social Card Live Preview</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">
+                Rich media banner generated when someone shares the link via WhatsApp, LinkedIn, or Twitter:
+            </p>
+
+            <div class="og-preview-card">
+                <div class="og-image-placeholder">
+                    🥖 ☕ 🌿
+                </div>
+                <div class="og-card-info">
+                    <span class="og-domain">botanicacafe.in</span>
+                    <h3 class="og-card-title">Botanica Eco-Cafe &amp; Artisan Bakery | Farm-to-Table Goodness</h3>
+                    <p class="og-card-desc">
+                        Slow-fermented artisan sourdough, direct-trade pour overs, and lush greenhouse dining near COER University.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. STRUCTURED DATA JSON-LD -->
+        <section class="seo-panel">
+            <h2>3. Schema.org JSON-LD Structured Data</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px; margin-bottom: 14px;">
+                Embedded in the page <code>&lt;head&gt;</code> to provide explicit knowledge-graph signals to Googlebot:
+            </p>
+
+            <pre class="json-code">
+{
+  "@context": "https://schema.org",
+  "@type": ["Bakery", "CafeOrCoffeeShop"],
+  "name": "Botanica Eco-Cafe & Artisan Bakery",
+  "telephone": "+91-1332-280000",
+  "servesCuisine": ["Artisan Bakery", "Organic Coffee", "Botanical Brunch"],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "7th Km Milestone, Roorkee-Haridwar Highway",
+    "addressLocality": "Roorkee",
+    "addressRegion": "Uttarakhand",
+    "postalCode": "247667",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 29.8543,
+    "longitude": 77.8880
+  }
+}
+            </pre>
+        </section>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 11: On-Page SEO Essentials).
+        </div>
+    </footer>
+
+</body>
+</html>

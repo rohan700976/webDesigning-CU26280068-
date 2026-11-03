@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q11 - Testimonials Slider Carousel Powered by JavaScript Arrays</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-page: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .header-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-title h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* TESTIMONIAL CAROUSEL CONTAINER */
+        .carousel-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 48px 40px;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            text-align: center;
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Quote mark decorative icon */
+        .quote-icon {
+            font-size: 54px;
+            color: #c7d2fe;
+            line-height: 1;
+            margin-bottom: 16px;
+            font-family: Georgia, serif;
+        }
+
+        /* CSS OPACITY TRANSITION FOR SLIDES */
+        .testimonial-content {
+            opacity: 1;
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            transform: translateY(0);
+        }
+
+        /* Class applied while swapping data */
+        .testimonial-content.fade-out {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .quote-text {
+            font-size: 19px;
+            font-style: italic;
+            color: #334155;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            max-width: 650px;
+        }
+
+        .author-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e0e7ff;
+            margin-bottom: 12px;
+        }
+
+        .author-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .author-role {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .rating-stars {
+            color: #f59e0b;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        /* CONTROLS ROW */
+        .controls-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn-nav {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: var(--text-dark);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-nav:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Indicator Dots */
+        .dots-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 11:</strong> Testimonials slider carousel powered by JavaScript arrays &amp; CSS opacity transitions</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <main class="container">
+        <header class="header-title">
+            <h1>Client Testimonials</h1>
+            <p>Customer reviews dynamically cycled from a JavaScript array with smooth CSS opacity fade transitions.</p>
+        </header>
+
+        <!-- Carousel Presentation Card -->
+        <div class="carousel-card" id="carouselWrapper">
+            <div class="quote-icon">&ldquo;</div>
+
+            <div class="testimonial-content" id="slideContent">
+                <div class="rating-stars" id="ratingStars">★★★★★</div>
+                <p class="quote-text" id="quoteText">Loading review...</p>
+                <img src="" alt="Avatar" class="author-avatar" id="authorAvatar">
+                <h3 class="author-name" id="authorName">Loading Name</h3>
+                <p class="author-role" id="authorRole">Loading Position</p>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons & Dots -->
+        <div class="controls-row">
+            <button class="btn-nav" id="prevBtn" title="Previous Testimonial">&#8592;</button>
+            <div class="dots-container" id="dotsContainer"></div>
+            <button class="btn-nav" id="nextBtn" title="Next Testimonial">&#8594;</button>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 11: Testimonial Carousel).
+    </footer>
+
+    <!-- JavaScript Data Array & Opacity Transition Logic -->
+    <script>
+        // 1. Array of Testimonial Objects
+        const testimonials = [
+            {
+                quote: "The semantic HTML5 structure and CSS Flexbox layout delivered by this team cut our page load times in half. The responsive performance is world class!",
+                name: "Dr. Sarah Jenkins",
+                role: "Director of Web Systems, TechCorp",
+                avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80",
+                rating: 5
+            },
+            {
+                quote: "Incredible attention to detail. The CSS Grid photo gallery with hardware-accelerated transforms made our design portfolio look like an elite design agency showcase.",
+                name: "Marcus Vance",
+                role: "Lead Creative Designer, StudioX",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                rating: 5
+            },
+            {
+                quote: "The dynamic dark/light mode toggle and client-side form validation worked flawlessly out of the box. Truly exceptional modern frontend engineering.",
+                name: "Priya Nair",
+                role: "Senior Engineering Manager, CloudPulse",
+                avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80",
+                rating: 5
+            },
+            {
+                quote: "Working with this developer was a breath of fresh air. Fast, fully compliant with W3C web standards, and visually outstanding across mobile viewports.",
+                name: "Alexander Reed",
+                role: "Founder & CTO, NextWave Solutions",
+                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",
+                rating: 5
+            }
+        ];
+
+        let currentIndex = 0;
+        const slideContent = document.getElementById('slideContent');
+        const quoteText = document.getElementById('quoteText');
+        const authorAvatar = document.getElementById('authorAvatar');
+        const authorName = document.getElementById('authorName');
+        const authorRole = document.getElementById('authorRole');
+        const ratingStars = document.getElementById('ratingStars');
+        const dotsContainer = document.getElementById('dotsContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Create indicator dots dynamically
+        testimonials.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (idx === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                if (idx !== currentIndex) {
+                    showSlide(idx);
+                }
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        // Function to display a specific slide with CSS Opacity Transition
+        function showSlide(index) {
+            // Step 1: Fade out
+            slideContent.classList.add('fade-out');
+
+            setTimeout(() => {
+                // Step 2: Swap content from JavaScript array
+                currentIndex = index;
+                const data = testimonials[currentIndex];
+
+                quoteText.textContent = `"${data.quote}"`;
+                authorName.textContent = data.name;
+                authorRole.textContent = data.role;
+                authorAvatar.src = data.avatar;
+                ratingStars.textContent = "★".repeat(data.rating);
+
+                // Update dot active indicator
+                document.querySelectorAll('.dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+
+                // Step 3: Fade in
+                slideContent.classList.remove('fade-out');
+            }, 300); // 300ms matches CSS transition timing
+        }
+
+        // Next slide trigger
+        function nextSlide() {
+            let next = (currentIndex + 1) % testimonials.length;
+            showSlide(next);
+        }
+
+        // Previous slide trigger
+        function prevSlide() {
+            let prev = (currentIndex - 1 + testimonials.length) % testimonials.length;
+            showSlide(prev);
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Auto-play timer
+        let autoPlayInterval = setInterval(nextSlide, 5000);
+
+        // Pause on hover
+        const carouselWrapper = document.getElementById('carouselWrapper');
+        carouselWrapper.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+        carouselWrapper.addEventListener('mouseleave', () => autoPlayInterval = setInterval(nextSlide, 5000));
+
+        // Initial render
+        showSlide(0);
+    </script>
+
+</body>
+</html>

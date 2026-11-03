@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q17 - Modal Popup Window in JavaScript</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .demo-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 50px 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .demo-card h1 {
+            font-size: 30px;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .demo-card p {
+            color: #64748b;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .btn-open-modal {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+            transition: all 0.2s ease;
+        }
+
+        .btn-open-modal:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+        }
+
+        /* ==================================================
+           MODAL BACKDROP OVERLAY & WINDOW
+           ================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+
+            /* Hidden by default with smooth fade */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Active State */
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Modal Dialog Box */
+        .modal-box {
+            background: #ffffff;
+            border-radius: 16px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            text-align: left;
+
+            /* Scale-up entrance animation */
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Modal Header */
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+        }
+
+        .modal-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* Close 'X' Button */
+        .btn-close-x {
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            line-height: 1;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-close-x:hover {
+            color: #0f172a;
+            background: #e2e8f0;
+        }
+
+        /* Modal Body */
+        .modal-body {
+            padding: 24px;
+            color: #475569;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .modal-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        /* Modal Footer Actions */
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: #f8fafc;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #334155;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+
+        .btn-primary-action {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary-action:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 17:</strong> Modal popup window in JavaScript triggered by button &amp; closed by 'X' or outside click</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <main class="container">
+        <div class="demo-card">
+            <h1>Interactive Modal Popup Demonstration</h1>
+            <p>Click the button below to launch the modal dialog. You can close it by clicking the <strong>&times; (X)</strong> button, clicking anywhere <strong>outside</strong> the modal card, or pressing the <strong>Escape</strong> key.</p>
+            <button class="btn-open-modal" id="openModalBtn">Open Project Modal</button>
+        </div>
+    </main>
+
+    <!-- Modal Backdrop Overlay -->
+    <div class="modal-overlay" id="modalOverlay" aria-modal="true" role="dialog" aria-hidden="true">
+        <!-- Modal Card Container -->
+        <div class="modal-box" id="modalBox">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 class="modal-title">Project Specification</h2>
+                <!-- Close 'X' Button -->
+                <button class="btn-close-x" id="closeXBtn" title="Close Modal">&times;</button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="modal-body">
+                <span class="modal-badge">✓ Active Status</span>
+                <p>This modal dialog is controlled dynamically by clean JavaScript event listeners adhering to accessibility guidelines.</p>
+                <p style="margin-top: 12px;">
+                    <strong>Features verified:</strong><br>
+                    &bull; Backdrop click detection (clicking outside the white card closes the modal).<br>
+                    &bull; Dedicated close button ('X' icon).<br>
+                    &bull; Keyboard listener for the <code>Escape</code> key.<br>
+                    &bull; Hardware-accelerated CSS scaling and blur transitions.
+                </p>
+            </div>
+
+            <!-- Modal Footer Controls -->
+            <div class="modal-footer">
+                <button class="btn-secondary" id="closeFooterBtn">Cancel</button>
+                <button class="btn-primary-action" onclick="alert('Confirmed action!'); closeModal();">Confirm Action</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 17: Modal Popup Window).
+    </footer>
+
+    <!-- JavaScript Modal Trigger & Close Handler Script -->
+    <script>
+        const openModalBtn = document.getElementById('openModalBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalBox = document.getElementById('modalBox');
+        const closeXBtn = document.getElementById('closeXBtn');
+        const closeFooterBtn = document.getElementById('closeFooterBtn');
+
+        // Function to open modal
+        function openModal() {
+            modalOverlay.classList.add('active');
+            modalOverlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Function to close modal
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            modalOverlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; // Restore background scrolling
+        }
+
+        // 1. Open modal upon clicking button
+        openModalBtn.addEventListener('click', openModal);
+
+        // 2. Close upon clicking 'X'
+        closeXBtn.addEventListener('click', closeModal);
+
+        // 3. Close upon clicking cancel button
+        closeFooterBtn.addEventListener('click', closeModal);
+
+        // 4. Close upon clicking OUTSIDE the modal box (on the backdrop overlay)
+        modalOverlay.addEventListener('click', function (event) {
+            // Check if the click target was the overlay itself, not inside the modal box
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        // 5. Close upon pressing the Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

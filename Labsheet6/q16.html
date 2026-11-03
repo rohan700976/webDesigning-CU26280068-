@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q16 - Product Feature Grid with CSS Flexbox &amp; Vector Icons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .header-block {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #4338ca;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+        }
+
+        .header-block h1 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .header-block p {
+            color: #64748b;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* ==================================================
+           CSS FLEXBOX PRODUCT FEATURE GRID
+           ================================================== */
+        .feature-flex-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            justify-content: center;
+        }
+
+        /* Feature Card (Calculated with Flexbox Basis) */
+        .feature-item {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1 1 calc(33.333% - 28px); /* 3 cards per row on desktop */
+            min-width: 290px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 30px -4px rgba(0, 0, 0, 0.08);
+            border-color: #cbd5e1;
+        }
+
+        /* CUSTOM VECTOR ICON STYLING */
+        .icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-wrapper svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2;
+        }
+
+        /* Distinct Icon Gradients */
+        .icon-blue {
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            color: #ffffff;
+        }
+
+        .icon-purple {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            color: #ffffff;
+        }
+
+        .icon-emerald {
+            background: linear-gradient(135deg, #059669, #34d399);
+            color: #ffffff;
+        }
+
+        .icon-amber {
+            background: linear-gradient(135deg, #d97706, #fbbf24);
+            color: #ffffff;
+        }
+
+        .icon-rose {
+            background: linear-gradient(135deg, #e11d48, #fb7185);
+            color: #ffffff;
+        }
+
+        .icon-cyan {
+            background: linear-gradient(135deg, #0891b2, #38bdf8);
+            color: #ffffff;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            color: #64748b;
+            font-size: 14.5px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .feature-link {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #2563eb;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s ease;
+        }
+
+        .feature-link:hover {
+            gap: 10px;
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 16:</strong> Product feature grid using CSS Flexbox with custom vector icons and responsive spacing</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <main class="container">
+        <header class="header-block">
+            <span class="feature-badge">Platform Capabilities</span>
+            <h1>Engineered for Modern Scale</h1>
+            <p>Every component is laid out with CSS Flexbox with custom responsive spacing and high-fidelity custom SVG vector icons.</p>
+        </header>
+
+        <!-- Product Feature Grid (CSS Flexbox) -->
+        <section class="feature-flex-grid">
+            <!-- 1. Real-Time Telemetry -->
+            <div class="feature-item">
+                <div class="icon-wrapper icon-blue">
+                    <!-- Vector Icon: Activity / Pulse -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                </div>
+                <h3 class="feature-title">Real-Time Telemetry</h3>
+                <p class="feature-description">Stream live application metrics with sub-millisecond event streaming, automated threshold alerts, and health traces.</p>
+                <a href="#" class="feature-link">Explore Metrics &rarr;</a>
+            </div>
+
+            <!-- 2. Shield Security -->
+            <div class="feature-item">
+                <div class="icon-wrapper icon-purple">
+                    <!-- Vector Icon: Shield / Security -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <h3 class="feature-title">Enterprise Security</h3>
+                <p class="feature-description">Encrypted data transports utilizing modern TLS certificates, role-based access tokens, and zero-trust verification.</p>
+                <a href="#" class="feature-link">Review Security &rarr;</a>
+            </div>
+
+            <!-- 3. High Availability -->
+            <div class="feature-item">
+                <div class="icon-wrapper icon-emerald">
+                    <!-- Vector Icon: Server / Database -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                </div>
+                <h3 class="feature-title">Multi-Region Redundancy</h3>
+                <p class="feature-description">Automated geo-replicated database backups with instantaneous automatic failover to eliminate single points of failure.</p>
+                <a href="#" class="feature-link">View Topology &rarr;</a>
+            </div>
+
+            <!-- 4. Ultra Speed -->
+            <div class="feature-item">
+                <div class="icon-wrapper icon-amber">
+                    <!-- Vector Icon: Zap / Lightning -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <h3 class="feature-title">Lightning Fast Edge CDN</h3>
+                <p class="feature-description">Static assets and HTML bundles cached globally at over 300 edge edge locations for sub-100ms first contentful paint.</p>
+                <a href="#" class="feature-link">Test Edge Latency &rarr;</a>
+            </div>
+
+            <!-- 5. Responsive Flexibility -->
+            <div class="feature-item">
+                <div class="icon-wrapper icon-rose">
+                    <!-- Vector Icon: Layout / Responsive -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                </div>
+                <h3 class="feature-title">Adaptive Flex Layouts</h3>
+                <p class="feature-description">Fluid CSS Flexbox foundations guaranteeing flawless alignment, dynamic wrapping, and thumb-friendly spacing.</p>
+                <a href="#" class="feature-link">Inspect Flexbox &rarr;</a>
+            </div>
+
+            <!-- 6. Developer APIs -->
+            <div class="feature-item">
+                <div class="icon-wrapper icon-cyan">
+                    <!-- Vector Icon: Code / API -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <h3 class="feature-title">Extensible REST &amp; GraphQL</h3>
+                <p class="feature-description">Fully documented SDKs and endpoints allowing painless integrations with your existing frontend and backend toolchains.</p>
+                <a href="#" class="feature-link">Read API Docs &rarr;</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 16: Product Feature Grid).
+    </footer>
+
+</body>
+</html>

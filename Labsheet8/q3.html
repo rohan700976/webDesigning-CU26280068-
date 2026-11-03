@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q3 - Mobile-First Responsive CSS Grid &amp; Flexbox | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        /* Mobile-First Responsive Simulator Toolbar */
+        .simulator-bar {
+            background: #ffffff;
+            border-bottom: 1px solid var(--color-border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .view-btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .view-btn {
+            background: var(--color-sand);
+            border: 1px solid var(--color-border);
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-primary);
+            transition: all 0.2s;
+        }
+
+        .view-btn.active, .view-btn:hover {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+
+        /* Frame Wrapper */
+        .preview-wrapper {
+            padding: 24px 0;
+            display: flex;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .responsive-frame {
+            width: 100%;
+            max-width: 1200px;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: max-width 0.35s ease;
+        }
+
+        /* ========================================================
+           MOBILE-FIRST CSS RULES (Core Requirements for Q3)
+           ======================================================== */
+        
+        /* 1. Base Mobile Styles (< 600px) */
+        .responsive-content {
+            padding: 20px;
+        }
+
+        .nav-flex-container {
+            display: flex;
+            flex-direction: column; /* Stacked on mobile */
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .hero-banner-flex {
+            display: flex;
+            flex-direction: column; /* Stacked image & text */
+            background: var(--color-sand);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .hero-banner-image {
+            background: #e2d9cc;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+        .hero-banner-text {
+            padding: 20px;
+        }
+
+        /* CSS Grid: Single Column by default on Mobile */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background: var(--color-sand);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* 2. Tablet Breakpoint (min-width: 601px) */
+        @media (min-width: 601px) {
+            .nav-flex-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .hero-banner-flex {
+                flex-direction: row;
+            }
+            .hero-banner-image {
+                flex: 1;
+            }
+            .hero-banner-text {
+                flex: 1.5;
+                padding: 30px;
+            }
+
+            /* CSS Grid: 2 Columns on Tablet */
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 3. Desktop Breakpoint (min-width: 1024px) */
+        @media (min-width: 1024px) {
+            .responsive-content {
+                padding: 40px;
+            }
+
+            /* CSS Grid: 4 Columns on Desktop */
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
+            }
+
+            .grid-item {
+                padding: 28px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 3:</strong> Mobile-First Responsive Layout using CSS Grid and Flexbox</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <!-- Simulator Controller Bar -->
+    <div class="simulator-bar">
+        <div style="font-size: 14px; font-weight: 700; color: var(--color-primary);">
+            📱 Live Viewport Scale Simulator:
+        </div>
+        <div class="view-btn-group">
+            <button class="view-btn" onclick="setViewport('375px', this)">Mobile (375px)</button>
+            <button class="view-btn" onclick="setViewport('768px', this)">Tablet (768px)</button>
+            <button class="view-btn active" onclick="setViewport('100%', this)">Desktop (Full 100%)</button>
+        </div>
+        <div id="viewport-indicator" style="font-size: 13px; color: var(--color-muted);">
+            Current Mode: <strong>Desktop (Full Width)</strong>
+        </div>
+    </div>
+
+    <main class="container" style="padding-top: 20px;">
+        <div style="margin-bottom: 24px;">
+            <span class="badge badge-primary">Mobile-First Architecture</span>
+            <h1 style="font-size: 28px; margin-top: 6px; margin-bottom: 6px;">Adaptive CSS Grid &amp; Flexbox Demonstration</h1>
+            <p style="color: var(--color-muted); font-size: 14.5px;">
+                Inspect how structural elements smoothly transition from 1-column mobile flex stack to 2-column tablet layout, and expansive 4-column desktop grid.
+            </p>
+        </div>
+
+        <div class="preview-wrapper">
+            <div class="responsive-frame" id="sim-frame">
+                <div class="responsive-content">
+                    
+                    <!-- Flexbox Navigation -->
+                    <div class="nav-flex-container">
+                        <div style="font-size: 20px; font-weight: 700; color: var(--color-primary); font-family: var(--font-heading);">
+                            🌿 Botanica Bakery
+                        </div>
+                        <div style="display: flex; gap: 14px; font-size: 13.5px; font-weight: 600;">
+                            <a href="#" style="color: var(--color-primary); text-decoration: none;">Menu</a>
+                            <a href="#" style="color: var(--color-muted); text-decoration: none;">Roastery</a>
+                            <a href="#" style="color: var(--color-muted); text-decoration: none;">Story</a>
+                            <a href="#" style="color: var(--color-muted); text-decoration: none;">Book Table</a>
+                        </div>
+                    </div>
+
+                    <!-- Flexbox Hero Section -->
+                    <div class="hero-banner-flex">
+                        <div class="hero-banner-image">
+                            🍞
+                        </div>
+                        <div class="hero-banner-text">
+                            <span class="badge badge-accent">Daily Fresh Bake</span>
+                            <h2 style="font-size: 24px; margin: 10px 0;">Heritage Grain Sourdough</h2>
+                            <p style="color: var(--color-muted); font-size: 14px; margin-bottom: 16px;">
+                                Wood-fired stone deck ovens delivering crusty perfection, golden crumb, and pure probiotic bliss.
+                            </p>
+                            <button class="btn btn-primary" style="padding: 8px 18px; font-size: 13px;">Explore Menu &rarr;</button>
+                        </div>
+                    </div>
+
+                    <!-- CSS Grid Featured Items -->
+                    <div style="margin-top: 30px;">
+                        <h3 style="font-size: 18px; margin-bottom: 4px;">Artisan Offerings (CSS Grid)</h3>
+                        <p style="color: var(--color-muted); font-size: 13px;">Changes automatically: 1 Col (Mobile) &rarr; 2 Col (Tablet) &rarr; 4 Col (Desktop)</p>
+                        
+                        <div class="gallery-grid">
+                            <div class="grid-item">
+                                <div style="font-size: 32px; margin-bottom: 8px;">🥖</div>
+                                <h4 style="font-size: 15px;">Country Sourdough</h4>
+                                <p style="font-size: 12.5px; color: var(--color-muted); margin-top: 4px;">48hr fermented loaf</p>
+                                <strong style="color: var(--color-accent); display: block; margin-top: 8px;">$6.50</strong>
+                            </div>
+
+                            <div class="grid-item">
+                                <div style="font-size: 32px; margin-bottom: 8px;">☕</div>
+                                <h4 style="font-size: 15px;">Pour-Over Coffee</h4>
+                                <p style="font-size: 12.5px; color: var(--color-muted); margin-top: 4px;">Ethiopian micro-lot</p>
+                                <strong style="color: var(--color-accent); display: block; margin-top: 8px;">$4.75</strong>
+                            </div>
+
+                            <div class="grid-item">
+                                <div style="font-size: 32px; margin-bottom: 8px;">🥐</div>
+                                <h4 style="font-size: 15px;">Almond Croissant</h4>
+                                <p style="font-size: 12.5px; color: var(--color-muted); margin-top: 4px;">Double-baked frangipane</p>
+                                <strong style="color: var(--color-accent); display: block; margin-top: 8px;">$5.20</strong>
+                            </div>
+
+                            <div class="grid-item">
+                                <div style="font-size: 32px; margin-bottom: 8px;">🍵</div>
+                                <h4 style="font-size: 15px;">Matcha Latte</h4>
+                                <p style="font-size: 12.5px; color: var(--color-muted); margin-top: 4px;">Uji ceremonial grade</p>
+                                <strong style="color: var(--color-accent); display: block; margin-top: 8px;">$5.50</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 3: Responsive CSS Grid &amp; Flexbox).
+        </div>
+    </footer>
+
+    <script>
+        function setViewport(width, btn) {
+            const frame = document.getElementById('sim-frame');
+            const indicator = document.getElementById('viewport-indicator');
+            
+            frame.style.maxWidth = width;
+            
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (width === '375px') {
+                indicator.innerHTML = 'Current Mode: <strong>Mobile (375px Viewport)</strong>';
+            } else if (width === '768px') {
+                indicator.innerHTML = 'Current Mode: <strong>Tablet (768px Viewport)</strong>';
+            } else {
+                indicator.innerHTML = 'Current Mode: <strong>Desktop (Full 100% Viewport)</strong>';
+            }
+        }
+    </script>
+</body>
+</html>

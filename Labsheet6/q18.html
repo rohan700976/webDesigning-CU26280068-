@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q18 - CSS Styles for Print Media (@media print)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.6;
+        }
+
+        /* Question Context Banner (Screen only) */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Screen Header Navigation */
+        .screen-navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .btn-print {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+            transition: background 0.2s;
+        }
+
+        .btn-print:hover {
+            background: #1d4ed8;
+        }
+
+        /* Document / Resume Container */
+        .print-document {
+            max-width: 850px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 48px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        .doc-header {
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 20px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .doc-header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .doc-header .role {
+            font-size: 16px;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            text-align: right;
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .section-block {
+            margin-bottom: 28px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .section-block h2 {
+            font-size: 20px;
+            color: #0f172a;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 6px;
+            margin-bottom: 14px;
+        }
+
+        .exp-item {
+            margin-bottom: 16px;
+        }
+
+        .exp-title-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .exp-title-row strong {
+            font-size: 16px;
+            color: #1e293b;
+        }
+
+        .exp-date {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .exp-desc {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .links-list {
+            margin-top: 10px;
+            list-style: none;
+        }
+
+        .links-list li {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .links-list a {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        /* Screen Footer */
+        .screen-footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 40px;
+        }
+
+        /* ==================================================
+           18. DEDICATED @MEDIA PRINT CSS STYLES
+           ================================================== */
+        @media print {
+            /* 1. Page margin configuration */
+            @page {
+                margin: 1.5cm;
+                size: A4 portrait;
+            }
+
+            /* 2. Hide all non-printable UI components */
+            .lab-header-banner,
+            .screen-navbar,
+            .btn-print,
+            .screen-footer,
+            .no-print {
+                display: none !important;
+            }
+
+            /* 3. Reset backgrounds and font colors for high-contrast, ink-saving black & white output */
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 12pt;
+                line-height: 1.5;
+            }
+
+            .print-document {
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            .doc-header {
+                border-bottom: 2pt solid #000000 !important;
+            }
+
+            .doc-header h1 {
+                color: #000000 !important;
+                font-size: 24pt !important;
+            }
+
+            .doc-header .role {
+                color: #333333 !important;
+            }
+
+            .section-block h2 {
+                color: #000000 !important;
+                border-bottom: 1pt solid #666666 !important;
+                font-size: 14pt !important;
+            }
+
+            /* 4. Avoid breaking sections across print pages */
+            .section-block,
+            .exp-item {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            /* 5. Print readable link URLs next to anchors */
+            a[href^="http"]::after,
+            a[href^="https"]::after,
+            a[href^="mailto"]::after {
+                content: " (" attr(href) ")" !important;
+                font-size: 9pt !important;
+                color: #444444 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner (Hidden in Print) -->
+    <div class="lab-header-banner no-print">
+        <span><strong>Lab Sheet 6 - Question 18:</strong> CSS styles for print media (<code>@media print</code>) ensuring clean printing of portfolio pages</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <!-- Screen Navbar with Print Trigger -->
+    <header class="screen-navbar no-print">
+        <div class="brand">PortfolioPrint.css</div>
+        <button class="btn-print" onclick="window.print()">
+            <!-- Print Vector Icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Print Portfolio (Ctrl + P)
+        </button>
+    </header>
+
+    <!-- Printable Portfolio Document -->
+    <main class="print-document">
+        <div class="doc-header">
+            <div>
+                <h1>Rohan Sharma</h1>
+                <p class="role">Full-Stack Web Engineer &amp; UI Specialist</p>
+            </div>
+            <div class="contact-info">
+                <p>Email: <a href="mailto:rohan@example.com">rohan@example.com</a></p>
+                <p>Web: <a href="https://rohansharma.dev">https://rohansharma.dev</a></p>
+                <p>COER University, Roorkee</p>
+            </div>
+        </div>
+
+        <!-- Section: Professional Summary -->
+        <section class="section-block">
+            <h2>Professional Summary</h2>
+            <p>
+                Passionate software engineering student with extensive experience building standards-compliant, semantic HTML5 web systems. Specialized in responsive CSS Grid/Flexbox architectures, dynamic JavaScript DOM manipulations, and print media optimization for production applications.
+            </p>
+        </section>
+
+        <!-- Section: Experience -->
+        <section class="section-block">
+            <h2>Featured Experience &amp; Projects</h2>
+            <div class="exp-item">
+                <div class="exp-title-row">
+                    <strong>Lead Frontend Architect &bull; Web Systems Lab</strong>
+                    <span class="exp-date">2025 &ndash; Present</span>
+                </div>
+                <p class="exp-desc">
+                    Engineered responsive client-side applications adhering strictly to W3C semantic markup standards. Reduced cumulative layout shift (CLS) by 80% using tokenized CSS root variables and hardware-accelerated transforms.
+                </p>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-title-row">
+                    <strong>Full-Stack Developer &bull; Campus Portal</strong>
+                    <span class="exp-date">2024 &ndash; 2025</span>
+                </div>
+                <p class="exp-desc">
+                    Implemented client-side real-time form validation scripts, dynamic FAQ accordions, and interactive testimonial carousels with sub-second responsiveness.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section: Core Links & References -->
+        <section class="section-block">
+            <h2>Digital Presence &amp; Verification Links</h2>
+            <ul class="links-list">
+                <li>GitHub Profile: <a href="https://github.com/rohan700976">https://github.com/rohan700976</a></li>
+                <li>Online Repository: <a href="https://github.com/rohan700976/webDesigning-CU26280068-">Project Codebase</a></li>
+                <li>University Portal: <a href="https://coer.ac.in">COER University Official</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Screen Footer (Hidden in Print) -->
+    <footer class="screen-footer no-print">
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 18: Print Media Stylesheet).
+    </footer>
+
+</body>
+</html>

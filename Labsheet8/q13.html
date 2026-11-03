@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q13 - Accessible FAQ Accordion | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin-bottom: 14px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: border-color 0.2s;
+        }
+
+        .accordion-item.active {
+            border-color: var(--color-accent);
+        }
+
+        /* Accessible Button Question */
+        .accordion-header {
+            width: 100%;
+            background: none;
+            border: none;
+            outline: none;
+            padding: 20px 24px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .accordion-header:hover {
+            background-color: var(--color-sand);
+            color: var(--color-primary);
+        }
+
+        .accordion-header:focus-visible {
+            outline: 3px solid #2563eb;
+            outline-offset: -3px;
+        }
+
+        .accordion-icon {
+            font-size: 18px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--color-accent);
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Smooth Collapsing Panel */
+        .accordion-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #faf8f5;
+        }
+
+        .accordion-body {
+            padding: 0 24px 20px;
+            color: var(--color-muted);
+            font-size: 14.5px;
+            line-height: 1.7;
+            border-top: 1px solid #f1ece1;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 13:</strong> Accessible FAQ Accordion (Semantic ARIA &amp; Vanilla JavaScript)</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">🌿</span>
+                <span class="brand-name">Botanica <span>FAQ</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q5.html">Accessibility</a></li>
+                <li><a href="q13.html" class="active">FAQ Accordion</a></li>
+                <li><a href="q14.html">Product Search</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <span class="badge badge-accent">Help Center &amp; Inquiries</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">Frequently Asked Questions</h1>
+            <p style="color: var(--color-muted); max-width: 600px; margin: 0 auto;">
+                W3C WAI-ARIA compliant accordion with keyboard navigation (<code>Tab</code>, <code>Enter</code>, <code>Space</code>) and progressive height animations.
+            </p>
+        </div>
+
+        <div class="faq-container" id="faqAccordion">
+
+            <!-- Question 1 -->
+            <div class="accordion-item">
+                <button class="accordion-header" id="faq-header-1" aria-expanded="false" aria-controls="faq-panel-1" onclick="toggleAccordion(this)">
+                    <span>🌾 What makes your sourdough bread easier to digest?</span>
+                    <span class="accordion-icon" aria-hidden="true">&#9662;</span>
+                </button>
+                <div class="accordion-panel" id="faq-panel-1" role="region" aria-labelledby="faq-header-1">
+                    <div class="accordion-body">
+                        Every Botanica sourdough loaf undergoes a strict 48-hour cold fermentation process using our heirloom wild yeast starter. This extensive fermentation naturally digests complex starches and breaks down gluten proteins, making it significantly easier to digest for individuals with mild wheat sensitivities.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="accordion-item">
+                <button class="accordion-header" id="faq-header-2" aria-expanded="false" aria-controls="faq-panel-2" onclick="toggleAccordion(this)">
+                    <span>☕ Where do you source your specialty coffee beans?</span>
+                    <span class="accordion-icon" aria-hidden="true">&#9662;</span>
+                </button>
+                <div class="accordion-panel" id="faq-panel-2" role="region" aria-labelledby="faq-header-2">
+                    <div class="accordion-body">
+                        We practice 100% direct-trade sourcing, partnering directly with micro-lot coffee estates in Yirgacheffe (Ethiopia), Huila (Colombia), and shade-grown organic plantations in Chikmagalur (India). We pay 35% above fair-trade floor prices to ensure living wages for picker families.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="accordion-item">
+                <button class="accordion-header" id="faq-header-3" aria-expanded="false" aria-controls="faq-panel-3" onclick="toggleAccordion(this)">
+                    <span>🍃 Do you accommodate vegan, dairy-free, and nut allergies?</span>
+                    <span class="accordion-icon" aria-hidden="true">&#9662;</span>
+                </button>
+                <div class="accordion-panel" id="faq-panel-3" role="region" aria-labelledby="faq-header-3">
+                    <div class="accordion-body">
+                        Yes! Over 60% of our botanical pastries are strictly vegan. We offer complimentary house-made oat and almond milks, and operate a separate sanitized station for allergen-sensitive baking orders.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="accordion-item">
+                <button class="accordion-header" id="faq-header-4" aria-expanded="false" aria-controls="faq-panel-4" onclick="toggleAccordion(this)">
+                    <span>♻️ What is Botanica's zero-waste sustainability policy?</span>
+                    <span class="accordion-icon" aria-hidden="true">&#9662;</span>
+                </button>
+                <div class="accordion-panel" id="faq-panel-4" role="region" aria-labelledby="faq-header-4">
+                    <div class="accordion-body">
+                        Zero single-use plastics are permitted on our premises. All takeaway packaging is 100% biodegradable plant-derived PLA. Patrons bringing their own travel tumblers receive a 10% discount on all espresso beverages, and coffee grounds are donated to local organic valley gardens.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="accordion-item">
+                <button class="accordion-header" id="faq-header-5" aria-expanded="false" aria-controls="faq-panel-5" onclick="toggleAccordion(this)">
+                    <span>🏛️ Can students or faculty reserve the Greenhouse for study groups?</span>
+                    <span class="accordion-icon" aria-hidden="true">&#9662;</span>
+                </button>
+                <div class="accordion-panel" id="faq-panel-5" role="region" aria-labelledby="faq-header-5">
+                    <div class="accordion-body">
+                        Absolutely! Our Greenhouse Atrium features high-speed optic fiber Wi-Fi and power outlets at every booth. Small academic groups of up to 10 persons can reserve seats without booking fees using our <a href="q7.html" style="color: var(--color-primary); font-weight: 700;">Reservation Form</a>.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 13: Accessible FAQ Accordion).
+        </div>
+    </footer>
+
+    <script>
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const panel = item.querySelector('.accordion-panel');
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+            // Optional: Close other panels for single-open behavior
+            document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+                    otherItem.querySelector('.accordion-panel').style.maxHeight = null;
+                }
+            });
+
+            if (isExpanded) {
+                button.setAttribute('aria-expanded', 'false');
+                item.classList.remove('active');
+                panel.style.maxHeight = null;
+            } else {
+                button.setAttribute('aria-expanded', 'true');
+                item.classList.add('active');
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    </script>
+</body>
+</html>

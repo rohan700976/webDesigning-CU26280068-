@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q15 - Multi-Step Booking Wizard | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .wizard-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* STEP PROGRESS INDICATOR */
+        .progress-bar-wrapper {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 36px;
+        }
+
+        .progress-bar-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+
+        .progress-line-fill {
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            height: 3px;
+            background: var(--color-primary);
+            z-index: 2;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .step-bubble {
+            position: relative;
+            z-index: 3;
+            background: #e2e8f0;
+            color: #64748b;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .step-bubble.active {
+            background: var(--color-primary);
+            color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(27, 67, 50, 0.2);
+        }
+
+        .step-bubble.completed {
+            background: var(--color-success);
+            color: #ffffff;
+        }
+
+        .step-label {
+            position: absolute;
+            top: 44px;
+            font-size: 11px;
+            white-space: nowrap;
+            color: var(--color-muted);
+            transform: translateX(-35%);
+            font-weight: 600;
+        }
+
+        /* WIZARD STEPS */
+        .wizard-step {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .wizard-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .option-card-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .option-card {
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-card:hover {
+            border-color: var(--color-accent);
+        }
+
+        .option-card.selected {
+            border-color: var(--color-primary);
+            background: var(--color-sand);
+        }
+
+        .wizard-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 15:</strong> Multi-Step Booking Wizard with Progress &amp; State Preservation</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">🌿</span>
+                <span class="brand-name">Botanica <span>Experience Wizard</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q7.html">Simple Table</a></li>
+                <li><a href="q15.html" class="active">Event Wizard</a></li>
+                <li><a href="q16.html">Accessibility</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <span class="badge badge-accent">Curated Events &amp; Workshops</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">Multi-Step Event Reservation Wizard</h1>
+            <p style="color: var(--color-muted); max-width: 600px; margin: 0 auto;">
+                Preserves user input state through every phase, features live dynamic price estimation, and validates each step before progression.
+            </p>
+        </div>
+
+        <div class="wizard-container">
+            <!-- PROGRESS INDICATOR -->
+            <div class="progress-bar-wrapper">
+                <div class="progress-line-fill" id="progressLine"></div>
+                <div class="step-bubble active" id="bubble-1">1<span class="step-label">Experience</span></div>
+                <div class="step-bubble" id="bubble-2">2<span class="step-label">Date &amp; Guests</span></div>
+                <div class="step-bubble" id="bubble-3">3<span class="step-label">Add-ons</span></div>
+                <div class="step-bubble" id="bubble-4">4<span class="step-label">Review</span></div>
+            </div>
+
+            <form id="wizardForm" onsubmit="return false;">
+                
+                <!-- STEP 1: EXPERIENCE TYPE -->
+                <div class="wizard-step active" id="step-1">
+                    <h2 style="font-size: 22px;">Step 1: Choose Your Experience</h2>
+                    <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">Select the masterclass or event format you want to reserve:</p>
+
+                    <div class="option-card-group">
+                        <div class="option-card selected" onclick="selectExperience('Sourdough Masterclass', 45, this)">
+                            <div style="font-size: 36px; margin-bottom: 8px;">🥖</div>
+                            <strong>Sourdough Masterclass</strong>
+                            <div style="color: var(--color-accent); font-weight: 700; margin-top: 4px;">$45 / person</div>
+                        </div>
+
+                        <div class="option-card" onclick="selectExperience('Coffee Cupping Tasting', 35, this)">
+                            <div style="font-size: 36px; margin-bottom: 8px;">☕</div>
+                            <strong>Coffee Cupping Lab</strong>
+                            <div style="color: var(--color-accent); font-weight: 700; margin-top: 4px;">$35 / person</div>
+                        </div>
+
+                        <div class="option-card" onclick="selectExperience('Greenhouse Private Dinner', 60, this)">
+                            <div style="font-size: 36px; margin-bottom: 8px;">🌿</div>
+                            <strong>Private Greenhouse</strong>
+                            <div style="color: var(--color-accent); font-weight: 700; margin-top: 4px;">$60 / person</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: DATE & GUESTS -->
+                <div class="wizard-step" id="step-2">
+                    <h2 style="font-size: 22px;">Step 2: Date &amp; Guest Count</h2>
+                    <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">Specify your preferred date and party attendance:</p>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="wizardDate">Event Date *</label>
+                        <input type="date" id="wizardDate" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wizardGuests">Number of Attendees *</label>
+                        <select id="wizardGuests" class="form-control" onchange="updateGuestCount(this.value)">
+                            <option value="2">2 Attendees</option>
+                            <option value="4" selected>4 Attendees</option>
+                            <option value="8">8 Attendees</option>
+                            <option value="12">12 Attendees (Private Atrium Booking)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- STEP 3: ADD-ONS -->
+                <div class="wizard-step" id="step-3">
+                    <h2 style="font-size: 22px;">Step 3: Botanical Add-ons</h2>
+                    <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">Enhance your session with signature culinary take-home packages:</p>
+
+                    <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 20px;">
+                        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; background: var(--color-sand); padding: 14px; border-radius: var(--radius-sm);">
+                            <input type="checkbox" id="addonStarter" onchange="toggleAddon('starter', 20, this.checked)" style="width: 18px; height: 18px;">
+                            <div>
+                                <strong>Heirloom Sourdough Starter Kit &amp; Banneton Basket (+$20)</strong>
+                                <div style="font-size: 12.5px; color: var(--color-muted);">Includes 50-year wild yeast culture and cane proofing basket.</div>
+                            </div>
+                        </label>
+
+                        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; background: var(--color-sand); padding: 14px; border-radius: var(--radius-sm);">
+                            <input type="checkbox" id="addonBeans" onchange="toggleAddon('beans', 18, this.checked)" style="width: 18px; height: 18px;">
+                            <div>
+                                <strong>Direct-Trade Ethiopian Yirgacheffe Whole Beans (+$18)</strong>
+                                <div style="font-size: 12.5px; color: var(--color-muted);">Freshly light-roasted 250g bag with brew card notes.</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 4: REVIEW & CONFIRM -->
+                <div class="wizard-step" id="step-4">
+                    <h2 style="font-size: 22px;">Step 4: Review &amp; Guest Details</h2>
+                    <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">Verify your reservation summary and enter lead contact information:</p>
+
+                    <!-- Order Summary Box -->
+                    <div style="background: var(--color-sand); padding: 20px; border-radius: var(--radius-md); margin: 20px 0; font-size: 14px; line-height: 1.8;">
+                        <div><strong>Experience:</strong> <span id="revExp">Sourdough Masterclass</span></div>
+                        <div><strong>Date:</strong> <span id="revDate">Not set</span></div>
+                        <div><strong>Attendees:</strong> <span id="revGuests">4 Attendees</span></div>
+                        <div><strong>Estimated Total:</strong> <span id="revTotal" style="color: var(--color-accent); font-weight: 800; font-size: 18px;">$180</span></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wizardName">Primary Contact Name *</label>
+                        <input type="text" id="wizardName" class="form-control" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wizardEmail">Confirmation Email *</label>
+                        <input type="email" id="wizardEmail" class="form-control" placeholder="your.email@example.com" required>
+                    </div>
+                </div>
+
+                <!-- WIZARD NAVIGATION CONTROLS -->
+                <div class="wizard-nav">
+                    <button type="button" class="btn btn-secondary" id="btnBack" onclick="changeStep(-1)" style="visibility: hidden;">
+                        &larr; Back
+                    </button>
+                    <button type="button" class="btn btn-primary" id="btnNext" onclick="changeStep(1)">
+                        Next Step &rarr;
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 15: Multi-Step Booking Wizard).
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        // State preservation store
+        const wizardState = {
+            experience: 'Sourdough Masterclass',
+            basePrice: 45,
+            guests: 4,
+            date: '',
+            addons: { starter: 0, beans: 0 },
+            name: '',
+            email: ''
+        };
+
+        // Set min date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('wizardDate').min = tomorrow.toISOString().split('T')[0];
+        document.getElementById('wizardDate').value = tomorrow.toISOString().split('T')[0];
+        wizardState.date = document.getElementById('wizardDate').value;
+
+        function selectExperience(name, price, card) {
+            wizardState.experience = name;
+            wizardState.basePrice = price;
+            document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+        }
+
+        function updateGuestCount(count) {
+            wizardState.guests = parseInt(count);
+        }
+
+        function toggleAddon(type, cost, isChecked) {
+            wizardState.addons[type] = isChecked ? cost : 0;
+        }
+
+        function calculateTotal() {
+            const expTotal = wizardState.basePrice * wizardState.guests;
+            const addonTotal = wizardState.addons.starter + wizardState.addons.beans;
+            return expTotal + addonTotal;
+        }
+
+        function updateProgress() {
+            // Update line fill
+            const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progressLine').style.width = pct + '%';
+
+            // Update step bubbles
+            for (let i = 1; i <= totalSteps; i++) {
+                const bubble = document.getElementById(`bubble-${i}`);
+                if (i < currentStep) {
+                    bubble.className = 'step-bubble completed';
+                    bubble.innerText = '✓';
+                } else if (i === currentStep) {
+                    bubble.className = 'step-bubble active';
+                    bubble.innerText = i;
+                } else {
+                    bubble.className = 'step-bubble';
+                    bubble.innerText = i;
+                }
+            }
+
+            // Button visibility
+            document.getElementById('btnBack').style.visibility = (currentStep === 1) ? 'hidden' : 'visible';
+            document.getElementById('btnNext').innerText = (currentStep === totalSteps) ? 'Complete Booking 🎉' : 'Next Step →';
+        }
+
+        function changeStep(delta) {
+            if (delta === 1 && currentStep === 4) {
+                // Submit action
+                const name = document.getElementById('wizardName').value.trim();
+                const email = document.getElementById('wizardEmail').value.trim();
+                if (!name || !email) {
+                    alert('Please provide your name and email to finalize booking.');
+                    return;
+                }
+                alert(`🎉 Booking Confirmed!\nThank you ${name}.\nReference: BOT-WZ-${Math.floor(1000 + Math.random()*9000)}\nConfirmation sent to: ${email}`);
+                window.location.href = "index.html";
+                return;
+            }
+
+            // Step validations
+            if (delta === 1 && currentStep === 2) {
+                const d = document.getElementById('wizardDate').value;
+                if (!d) {
+                    alert('Please choose a valid event date.');
+                    return;
+                }
+                wizardState.date = d;
+            }
+
+            currentStep += delta;
+            if (currentStep < 1) currentStep = 1;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+
+            // Render active step
+            document.querySelectorAll('.wizard-step').forEach((st, idx) => {
+                st.classList.toggle('active', (idx + 1) === currentStep);
+            });
+
+            // Update review step content
+            if (currentStep === 4) {
+                document.getElementById('revExp').innerText = wizardState.experience;
+                document.getElementById('revDate').innerText = wizardState.date;
+                document.getElementById('revGuests').innerText = wizardState.guests + ' Attendees';
+                document.getElementById('revTotal').innerText = '$' + calculateTotal();
+            }
+
+            updateProgress();
+        }
+
+        updateProgress();
+    </script>
+</body>
+</html>

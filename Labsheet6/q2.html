@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q2 - External CSS &amp; Flexbox Portfolio</title>
+    <!-- Linking external CSS stylesheet featuring CSS Flexbox -->
+    <link rel="stylesheet" href="q2_style.css">
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 2:</strong> Style portfolio website using external CSS file with CSS Flexbox for navigation &amp; card grids</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <!-- Responsive Flexbox Navigation Bar -->
+    <header class="flex-header">
+        <div class="navbar-flex-container">
+            <a href="q2.html" class="brand-logo">
+                <span>DevFlex</span>
+                <span class="badge-tag">Flexbox CSS</span>
+            </a>
+
+            <nav class="flex-nav-menu">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Portfolio</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#contact" class="btn-hire">Hire Me</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area with Flexbox Grid -->
+    <main class="container">
+        <section class="section-header">
+            <h1>Featured Engineering Projects</h1>
+            <p>Responsive layout powered dynamically by CSS Flexbox properties: <code>display: flex</code>, <code>flex-wrap: wrap</code>, and <code>flex: 1 1 calc(33.333% - 24px)</code>.</p>
+        </section>
+
+        <!-- Responsive Flexbox Card Grid -->
+        <section class="flexbox-card-grid">
+            <!-- Card 1 -->
+            <div class="flex-card">
+                <div class="card-icon">⚡</div>
+                <h2 class="card-title">Real-Time Chat Engine</h2>
+                <p class="card-desc">WebSocket-based instant messaging application with message queues, room subscriptions, and end-to-end encryption demonstration.</p>
+                <div class="card-footer">
+                    <span class="card-tech-tag">Socket.io &bull; Node.js</span>
+                    <a href="#" class="card-link">Live Demo &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="flex-card">
+                <div class="card-icon">🎨</div>
+                <h2 class="card-title">UI Design System</h2>
+                <p class="card-desc">Accessible, scalable component library featuring tokenized colors, accessible typography, and customizable flexbox components.</p>
+                <div class="card-footer">
+                    <span class="card-tech-tag">CSS Flexbox &bull; Storybook</span>
+                    <a href="#" class="card-link">Live Demo &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="flex-card">
+                <div class="card-icon">📊</div>
+                <h2 class="card-title">Analytics Dashboard</h2>
+                <p class="card-desc">Interactive business intelligence dashboard presenting key performance indicators with real-time charts and metric summaries.</p>
+                <div class="card-footer">
+                    <span class="card-tech-tag">Chart.js &bull; Flex Layout</span>
+                    <a href="#" class="card-link">Live Demo &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="flex-card">
+                <div class="card-icon">🛡️</div>
+                <h2 class="card-title">OAuth Authentication Hub</h2>
+                <p class="card-desc">Secure client-side and server-side OAuth2.0 authentication flow with JWT token lifecycle management and refresh token rotation.</p>
+                <div class="card-footer">
+                    <span class="card-tech-tag">Security &bull; JWT</span>
+                    <a href="#" class="card-link">Live Demo &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="flex-card">
+                <div class="card-icon">📱</div>
+                <h2 class="card-title">Progressive Web App</h2>
+                <p class="card-desc">Offline-first web application featuring service worker caching, push notifications, and adaptive flex layouts across mobile devices.</p>
+                <div class="card-footer">
+                    <span class="card-tech-tag">PWA &bull; Service Workers</span>
+                    <a href="#" class="card-link">Live Demo &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="flex-card">
+                <div class="card-icon">🚀</div>
+                <h2 class="card-title">Cloud Deployment Pipeline</h2>
+                <p class="card-desc">Automated CI/CD pipeline script testing code quality, bundling static assets, and deploying to edge servers with zero downtime.</p>
+                <div class="card-footer">
+                    <span class="card-tech-tag">DevOps &bull; GitHub Actions</span>
+                    <a href="#" class="card-link">Live Demo &rarr;</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Flexbox Footer -->
+    <footer class="flex-footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 2: CSS Flexbox).</p>
+            <p>External stylesheet: <code>q2_style.css</code> linked successfully.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

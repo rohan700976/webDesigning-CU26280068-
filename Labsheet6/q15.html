@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q15 - Animated Statistics Counter on Scroll</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.6;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .hero-lead {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .hero-lead h1 {
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .hero-lead p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Scroll buffer to allow user to scroll down to trigger the animation */
+        .scroll-intro {
+            max-width: 800px;
+            margin: 60px auto 40px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .scroll-prompt-badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 8px 18px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+
+        /* ==================================================
+           STATISTICS SECTION TRIGGERED BY INTERSECTION OBSERVER
+           ================================================== */
+        .stats-section {
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 80px 24px;
+            margin: 40px 0;
+        }
+
+        .stats-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 36px 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .stat-number-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 2px;
+            margin-bottom: 8px;
+        }
+
+        .counter {
+            font-size: 46px;
+            font-weight: 800;
+            color: #2563eb;
+            line-height: 1;
+        }
+
+        .stat-suffix {
+            font-size: 32px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .stat-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .restart-box {
+            text-align: center;
+            margin-top: 36px;
+        }
+
+        .btn-restart {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 26px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-restart:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 15:</strong> Statistics counter animation in JavaScript incrementing numbers from zero when scrolled into view</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <header class="hero-lead">
+        <h1>Engineering Milestones &amp; Metrics</h1>
+        <p>Demonstrating JavaScript dynamic incrementing counters using <code>IntersectionObserver</code> for scroll detection.</p>
+    </header>
+
+    <div class="scroll-intro">
+        <span class="scroll-prompt-badge">👇 Scroll down into the statistics cards area below</span>
+        <h2>Intersection Observer Trigger</h2>
+        <p style="color: #64748b; margin-top: 8px;">
+            The numbers below will automatically count up smoothly from 0 to their respective target values as soon as the section scrolls into the browser's viewport.
+        </p>
+    </div>
+
+    <!-- Target Statistics Section -->
+    <section class="stats-section" id="statsSection">
+        <div class="stats-container">
+            <div class="stats-grid">
+                <!-- Stat 1 -->
+                <div class="stat-card">
+                    <div class="stat-icon">💻</div>
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="250">0</span>
+                        <span class="stat-suffix">+</span>
+                    </div>
+                    <p class="stat-label">Projects Completed</p>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="1500">0</span>
+                        <span class="stat-suffix">+</span>
+                    </div>
+                    <p class="stat-label">Satisfied Clients</p>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="99">0</span>
+                        <span class="stat-suffix">%</span>
+                    </div>
+                    <p class="stat-label">System Uptime</p>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-number-wrapper">
+                        <span class="counter" data-target="18">0</span>
+                        <span class="stat-suffix">+</span>
+                    </div>
+                    <p class="stat-label">Hackathons Won</p>
+                </div>
+            </div>
+
+            <div class="restart-box">
+                <button class="btn-restart" id="restartBtn">Re-run Counter Animation</button>
+            </div>
+        </div>
+    </section>
+
+    <div style="height: 300px; display: flex; align-items: center; justify-content: center; color: #94a3b8;">
+        (End of page content)
+    </div>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 15: Statistics Counter Animation).
+    </footer>
+
+    <!-- JavaScript Counter Animation Script -->
+    <script>
+        const counters = document.querySelectorAll('.counter');
+        const statsSection = document.getElementById('statsSection');
+        let hasAnimated = false;
+
+        // Function to animate a single counter smoothly from 0 to target
+        function animateCounter(counter) {
+            const target = +counter.getAttribute('data-target');
+            const duration = 2000; // 2 seconds animation duration
+            const frameRate = 30; // ms per update
+            const totalSteps = duration / frameRate;
+            const stepIncrement = target / totalSteps;
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += stepIncrement;
+                if (current >= target) {
+                    counter.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    counter.textContent = Math.floor(current).toLocaleString();
+                }
+            }, frameRate);
+        }
+
+        // Trigger all counters
+        function startAllCounters() {
+            counters.forEach(counter => {
+                counter.textContent = '0';
+                animateCounter(counter);
+            });
+        }
+
+        // Modern IntersectionObserver to detect when section enters viewport
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    hasAnimated = true;
+                    startAllCounters();
+                    obs.unobserve(entry.target); // Trigger once on scroll
+                }
+            });
+        }, {
+            threshold: 0.3 // Trigger when 30% of the section is visible
+        });
+
+        observer.observe(statsSection);
+
+        // Manual restart button
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            startAllCounters();
+        });
+    </script>
+
+</body>
+</html>

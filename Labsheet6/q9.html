@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q9 - JavaScript Smooth Scrolling Navigation Effect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Note: We deliberately do not rely only on html { scroll-behavior: smooth; }
+           because the question explicitly specifies:
+           "Implement a smooth-scrolling navigation effect in JavaScript when clicking anchor links" */
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.6;
+        }
+
+        /* Top Question Context Header */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Fixed Navigation Header */
+        header.nav-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1e293b;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 12px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        /* Sections for Smooth Scrolling */
+        section {
+            min-height: 90vh;
+            padding: 80px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-box {
+            max-width: 800px;
+            background: #ffffff;
+            padding: 50px 40px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #4338ca;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }
+
+        p {
+            color: #64748b;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* Color differentiation for sections */
+        #home { background: linear-gradient(180deg, #f0fdf4 0%, #f8fafc 100%); }
+        #about { background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%); }
+        #services { background: linear-gradient(180deg, #fdf4ff 0%, #f8fafc 100%); }
+        #portfolio { background: linear-gradient(180deg, #fff7ed 0%, #f8fafc 100%); }
+        #contact { background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%); }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 9:</strong> Smooth-scrolling navigation effect in JavaScript when clicking anchor links in header menu</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <!-- Fixed Header with Anchor Menu -->
+    <header class="nav-header" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Smooth<span>Scroll.js</span></a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Sections with Unique IDs -->
+    <section id="home">
+        <div class="section-box">
+            <span class="section-tag">Section 1</span>
+            <h2>Home Section</h2>
+            <p>Click on any link in the sticky header menu above. JavaScript intercepts the default jump and smoothly glides to the target section, precisely taking into account the fixed header height.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-box">
+            <span class="section-tag">Section 2</span>
+            <h2>About Section</h2>
+            <p>Our JavaScript implementation uses <code>window.scrollTo({ top: targetPosition, behavior: 'smooth' })</code>. Notice how clean and frictionless the easing animation feels.</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="section-box">
+            <span class="section-tag">Section 3</span>
+            <h2>Services Section</h2>
+            <p>We provide full-stack web engineering, UI/UX interaction systems, and automated cross-browser testing for responsive web products.</p>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="section-box">
+            <span class="section-tag">Section 4</span>
+            <h2>Portfolio Section</h2>
+            <p>Explore production case studies featuring high-performance CSS grid interfaces, animated component states, and accessible web standards.</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-box">
+            <span class="section-tag">Section 5</span>
+            <h2>Contact Section</h2>
+            <p>Ready to discuss your web project? Reach out to start your collaboration today!</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 9: JS Smooth Scrolling).
+    </footer>
+
+    <!-- JavaScript Smooth Scrolling & Scrollspy Script -->
+    <script>
+        // Select all header anchor links that start with '#'
+        const navLinks = document.querySelectorAll('header.nav-header a[href^="#"]');
+        const header = document.getElementById('navbar');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // Stop instant abrupt anchor jump
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    // Header height compensation so header never overlaps the title
+                    const headerHeight = header.offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                    // Execute smooth scroll via JavaScript
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Optional scrollspy: highlights current link as user scrolls
+        window.addEventListener('scroll', () => {
+            let currentSection = '';
+            const sections = document.querySelectorAll('section');
+            const headerHeight = header.offsetHeight;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - headerHeight - 50;
+                if (window.pageYOffset >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

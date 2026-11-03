@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q7 - Dark Mode / Light Mode Dynamic CSS Root Variables</title>
+    <style>
+        /* 1. CSS ROOT VARIABLES (:root) FOR LIGHT THEME (DEFAULT) */
+        :root {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --badge-bg: #e0e7ff;
+            --badge-text: #4338ca;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --header-bg: #ffffff;
+        }
+
+        /* 2. DARK THEME CSS ROOT VARIABLES APPLIED VIA [data-theme="dark"] OR SCRIPT */
+        [data-theme="dark"] {
+            --bg-body: #0b1120;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --accent-color: #60a5fa;
+            --accent-hover: #3b82f6;
+            --badge-bg: rgba(59, 130, 246, 0.2);
+            --badge-text: #93c5fd;
+            --card-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+            --header-bg: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Header with Mode Toggle */
+        header.theme-header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        /* TOGGLE SWITCH STYLING */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 32px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cbd5e1;
+            border-radius: 34px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+
+        input:checked + .slider {
+            background-color: #3b82f6;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(28px);
+        }
+
+        .mode-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* MAIN CONTENT */
+        main.container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 24px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .demo-panel {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .demo-panel h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .demo-panel p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        /* Feature cards inside container to show theme variables in action */
+        .cards-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .inner-card {
+            background-color: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .badge {
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .code-box {
+            background: #090d16;
+            color: #38bdf8;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 13px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        footer {
+            background-color: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 7:</strong> Dark mode / light mode toggle switch using JavaScript to swap CSS root variables (<code>:root</code>) dynamically</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <!-- Theme Header with Toggle Switch -->
+    <header class="theme-header">
+        <div class="header-content">
+            <div class="logo">Theme<span>Shift</span></div>
+            <div class="theme-switch-wrapper">
+                <span class="mode-label" id="themeStatusText">Light Mode</span>
+                <label class="theme-switch" for="themeCheckbox">
+                    <input type="checkbox" id="themeCheckbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="demo-panel">
+            <span class="badge">Dynamic CSS Variables Demonstration</span>
+            <h1>Dynamic Root Variable Swapper</h1>
+            <p>
+                This web application demonstrates swapping CSS variables defined inside <code>:root</code> dynamically using JavaScript. When you toggle the switch above, JavaScript changes the active theme attribute and adjusts custom CSS properties such as <code>--bg-body</code>, <code>--bg-card</code>, <code>--text-primary</code>, and <code>--accent-color</code> in real time.
+            </p>
+
+            <div class="cards-row">
+                <div class="inner-card">
+                    <h3 style="margin-bottom: 8px;">Semantic Tokens</h3>
+                    <p style="font-size: 13px; color: var(--text-secondary);">Using centralized CSS variables avoids hardcoded hexadecimal colors across components.</p>
+                </div>
+                <div class="inner-card">
+                    <h3 style="margin-bottom: 8px;">Persistence</h3>
+                    <p style="font-size: 13px; color: var(--text-secondary);">Your theme preference is automatically stored in <code>localStorage</code> so it survives page reloads.</p>
+                </div>
+                <div class="inner-card">
+                    <h3 style="margin-bottom: 8px;">Smooth Transition</h3>
+                    <p style="font-size: 13px; color: var(--text-secondary);">All color and background transitions execute with 0.3s cubic timing for optimal visual ergonomics.</p>
+                </div>
+            </div>
+
+            <div class="code-box">
+// JavaScript dynamic root CSS variable swap snippet:<br>
+document.documentElement.setAttribute('data-theme', 'dark');<br>
+// Or dynamically setting directly:<br>
+document.documentElement.style.setProperty('--bg-body', '#0b1120');
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 7: Dark/Light Mode Root Variables).
+    </footer>
+
+    <!-- JavaScript Root Variables Swapper Script -->
+    <script>
+        const themeCheckbox = document.getElementById('themeCheckbox');
+        const themeStatusText = document.getElementById('themeStatusText');
+
+        // Function to apply theme dynamically
+        function applyTheme(isDark) {
+            if (isDark) {
+                // Set data-theme attribute on root <html> element
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeCheckbox.checked = true;
+                themeStatusText.textContent = 'Dark Mode 🌙';
+                localStorage.setItem('labsheet6_theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                themeCheckbox.checked = false;
+                themeStatusText.textContent = 'Light Mode ☀️';
+                localStorage.setItem('labsheet6_theme', 'light');
+            }
+        }
+
+        // Event listener for toggle switch change
+        themeCheckbox.addEventListener('change', function () {
+            applyTheme(this.checked);
+        });
+
+        // Initialize theme from localStorage or system preference
+        const savedTheme = localStorage.getItem('labsheet6_theme');
+        if (savedTheme === 'dark') {
+            applyTheme(true);
+        } else if (savedTheme === 'light') {
+            applyTheme(false);
+        } else {
+            // Check OS system dark mode preference
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark);
+        }
+    </script>
+
+</body>
+</html>

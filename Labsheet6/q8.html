@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q8 - Pricing Table Section with Hover Elevation &amp; Highlighted Popular Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --popular-accent: #2563eb;
+            --bg-page: #f8fafc;
+            --card-bg: #ffffff;
+            --border-normal: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .pricing-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 50px;
+        }
+
+        .pricing-header .badge {
+            background: #e0e7ff;
+            color: #4338ca;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .pricing-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* PRICING TABLE GRID */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            align-items: center;
+        }
+
+        /* BASE CARD STYLING WITH DISTINCT BORDERS */
+        .pricing-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-normal);
+            border-radius: 16px;
+            padding: 36px 28px;
+            position: relative;
+            /* Hover elevation transition */
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HOVER ELEVATION SHADOW & TRANSFORM */
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.05);
+            border-color: #cbd5e1;
+        }
+
+        /* HIGHLIGHTED POPULAR PLAN CARD */
+        .pricing-card.popular {
+            border: 2px solid var(--popular-accent);
+            box-shadow: 0 12px 28px -4px rgba(37, 99, 235, 0.18);
+            transform: scale(1.03); /* Slightly larger */
+            background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+            z-index: 2;
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.03) translateY(-10px);
+            box-shadow: 0 25px 35px -5px rgba(37, 99, 235, 0.28);
+        }
+
+        /* Popular Ribbon / Tag */
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--popular-accent);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 16px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+        }
+
+        .plan-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .plan-description {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .plan-price {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--text-dark);
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-normal);
+        }
+
+        .plan-price .currency {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .plan-price .period {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* Features list */
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .features-list li {
+            font-size: 14px;
+            color: #334155;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .check-icon {
+            width: 18px;
+            height: 18px;
+            background: #dcfce7;
+            color: #16a34a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .disabled-icon {
+            width: 18px;
+            height: 18px;
+            background: #f1f5f9;
+            color: #94a3b8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        .pricing-btn {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border-normal);
+            color: var(--text-dark);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-dark);
+            background: #f8fafc;
+        }
+
+        .btn-popular {
+            background: var(--popular-accent);
+            color: #ffffff;
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-popular:hover {
+            background: #1d4ed8;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45);
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 8:</strong> Pricing table section with CSS cards, distinct borders, hover elevation shadows &amp; highlighted popular plan</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <main class="container">
+        <header class="pricing-header">
+            <span class="badge">Transparent Pricing</span>
+            <h1>Choose the Perfect Plan</h1>
+            <p>Flexible packages designed to scale with your project needs. Distinct cards with elevation shadows on hover.</p>
+        </header>
+
+        <!-- Pricing Cards Grid -->
+        <div class="pricing-grid">
+            <!-- 1. Starter Tier -->
+            <div class="pricing-card">
+                <h3 class="plan-title">Starter</h3>
+                <p class="plan-description">Essential toolkit for personal projects and student portfolios.</p>
+                <div class="plan-price">
+                    <span class="currency">$</span>19<span class="period">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li><span class="check-icon">✓</span> 3 Semantic Web Pages</li>
+                    <li><span class="check-icon">✓</span> Responsive Flexbox Layout</li>
+                    <li><span class="check-icon">✓</span> Standard Contact Form</li>
+                    <li><span class="disabled-icon">&times;</span> <span style="color: #94a3b8; text-decoration: line-through;">Custom Domain Integration</span></li>
+                    <li><span class="disabled-icon">&times;</span> <span style="color: #94a3b8; text-decoration: line-through;">24/7 Priority Support</span></li>
+                </ul>
+                <button class="pricing-btn btn-outline" onclick="alert('Starter Plan selected!')">Get Started</button>
+            </div>
+
+            <!-- 2. Professional (Highlighted Popular Plan) -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">★ Most Popular</div>
+                <h3 class="plan-title">Professional</h3>
+                <p class="plan-description">Complete feature set for freelancers and fast-growing teams.</p>
+                <div class="plan-price">
+                    <span class="currency">$</span>49<span class="period">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li><span class="check-icon">✓</span> Unlimited Responsive Pages</li>
+                    <li><span class="check-icon">✓</span> CSS Grid &amp; Flexbox Layouts</li>
+                    <li><span class="check-icon">✓</span> Dynamic Dark / Light Mode</li>
+                    <li><span class="check-icon">✓</span> Interactive FAQ &amp; Testimonials</li>
+                    <li><span class="check-icon">✓</span> Priority Support &amp; Analytics</li>
+                </ul>
+                <button class="pricing-btn btn-popular" onclick="alert('Professional Plan selected!')">Upgrade to Pro</button>
+            </div>
+
+            <!-- 3. Enterprise Tier -->
+            <div class="pricing-card">
+                <h3 class="plan-title">Enterprise</h3>
+                <p class="plan-description">Dedicated infrastructure and tailored engineering solutions.</p>
+                <div class="plan-price">
+                    <span class="currency">$</span>99<span class="period">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li><span class="check-icon">✓</span> Everything in Professional</li>
+                    <li><span class="check-icon">✓</span> Custom Vector Icon Design</li>
+                    <li><span class="check-icon">✓</span> High-Availability CDN Hosting</li>
+                    <li><span class="check-icon">✓</span> Dedicated Security Auditing</li>
+                    <li><span class="check-icon">✓</span> 24/7 Dedicated Account Manager</li>
+                </ul>
+                <button class="pricing-btn btn-outline" onclick="alert('Enterprise Plan selected!')">Contact Sales</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 8: Pricing Table Section).
+    </footer>
+
+</body>
+</html>

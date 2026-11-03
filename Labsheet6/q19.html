@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q19 - Interactive Search Filter Bar for Portfolio Project Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg-page: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 50px 24px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .page-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 36px;
+        }
+
+        .page-header h1 {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* SEARCH & FILTER CONTROLS BAR */
+        .filter-controls-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 36px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            font-size: 15px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .filter-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        /* Category Filter Tags */
+        .category-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .category-pill {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .category-pill:hover,
+        .category-pill.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .results-count {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* PROJECT CARDS GRID */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.08);
+            border-color: #cbd5e1;
+        }
+
+        /* Hide unmatched cards smoothly */
+        .project-card.hidden {
+            display: none !important;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .project-category {
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+
+        .project-date {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .project-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            color: #334155;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .btn-card {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            align-self: flex-start;
+            transition: background 0.2s;
+        }
+
+        .btn-card:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Empty state message when search yields no results */
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px dashed var(--border);
+            grid-column: 1 / -1;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 19:</strong> Interactive search filter bar in JavaScript filtering portfolio cards dynamically as user types</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <main class="container">
+        <header class="page-header">
+            <h1>Searchable Projects Portfolio</h1>
+            <p>Filter project cards dynamically in real time as you type keywords or toggle category pills.</p>
+        </header>
+
+        <!-- Search & Category Filter Bar -->
+        <section class="filter-controls-card">
+            <!-- Search Input Box -->
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="Type here to filter by title, description, or tech stack (e.g. 'flexbox', 'validation', 'grid')...">
+            </div>
+
+            <!-- Category Pills & Count -->
+            <div class="filter-meta-row">
+                <div class="category-pills">
+                    <button class="category-pill active" data-category="all">All Projects</button>
+                    <button class="category-pill" data-category="frontend">Frontend &amp; CSS</button>
+                    <button class="category-pill" data-category="javascript">JavaScript</button>
+                    <button class="category-pill" data-category="fullstack">Architecture</button>
+                </div>
+                <div class="results-count" id="resultsCount">Showing 6 of 6 projects</div>
+            </div>
+        </section>
+
+        <!-- Project Cards Grid -->
+        <section class="projects-grid" id="projectsGrid">
+            <!-- Card 1 -->
+            <article class="project-card" data-category="frontend" data-tags="html5 semantic flexbox css responsive">
+                <div class="card-top">
+                    <span class="project-category">Frontend &amp; CSS</span>
+                    <span class="project-date">Feb 2026</span>
+                </div>
+                <h3 class="project-title">Semantic Multi-Page Portfolio</h3>
+                <p class="project-desc">Complete multi-page portfolio built with strict HTML5 semantic elements (&lt;header&gt;, &lt;nav&gt;, &lt;section&gt;, &lt;article&gt;, &lt;footer&gt;) and CSS Flexbox.</p>
+                <div class="project-tags">
+                    <span class="tag">HTML5</span>
+                    <span class="tag">Flexbox</span>
+                    <span class="tag">Semantic</span>
+                </div>
+                <a href="q1.html" class="btn-card">View Project</a>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="project-card" data-category="frontend" data-tags="css grid hover transform scale gallery transition">
+                <div class="card-top">
+                    <span class="project-category">Frontend &amp; CSS</span>
+                    <span class="project-date">Jan 2026</span>
+                </div>
+                <h3 class="project-title">CSS Grid Photo Showcase</h3>
+                <p class="project-desc">Photo gallery using CSS Grid layout with smooth hardware-accelerated image zoom hover effects utilizing CSS transform: scale() and transition.</p>
+                <div class="project-tags">
+                    <span class="tag">CSS Grid</span>
+                    <span class="tag">Transform</span>
+                    <span class="tag">Transition</span>
+                </div>
+                <a href="q5.html" class="btn-card">View Project</a>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="project-card" data-category="javascript" data-tags="javascript validation regex form security client-side">
+                <div class="card-top">
+                    <span class="project-category">JavaScript</span>
+                    <span class="project-date">Feb 2026</span>
+                </div>
+                <h3 class="project-title">Client-Side Form Validator</h3>
+                <p class="project-desc">Real-time dynamic contact form validation script in vanilla JavaScript verifying name format, RFC email compliance, and message length.</p>
+                <div class="project-tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Validation</span>
+                    <span class="tag">DOM</span>
+                </div>
+                <a href="q6.html" class="btn-card">View Project</a>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="project-card" data-category="javascript" data-tags="dark mode light mode css variables :root localstorage toggle">
+                <div class="card-top">
+                    <span class="project-category">JavaScript</span>
+                    <span class="project-date">Jan 2026</span>
+                </div>
+                <h3 class="project-title">Dynamic Theme Engine (:root)</h3>
+                <p class="project-desc">Dark mode and Light mode toggle switch swapping CSS root custom properties dynamically with localStorage state retention.</p>
+                <div class="project-tags">
+                    <span class="tag">CSS Variables</span>
+                    <span class="tag">Dark Mode</span>
+                    <span class="tag">Theme</span>
+                </div>
+                <a href="q7.html" class="btn-card">View Project</a>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="project-card" data-category="javascript" data-tags="accordion faq dom manipulation animation interactive">
+                <div class="card-top">
+                    <span class="project-category">JavaScript</span>
+                    <span class="project-date">Feb 2026</span>
+                </div>
+                <h3 class="project-title">Interactive FAQ Accordion</h3>
+                <p class="project-desc">Collapsible FAQ accordion module using JavaScript DOM manipulation and scrollHeight calculation for smooth accordion expansion.</p>
+                <div class="project-tags">
+                    <span class="tag">JavaScript DOM</span>
+                    <span class="tag">Accordion</span>
+                    <span class="tag">UI/UX</span>
+                </div>
+                <a href="q10.html" class="btn-card">View Project</a>
+            </article>
+
+            <!-- Card 6 -->
+            <article class="project-card" data-category="fullstack" data-tags="architecture counter intersection observer metrics scroll">
+                <div class="card-top">
+                    <span class="project-category">Architecture</span>
+                    <span class="project-date">Jan 2026</span>
+                </div>
+                <h3 class="project-title">Intersection Counter Metrics</h3>
+                <p class="project-desc">Live statistics counter animation in JavaScript that increments numbers from zero to target values when scrolled into the browser viewport.</p>
+                <div class="project-tags">
+                    <span class="tag">IntersectionObserver</span>
+                    <span class="tag">Animation</span>
+                    <span class="tag">Metrics</span>
+                </div>
+                <a href="q15.html" class="btn-card">View Project</a>
+            </article>
+
+            <!-- No Results State -->
+            <div class="empty-state" id="emptyState">
+                <h3>🔍 No matching projects found</h3>
+                <p>Try searching for a different keyword or resetting the category filter.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 19: Interactive Search Filter Bar).
+    </footer>
+
+    <!-- JavaScript Real-Time Dynamic Search & Filter Script -->
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const categoryPills = document.querySelectorAll('.category-pill');
+        const projectCards = document.querySelectorAll('.project-card');
+        const resultsCount = document.getElementById('resultsCount');
+        const emptyState = document.getElementById('emptyState');
+
+        let activeCategory = 'all';
+
+        // Filter function running whenever query or category changes
+        function filterProjects() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            projectCards.forEach(card => {
+                const title = card.querySelector('.project-title').textContent.toLowerCase();
+                const desc = card.querySelector('.project-desc').textContent.toLowerCase();
+                const tags = card.getAttribute('data-tags').toLowerCase();
+                const cardCategory = card.getAttribute('data-category');
+
+                // Check text match
+                const matchesQuery = query === '' || 
+                                     title.includes(query) || 
+                                     desc.includes(query) || 
+                                     tags.includes(query);
+
+                // Check category match
+                const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
+
+                if (matchesQuery && matchesCategory) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Update result counter
+            resultsCount.textContent = `Showing ${visibleCount} of ${projectCards.length} projects`;
+
+            // Display empty state if no cards match
+            if (visibleCount === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+            }
+        }
+
+        // Listen for real-time keystrokes in search bar
+        searchInput.addEventListener('input', filterProjects);
+
+        // Listen for clicks on category pills
+        categoryPills.forEach(pill => {
+            pill.addEventListener('click', function () {
+                categoryPills.forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                activeCategory = this.getAttribute('data-category');
+                filterProjects();
+            });
+        });
+    </script>
+
+</body>
+</html>

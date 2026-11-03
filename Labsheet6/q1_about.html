@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1 - About Me | Semantic Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        :root { --primary: #2563eb; --primary-dark: #1d4ed8; --text-dark: #0f172a; --text-muted: #64748b; --bg-light: #f8fafc; --card-bg: #ffffff; --border: #e2e8f0; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+        .lab-header-banner { background: #0f172a; color: #94a3b8; padding: 10px 24px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+        .lab-header-banner a { color: #38bdf8; text-decoration: none; font-weight: 600; }
+        header { background: #ffffff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04); }
+        .nav-container { max-width: 1100px; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 800; color: var(--text-dark); text-decoration: none; }
+        .logo span { color: var(--primary); }
+        nav ul { display: flex; list-style: none; gap: 24px; }
+        nav ul li a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 15px; padding: 6px 12px; border-radius: 6px; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); background: #eff6ff; }
+        main { max-width: 1100px; margin: 0 auto; padding: 40px 24px; flex: 1; width: 100%; }
+        .page-title { font-size: 32px; font-weight: 800; margin-bottom: 24px; color: var(--text-dark); }
+        .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; align-items: start; }
+        @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+        .profile-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; }
+        .avatar-placeholder { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #60a5fa); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; font-weight: bold; margin: 0 auto 16px; }
+        article.bio-article { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 30px; }
+        article.bio-article h3 { font-size: 22px; margin-bottom: 14px; color: var(--text-dark); }
+        article.bio-article p { color: #475569; margin-bottom: 16px; font-size: 15px; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; list-style: none; }
+        .skills-list li { background: #e2e8f0; color: #1e293b; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        footer { background: #0f172a; color: #94a3b8; padding: 30px 24px 20px; margin-top: auto; }
+        .footer-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; border-bottom: 1px solid #334155; padding-bottom: 20px; }
+        .footer-links { display: flex; gap: 20px; list-style: none; }
+        .footer-links a { color: #cbd5e1; text-decoration: none; font-size: 14px; }
+        .copyright { max-width: 1100px; margin: 16px auto 0; text-align: center; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 1:</strong> About Page (Semantic HTML5 tags)</span>
+        <a href="q1.html">← Back to Portfolio Home</a>
+    </div>
+
+    <header>
+        <div class="nav-container">
+            <a href="q1.html" class="logo">Portfolio<span>.dev</span></a>
+            <nav aria-label="Main Navigation">
+                <ul>
+                    <li><a href="q1.html">Home</a></li>
+                    <li><a href="q1_about.html" class="active">About</a></li>
+                    <li><a href="q1_projects.html">Projects</a></li>
+                    <li><a href="q1_contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="page-title">About Me</h1>
+        <section class="about-grid">
+            <aside class="profile-card">
+                <div class="avatar-placeholder">RS</div>
+                <h2>Rohan Sharma</h2>
+                <p style="color: var(--primary); font-weight: 600; margin-bottom: 8px;">Computer Science Student</p>
+                <p style="color: var(--text-muted); font-size: 14px;">COER University, Roorkee</p>
+            </aside>
+
+            <article class="bio-article">
+                <h3>Passionate Developer &amp; Tech Enthusiast</h3>
+                <p>Hello! I am a student specializing in Computer Science and Engineering with a deep passion for modern frontend and web technologies. I focus on creating accessible, responsive, and performance-oriented web applications adhering strictly to W3C semantic markup standards.</p>
+                <p>During my academic laboratory practicals, I have implemented scalable layouts using CSS Flexbox, CSS Grid, dynamic JavaScript interactions, and responsive media query techniques.</p>
+                
+                <h4 style="margin-top: 24px; font-size: 16px;">Core Competencies &amp; Technical Skills:</h4>
+                <ul class="skills-list">
+                    <li>Semantic HTML5</li>
+                    <li>Modern CSS3 (Flexbox &amp; Grid)</li>
+                    <li>JavaScript (ES6+)</li>
+                    <li>Responsive Web Design</li>
+                    <li>UI/UX Design</li>
+                    <li>Git &amp; Version Control</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <strong>Rohan Sharma</strong>
+            <ul class="footer-links">
+                <li><a href="q1.html">Home</a></li>
+                <li><a href="q1_about.html">About</a></li>
+                <li><a href="q1_projects.html">Projects</a></li>
+                <li><a href="q1_contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <p class="copyright">&copy; 2026 COER University - Web Designing Lab Sheet 6.</p>
+    </footer>
+</body>
+</html>

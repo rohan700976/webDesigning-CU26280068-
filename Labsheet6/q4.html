@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q4 - Interactive Hamburger Menu Toggle with JavaScript</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --dark: #0f172a;
+            --light-bg: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* NAVIGATION BAR */
+        header.nav-header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        /* Desktop Nav Menu */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 28px;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: var(--primary);
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: #ffffff !important;
+            padding: 8px 18px;
+            border-radius: 8px;
+            transition: background 0.2s ease !important;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-dark) !important;
+        }
+
+        /* HAMBURGER ICON (Visible on Mobile) */
+        .hamburger-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 22px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1100;
+        }
+
+        .hamburger-bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--dark);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Hamburger Animation when Active (transforms into an 'X') */
+        .hamburger-btn.active .hamburger-bar:nth-child(1) {
+            transform: translateY(9.5px) rotate(45deg);
+        }
+
+        .hamburger-btn.active .hamburger-bar:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .hamburger-btn.active .hamburger-bar:nth-child(3) {
+            transform: translateY(-9.5px) rotate(-45deg);
+        }
+
+        /* Mobile Screen Styles (Media Query) */
+        @media (max-width: 768px) {
+            .hamburger-btn {
+                display: flex;
+            }
+
+            /* Mobile Dropdown Drawer */
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Hidden offscreen by default */
+                width: 75%;
+                max-width: 320px;
+                height: 100vh;
+                background: #ffffff;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 90px 30px 40px;
+                gap: 20px;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+                transition: right 0.35s ease-in-out;
+                z-index: 1050;
+            }
+
+            /* Manipulated via JS: .nav-menu.active slides in */
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu li a {
+                display: block;
+                font-size: 18px;
+                padding: 10px 0;
+                border-bottom: 1px solid #f1f5f9;
+            }
+
+            .nav-btn {
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            /* Backdrop Overlay */
+            .menu-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(15, 23, 42, 0.5);
+                backdrop-filter: blur(2px);
+                z-index: 1020;
+            }
+
+            .menu-overlay.active {
+                display: block;
+            }
+        }
+
+        /* Page Content for Demonstration */
+        .demo-content {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .demo-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .status-pill {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        .btn-test {
+            margin-top: 20px;
+            background: #0f172a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 4:</strong> Interactive hamburger menu toggling using JavaScript event listeners &amp; CSS class manipulation</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <!-- Backdrop Overlay for Mobile Drawer -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="nav-header">
+        <div class="nav-wrapper">
+            <a href="q4.html" class="logo">Flex<span>Nav</span></a>
+
+            <!-- Hamburger Button -->
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+
+            <!-- Nav Links List -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact" class="nav-btn">Contact Me</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Interactive Demonstration Canvas -->
+    <main class="demo-content">
+        <div class="demo-card">
+            <span class="status-pill">Question 4 Demonstration</span>
+            <h1 style="font-size: 28px; margin-bottom: 12px;">Responsive Hamburger Menu</h1>
+            <p style="color: #64748b; line-height: 1.7; margin-bottom: 20px;">
+                Resize your browser window below <strong>768px</strong> (or toggle device toolbar in Developer Tools) to see the 3-bar hamburger icon. Click the icon to trigger the smooth CSS slide animation toggled dynamically via JavaScript!
+            </p>
+
+            <button class="btn-test" id="manualToggleBtn">Test Toggle via Script</button>
+            <p id="stateMsg" style="margin-top: 15px; font-weight: 600; color: #4f46e5;">Current Menu State: Closed</p>
+        </div>
+    </main>
+
+    <!-- JavaScript Event Listeners & Class Manipulation -->
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const manualToggleBtn = document.getElementById('manualToggleBtn');
+        const stateMsg = document.getElementById('stateMsg');
+        const navLinks = document.querySelectorAll('.nav-menu li a');
+
+        // Function to toggle mobile menu open/close
+        function toggleMenu() {
+            // CSS class manipulation
+            const isOpen = hamburgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+
+            // Accessibility attributes
+            hamburgerBtn.setAttribute('aria-expanded', isOpen);
+
+            // Update status text on screen
+            stateMsg.textContent = isOpen ? 'Current Menu State: OPEN (Active)' : 'Current Menu State: Closed';
+            stateMsg.style.color = isOpen ? '#16a34a' : '#4f46e5';
+        }
+
+        // Close menu function
+        function closeMenu() {
+            hamburgerBtn.classList.remove('active');
+            navMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            stateMsg.textContent = 'Current Menu State: Closed';
+            stateMsg.style.color = '#4f46e5';
+        }
+
+        // Event Listener on Hamburger button
+        hamburgerBtn.addEventListener('click', toggleMenu);
+
+        // Event Listener on Backdrop overlay click (closes menu)
+        menuOverlay.addEventListener('click', closeMenu);
+
+        // Close menu when any navigation link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Manual test button for desktop view testing
+        manualToggleBtn.addEventListener('click', toggleMenu);
+
+        // Close on Escape key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
+
+</body>
+</html>

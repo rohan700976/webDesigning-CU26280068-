@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1 - Projects | Semantic Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        :root { --primary: #2563eb; --primary-dark: #1d4ed8; --text-dark: #0f172a; --text-muted: #64748b; --bg-light: #f8fafc; --card-bg: #ffffff; --border: #e2e8f0; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+        .lab-header-banner { background: #0f172a; color: #94a3b8; padding: 10px 24px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+        .lab-header-banner a { color: #38bdf8; text-decoration: none; font-weight: 600; }
+        header { background: #ffffff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04); }
+        .nav-container { max-width: 1100px; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 800; color: var(--text-dark); text-decoration: none; }
+        .logo span { color: var(--primary); }
+        nav ul { display: flex; list-style: none; gap: 24px; }
+        nav ul li a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 15px; padding: 6px 12px; border-radius: 6px; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); background: #eff6ff; }
+        main { max-width: 1100px; margin: 0 auto; padding: 40px 24px; flex: 1; width: 100%; }
+        .page-title { font-size: 32px; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+        .page-subtitle { color: var(--text-muted); margin-bottom: 30px; font-size: 16px; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+        article.project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .project-banner { height: 160px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); display: flex; align-items: center; justify-content: center; color: white; font-size: 36px; font-weight: bold; }
+        .project-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .project-body h3 { font-size: 18px; margin-bottom: 8px; }
+        .project-body p { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; flex: 1; }
+        .tags-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+        .badge { background: #eff6ff; color: #2563eb; font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 4px; }
+        .btn-view { display: inline-block; padding: 8px 16px; background: var(--primary); color: white; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: 600; align-self: flex-start; }
+        .btn-view:hover { background: var(--primary-dark); }
+        footer { background: #0f172a; color: #94a3b8; padding: 30px 24px 20px; margin-top: auto; }
+        .footer-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; border-bottom: 1px solid #334155; padding-bottom: 20px; }
+        .footer-links { display: flex; gap: 20px; list-style: none; }
+        .footer-links a { color: #cbd5e1; text-decoration: none; font-size: 14px; }
+        .copyright { max-width: 1100px; margin: 16px auto 0; text-align: center; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 1:</strong> Projects Page (Semantic HTML5 tags)</span>
+        <a href="q1.html">← Back to Portfolio Home</a>
+    </div>
+
+    <header>
+        <div class="nav-container">
+            <a href="q1.html" class="logo">Portfolio<span>.dev</span></a>
+            <nav aria-label="Main Navigation">
+                <ul>
+                    <li><a href="q1.html">Home</a></li>
+                    <li><a href="q1_about.html">About</a></li>
+                    <li><a href="q1_projects.html" class="active">Projects</a></li>
+                    <li><a href="q1_contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="page-title">Portfolio Projects</h1>
+        <p class="page-subtitle">A showcase of semantic, accessible, and responsive applications developed during laboratory coursework.</p>
+
+        <section class="projects-grid">
+            <article class="project-card">
+                <div class="project-banner" style="background: linear-gradient(135deg, #0ea5e9, #2563eb);">01</div>
+                <div class="project-body">
+                    <h3>E-Commerce Storefront</h3>
+                    <p>Fully responsive shopping catalog with filter tags, category navigation, dynamic cart calculation, and client-side modal checkout previews.</p>
+                    <div class="tags-row">
+                        <span class="badge">HTML5</span>
+                        <span class="badge">CSS Flexbox</span>
+                        <span class="badge">JavaScript</span>
+                    </div>
+                    <a href="q16.html" class="btn-view">View Features</a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-banner" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);">02</div>
+                <div class="project-body">
+                    <h3>Interactive Photo Gallery</h3>
+                    <p>CSS Grid based photographic gallery exhibiting smooth hover zoom effects, responsive aspect ratio management, and lightbox modal integration.</p>
+                    <div class="tags-row">
+                        <span class="badge">CSS Grid</span>
+                        <span class="badge">Transform Scale</span>
+                        <span class="badge">Transitions</span>
+                    </div>
+                    <a href="q5.html" class="btn-view">View Gallery</a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-banner" style="background: linear-gradient(135deg, #10b981, #059669);">03</div>
+                <div class="project-body">
+                    <h3>SaaS Pricing &amp; Metrics Dashboard</h3>
+                    <p>Card-based pricing model featuring elevated popular plan visual hierarchies and animated counter statistics upon scroll view triggers.</p>
+                    <div class="tags-row">
+                        <span class="badge">DOM Manipulation</span>
+                        <span class="badge">CSS Variables</span>
+                        <span class="badge">Animations</span>
+                    </div>
+                    <a href="q8.html" class="btn-view">View Pricing</a>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <strong>Rohan Sharma</strong>
+            <ul class="footer-links">
+                <li><a href="q1.html">Home</a></li>
+                <li><a href="q1_about.html">About</a></li>
+                <li><a href="q1_projects.html">Projects</a></li>
+                <li><a href="q1_contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <p class="copyright">&copy; 2026 COER University - Web Designing Lab Sheet 6.</p>
+    </footer>
+</body>
+</html>

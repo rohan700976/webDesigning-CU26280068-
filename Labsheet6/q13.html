@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q13 - Back to Top Floating Button with Smooth Scrolling</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.7;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .hero-top {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 70px 24px;
+            text-align: center;
+        }
+
+        .hero-top h1 {
+            font-size: 34px;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .hero-top p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #dbeafe;
+        }
+
+        /* Content blocks creating a naturally long scrollable page */
+        .content-container {
+            max-width: 860px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .article-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .article-card h2 {
+            font-size: 22px;
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .article-card p {
+            color: #475569;
+            margin-bottom: 12px;
+        }
+
+        .scroll-indicator-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 16px;
+            border-radius: 8px;
+            color: #1d4ed8;
+            font-size: 14px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        /* ==================================================
+           FLOATING 'BACK TO TOP' BUTTON STYLES
+           ================================================== */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+            z-index: 999;
+            
+            /* Hidden by default until scrolled down */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        background-color 0.2s ease;
+        }
+
+        /* Active visible state toggled via JS */
+        #backToTopBtn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #backToTopBtn:hover {
+            background: #1d4ed8;
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(37, 99, 235, 0.45);
+        }
+
+        #backToTopBtn svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 13:</strong> 'Back to Top' floating button that appears when scrolling and smoothly returns to the top</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <!-- Top Landmark -->
+    <header class="hero-top" id="topAnchor">
+        <h1>Back to Top Floating Controller</h1>
+        <p>Scroll down the page. As soon as you cross <strong>300px</strong> of vertical scroll, the floating button will animate into view in the bottom right corner!</p>
+    </header>
+
+    <main class="content-container">
+        <div class="scroll-indicator-box">
+            👇 Scroll down through the articles below to test the floating trigger.
+        </div>
+
+        <article class="article-card">
+            <h2>1. Web Performance &amp; Lazy Execution</h2>
+            <p>Modern web engineering demands responsive interfaces that react immediately to human interactions. By tracking the viewport offset with an efficient scroll event listener, we avoid unnecessary repaints and only mount UI elements when appropriate.</p>
+            <p>JavaScript provides the <code>window.pageYOffset</code> (or <code>window.scrollY</code>) property which allows us to measure the exact distance in pixels that the user has scrolled from the top boundary.</p>
+        </article>
+
+        <article class="article-card">
+            <h2>2. User Ergonomics in Long-Form Pages</h2>
+            <p>On mobile phones and desktops with extensive catalogs, blogs, or documentation archives, users frequently scroll multiple viewports deep into the document. Requiring users to repeatedly swipe back up generates cognitive friction.</p>
+            <p>A floating action button positioned fixed in the lower right thumb zone solves this ergonomic requirement effortlessly.</p>
+        </article>
+
+        <article class="article-card">
+            <h2>3. Smooth Scrolling Implementation</h2>
+            <p>When the user taps the floating button, rather than instantaneously snapping to pixel zero, the browser executes <code>window.scrollTo({ top: 0, behavior: 'smooth' })</code>. This offers smooth visual continuity, orienting the reader back to the website header.</p>
+        </article>
+
+        <article class="article-card">
+            <h2>4. Progressive Enhancement &amp; Clean Styles</h2>
+            <p>CSS properties like <code>opacity</code> and <code>visibility</code> coupled with CSS transitions create a polished fade-in and slide-up entrance animation rather than an abrupt appearance.</p>
+            <p>Here at the bottom of the page, the button is prominently visible in the bottom right corner. Click it now to watch it glide back to the top!</p>
+        </article>
+    </main>
+
+    <!-- Floating 'Back to Top' Button -->
+    <button id="backToTopBtn" aria-label="Scroll back to top of webpage" title="Back to Top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 13: Floating Back to Top Button).
+    </footer>
+
+    <!-- JavaScript Scroll & Smooth Return Script -->
+    <script>
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        // Scroll Threshold in pixels before showing the floating button
+        const SCROLL_THRESHOLD = 250;
+
+        // Listen for window scroll events
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScrollY > SCROLL_THRESHOLD) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Click event listener to smoothly scroll back to top
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+</body>
+</html>

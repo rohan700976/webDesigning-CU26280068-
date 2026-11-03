@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q8 - Google Maps Embed &amp; Location | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .contact-page-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .contact-page-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Responsive Google Maps Container using modern aspect-ratio */
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--color-border);
+            background: #e2e8f0;
+        }
+
+        .map-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .location-info-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .info-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .info-icon {
+            font-size: 24px;
+            background: var(--color-sand);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 8:</strong> Responsive Google Maps Embed on Client's Contact Page</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">🌿</span>
+                <span class="brand-name">Botanica <span>Contact &amp; Map</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q7.html">Reservations</a></li>
+                <li><a href="q8.html" class="active">Find Us (Map)</a></li>
+                <li><a href="q9.html">Social Feed</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="margin-bottom: 24px;">
+            <span class="badge badge-primary">Visit Our Sanctuary</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">Location &amp; Responsive Google Map</h1>
+            <p style="color: var(--color-muted);">
+                Located on the historic Haridwar-Roorkee highway right next to COER University. Easily accessible with ample green vehicle parking.
+            </p>
+        </div>
+
+        <div class="contact-page-grid">
+            <!-- 1. RESPONSIVE GOOGLE MAP EMBED -->
+            <div>
+                <div class="map-wrapper">
+                    <!-- Google Maps Embed for Roorkee / Haridwar Road COER University area -->
+                    <iframe 
+                        title="Botanica Eco Cafe Location Map"
+                        src="https://maps.google.com/maps?q=COER+University,+Roorkee+Haridwar+Highway,+Uttarakhand&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        loading="lazy" 
+                        allowfullscreen 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div style="font-size: 13px; color: var(--color-muted);">
+                        📍 Coordinates: 29.8543° N, 77.8880° E &bull; GPS Verified
+                    </div>
+                    <a href="https://maps.google.com/?q=COER+University+Roorkee" target="_blank" rel="noopener" class="btn btn-accent" style="padding: 8px 16px; font-size: 13px;">
+                        Open in Google Maps App &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2. CONTACT DETAILS & ACCESS CARD -->
+            <div class="location-info-card">
+                <h2 style="font-size: 22px; margin-bottom: 20px;">Contact &amp; Opening Hours</h2>
+
+                <div class="info-row">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <strong style="font-size: 14.5px; color: var(--color-primary);">Botanica Eco-Cafe &amp; Bakery</strong>
+                        <p style="color: var(--color-muted); font-size: 13.5px; margin-top: 2px;">
+                            7th Km Milestone, Roorkee-Haridwar Highway<br>
+                            Adjacent to COER University Main Entrance<br>
+                            Roorkee, Uttarakhand 247667, India
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <div class="info-icon">⏰</div>
+                    <div>
+                        <strong style="font-size: 14.5px; color: var(--color-primary);">Operating Hours</strong>
+                        <p style="color: var(--color-muted); font-size: 13.5px; margin-top: 2px;">
+                            <strong>Monday – Friday:</strong> 07:30 AM – 10:00 PM<br>
+                            <strong>Saturday &amp; Sunday:</strong> 07:00 AM – 11:00 PM<br>
+                            <em>(Breads fresh out of oven daily at 07:30 AM &amp; 03:00 PM)</em>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <div class="info-icon">📞</div>
+                    <div>
+                        <strong style="font-size: 14.5px; color: var(--color-primary);">Direct Connections</strong>
+                        <p style="color: var(--color-muted); font-size: 13.5px; margin-top: 2px;">
+                            Reservations: <a href="tel:+911332280000" style="color: var(--color-primary); font-weight: 600;">+91 1332 280000</a><br>
+                            Concierge: <a href="mailto:visit@botanicacafe.in" style="color: var(--color-primary); font-weight: 600;">visit@botanicacafe.in</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <div class="info-icon">🚲</div>
+                    <div>
+                        <strong style="font-size: 14.5px; color: var(--color-primary);">Eco Mobility Perks</strong>
+                        <p style="color: var(--color-muted); font-size: 13.5px; margin-top: 2px;">
+                            Complimentary EV charging station + secure bicycle stands with 10% discount for patrons cycling to the cafe!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 8: Responsive Google Maps Embed).
+        </div>
+    </footer>
+
+</body>
+</html>

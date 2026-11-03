@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q10 - Interactive FAQ Accordion Section</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --dark: #0f172a;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --bg-page: #f8fafc;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-badge {
+            background: #dbeafe;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .faq-header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .faq-header p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* ACCORDION CONTAINER */
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .accordion-item {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            transition: all 0.25s ease;
+        }
+
+        .accordion-item.active {
+            border-color: var(--primary);
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Question Header Button */
+        .accordion-header {
+            width: 100%;
+            padding: 20px 24px;
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            transition: background 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: #f8fafc;
+        }
+
+        .accordion-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--dark);
+            transition: color 0.2s ease;
+        }
+
+        .accordion-item.active .accordion-title {
+            color: var(--primary);
+        }
+
+        /* Rotating Chevron Icon */
+        .accordion-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: #64748b;
+            flex-shrink: 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Collapsible Answer Body */
+        .accordion-collapse {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+        }
+
+        .accordion-body {
+            padding: 0 24px 22px 24px;
+            color: #475569;
+            font-size: 14.5px;
+            line-height: 1.7;
+            border-top: 1px solid transparent;
+        }
+
+        .accordion-item.active .accordion-body {
+            border-top-color: #f1f5f9;
+            padding-top: 16px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 10:</strong> Interactive FAQ accordion where clicking headings expands &amp; collapses answers using JavaScript DOM manipulation</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <main class="container">
+        <div class="faq-header">
+            <span class="faq-badge">Frequently Asked Questions</span>
+            <h1>Web Development Inquiries</h1>
+            <p>Click on any question below to expand or collapse the technical explanation via JavaScript DOM manipulation.</p>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="accordion" id="faqAccordion">
+            <!-- Item 1 -->
+            <div class="accordion-item active">
+                <button class="accordion-header" aria-expanded="true">
+                    <span class="accordion-title">What is the advantage of using semantic HTML5 elements?</span>
+                    <span class="accordion-icon">&#9662;</span>
+                </button>
+                <div class="accordion-collapse" style="max-height: 200px;">
+                    <div class="accordion-body">
+                        Semantic HTML5 elements like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, and <code>&lt;footer&gt;</code> clearly describe their meaning to both browsers and developers. They drastically boost Search Engine Optimization (SEO), improve accessibility for screen readers, and create clean, maintainable DOM trees.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span class="accordion-title">When should I choose CSS Flexbox over CSS Grid?</span>
+                    <span class="accordion-icon">&#9662;</span>
+                </button>
+                <div class="accordion-collapse">
+                    <div class="accordion-body">
+                        CSS Flexbox is optimal for one-dimensional layouts (a single row or a single column), such as navigation bars, form controls, and linear card lists. CSS Grid is designed for two-dimensional layouts with rows and columns simultaneously, making it ideal for overall page scaffolding and complex galleries.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span class="accordion-title">How does JavaScript DOM manipulation power this accordion?</span>
+                    <span class="accordion-icon">&#9662;</span>
+                </button>
+                <div class="accordion-collapse">
+                    <div class="accordion-body">
+                        Each accordion heading has a click event listener attached. When triggered, JavaScript reads the content container's <code>scrollHeight</code> property and sets <code>maxHeight</code> smoothly in CSS, while toggling the <code>.active</code> class on the parent item to trigger chevron rotation.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="accordion-item">
+                <button class="accordion-header" aria-expanded="false">
+                    <span class="accordion-title">What is the purpose of CSS root variables (:root)?</span>
+                    <span class="accordion-icon">&#9662;</span>
+                </button>
+                <div class="accordion-collapse">
+                    <div class="accordion-body">
+                        The <code>:root</code> pseudo-class represents the highest-level element in the document tree. Declaring variables here (e.g. <code>--primary: #2563eb</code>) makes design tokens globally accessible, enabling instant theme switches (such as Light to Dark mode) by swapping variable values in one place.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 10: Interactive FAQ Accordion).
+    </footer>
+
+    <!-- JavaScript DOM Manipulation Script -->
+    <script>
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function () {
+                const currentItem = this.parentElement;
+                const collapse = currentItem.querySelector('.accordion-collapse');
+                const isCurrentlyActive = currentItem.classList.contains('active');
+
+                // Optional: Collapse all other open items for a neat single-open accordion
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    if (item !== currentItem) {
+                        item.classList.remove('active');
+                        item.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+                        item.querySelector('.accordion-collapse').style.maxHeight = null;
+                    }
+                });
+
+                // Toggle the clicked item
+                if (isCurrentlyActive) {
+                    currentItem.classList.remove('active');
+                    this.setAttribute('aria-expanded', 'false');
+                    collapse.style.maxHeight = null;
+                } else {
+                    currentItem.classList.add('active');
+                    this.setAttribute('aria-expanded', 'true');
+                    // Dynamically set maxHeight to scrollHeight for smooth CSS animation
+                    collapse.style.maxHeight = collapse.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

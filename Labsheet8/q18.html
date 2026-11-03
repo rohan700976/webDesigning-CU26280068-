@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q18 - Pricing Table &amp; Service Tier Comparison | Botanica</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        /* Billing Toggle */
+        .billing-toggle-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 40px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 54px;
+            height: 28px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-round {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1;
+            transition: .3s;
+            border-radius: 34px;
+        }
+
+        .slider-round:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider-round {
+            background-color: var(--color-primary);
+        }
+
+        input:checked + .slider-round:before {
+            transform: translateX(26px);
+        }
+
+        /* PRICING GRID */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            align-items: stretch;
+            margin-bottom: 50px;
+        }
+
+        .pricing-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 36px 30px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--color-accent);
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.15);
+            transform: scale(1.03);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.03) translateY(-6px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-accent);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 16px;
+            border-radius: 99px;
+            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3);
+        }
+
+        .tier-title {
+            font-size: 22px;
+            font-family: var(--font-heading);
+            color: var(--color-primary);
+            margin-bottom: 6px;
+        }
+
+        .tier-price-box {
+            margin: 20px 0;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .price-amount {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--color-dark);
+        }
+
+        .price-period {
+            color: var(--color-muted);
+            font-size: 14px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 24px 0;
+            flex: 1;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--color-dark);
+        }
+
+        .check-icon {
+            color: var(--color-success);
+            font-weight: 800;
+        }
+
+        /* FEATURE COMPARISON TABLE (CSS Grid) */
+        .comparison-grid {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .comp-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 13.5px;
+            align-items: center;
+        }
+
+        .comp-row:nth-child(even) {
+            background: #fafaf9;
+        }
+
+        .comp-header {
+            background: var(--color-sand) !important;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 18:</strong> Pricing Table &amp; Service Tier Comparison (Flexbox &amp; CSS Grid)</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">🌿</span>
+                <span class="brand-name">Botanica <span>Subscriptions</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q2.html">Offerings</a></li>
+                <li><a href="q18.html" class="active">Pricing Plans</a></li>
+                <li><a href="q19.html">Newsletter</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="text-align: center; margin-bottom: 24px;">
+            <span class="badge badge-primary">Artisan Subscription Tiers</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">Flexible Monthly Roastery &amp; Bakery Clubs</h1>
+            <p style="color: var(--color-muted); max-width: 600px; margin: 0 auto;">
+                Enjoy fresh stone-deck sourdough deliveries and ethically sourced whole-bean micro-lots right at your doorstep.
+            </p>
+        </div>
+
+        <!-- BILLING FREQUENCY TOGGLE -->
+        <div class="billing-toggle-wrapper">
+            <span style="font-weight: 700; font-size: 14.5px;" id="labelMonthly">Monthly Billing</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="billingToggle" onchange="toggleBilling(this.checked)">
+                <span class="slider-round"></span>
+            </label>
+            <span style="font-weight: 700; font-size: 14.5px; color: var(--color-muted);" id="labelAnnual">Annual Billing</span>
+            <span class="badge badge-accent" style="margin-left: 6px;">Save 20%</span>
+        </div>
+
+        <!-- PRICING CARDS (CSS Flexbox/Grid) -->
+        <div class="pricing-grid">
+            
+            <!-- Tier 1 -->
+            <div class="pricing-card">
+                <div>
+                    <h2 class="tier-title">The Morning Baker</h2>
+                    <p style="color: var(--color-muted); font-size: 13.5px;">For daily sourdough lovers who crave bakery fresh bread.</p>
+                    
+                    <div class="tier-price-box">
+                        <span class="price-amount" id="price-tier-1">$19</span>
+                        <span class="price-period">/ month</span>
+                    </div>
+
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> 2 Fresh Sourdough Loaves weekly</li>
+                        <li><span class="check-icon">✓</span> Complimentary Batch Filter on pickup</li>
+                        <li><span class="check-icon">✓</span> 5% discount on all pastries</li>
+                        <li><span class="check-icon">✓</span> Priority weekend seating queue</li>
+                    </ul>
+                </div>
+                <button class="btn btn-secondary" onclick="selectPlan('The Morning Baker')" style="width: 100%;">
+                    Select Morning Baker
+                </button>
+            </div>
+
+            <!-- Tier 2 (Featured) -->
+            <div class="pricing-card featured">
+                <span class="popular-badge">Most Popular</span>
+                <div>
+                    <h2 class="tier-title">Coffee Connoisseur</h2>
+                    <p style="color: var(--color-muted); font-size: 13.5px;">For specialty coffee enthusiasts and cupping purists.</p>
+                    
+                    <div class="tier-price-box">
+                        <span class="price-amount" id="price-tier-2" style="color: var(--color-primary);">$39</span>
+                        <span class="price-period">/ month</span>
+                    </div>
+
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> 2x 250g Micro-Lot Single-Origin Bags</li>
+                        <li><span class="check-icon">✓</span> Unlimited In-House Batch Brew Coffee</li>
+                        <li><span class="check-icon">✓</span> 1 Weekly Heirloom Sourdough Loaf</li>
+                        <li><span class="check-icon">✓</span> 15% discount on entire bakery catalog</li>
+                        <li><span class="check-icon">✓</span> Free invite to monthly Cupping Labs</li>
+                    </ul>
+                </div>
+                <button class="btn btn-primary" onclick="selectPlan('Coffee Connoisseur')" style="width: 100%;">
+                    Join Connoisseur Club &rarr;
+                </button>
+            </div>
+
+            <!-- Tier 3 -->
+            <div class="pricing-card">
+                <div>
+                    <h2 class="tier-title">Botanical Master</h2>
+                    <p style="color: var(--color-muted); font-size: 13.5px;">The ultimate all-inclusive farm-to-table club.</p>
+                    
+                    <div class="tier-price-box">
+                        <span class="price-amount" id="price-tier-3">$79</span>
+                        <span class="price-period">/ month</span>
+                    </div>
+
+                    <ul class="feature-list">
+                        <li><span class="check-icon">✓</span> Unlimited Sourdough &amp; Brioche weekly</li>
+                        <li><span class="check-icon">✓</span> Custom Roast Profile reserved for you</li>
+                        <li><span class="check-icon">✓</span> Greenhouse Atrium study reservation</li>
+                        <li><span class="check-icon">✓</span> Free guest passes to all workshops</li>
+                        <li><span class="check-icon">✓</span> 25% VIP discount across all items</li>
+                    </ul>
+                </div>
+                <button class="btn btn-secondary" onclick="selectPlan('Botanical Master')" style="width: 100%;">
+                    Subscribe to Master Tier
+                </button>
+            </div>
+
+        </div>
+
+        <!-- FULL COMPARISON MATRIX (CSS Grid) -->
+        <section style="margin-top: 50px;">
+            <h2 style="font-size: 22px; margin-bottom: 16px;">Comprehensive Feature Comparison Grid</h2>
+            
+            <div class="comparison-grid">
+                <div class="comp-row comp-header">
+                    <div>Subscription Feature</div>
+                    <div class="text-center">Morning Baker</div>
+                    <div class="text-center">Connoisseur</div>
+                    <div class="text-center">Master</div>
+                </div>
+
+                <div class="comp-row">
+                    <div>Weekly Sourdough Loaves</div>
+                    <div class="text-center">2 Loaves</div>
+                    <div class="text-center">1 Loaf</div>
+                    <div class="text-center">Unlimited</div>
+                </div>
+
+                <div class="comp-row">
+                    <div>Specialty Single-Origin Beans</div>
+                    <div class="text-center">—</div>
+                    <div class="text-center">500g / month</div>
+                    <div class="text-center">1000g / month</div>
+                </div>
+
+                <div class="comp-row">
+                    <div>In-House Coffee Refills</div>
+                    <div class="text-center">1 per visit</div>
+                    <div class="text-center">Unlimited</div>
+                    <div class="text-center">Unlimited</div>
+                </div>
+
+                <div class="comp-row">
+                    <div>Bakery Store Discount</div>
+                    <div class="text-center">5%</div>
+                    <div class="text-center">15%</div>
+                    <div class="text-center">25% VIP</div>
+                </div>
+
+                <div class="comp-row">
+                    <div>Greenhouse Atrium Table Booking</div>
+                    <div class="text-center">Standard</div>
+                    <div class="text-center">Priority</div>
+                    <div class="text-center">Reserved Anytime</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 18: Pricing Table &amp; Service Tiers).
+        </div>
+    </footer>
+
+    <script>
+        let isAnnual = false;
+
+        function toggleBilling(checked) {
+            isAnnual = checked;
+            document.getElementById('labelMonthly').style.color = checked ? 'var(--color-muted)' : 'var(--color-dark)';
+            document.getElementById('labelAnnual').style.color = checked ? 'var(--color-dark)' : 'var(--color-muted)';
+
+            document.getElementById('price-tier-1').innerText = checked ? '$15' : '$19';
+            document.getElementById('price-tier-2').innerText = checked ? '$31' : '$39';
+            document.getElementById('price-tier-3').innerText = checked ? '$63' : '$79';
+        }
+
+        function selectPlan(plan) {
+            const freq = isAnnual ? 'Annual (20% off)' : 'Monthly';
+            alert(`Selected: ${plan} (${freq})\nRedirecting to checkout & member portal...`);
+        }
+    </script>
+</body>
+</html>

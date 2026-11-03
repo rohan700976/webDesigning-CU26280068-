@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q12 - CSS Micro-Interactions &amp; Transitions | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .section-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* 1. BUTTON MICRO-INTERACTIONS */
+        .interactive-btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        /* Pulsing Glow Button */
+        .btn-glow {
+            position: relative;
+            background: linear-gradient(135deg, #1b4332, #2d6a4f);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 14px rgba(27, 67, 50, 0.3);
+        }
+        .btn-glow:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(27, 67, 50, 0.5);
+        }
+        .btn-glow:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        /* Slide Arrow Button */
+        .btn-arrow-slide {
+            background: var(--color-accent);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+        .btn-arrow-slide span {
+            transition: transform 0.25s ease;
+        }
+        .btn-arrow-slide:hover span {
+            transform: translateX(6px);
+        }
+        .btn-arrow-slide:hover {
+            background: #b45309;
+        }
+
+        /* Ripple Outline Button */
+        .btn-outline-interactive {
+            background: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease;
+            z-index: 1;
+        }
+        .btn-outline-interactive::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--color-primary);
+            z-index: -1;
+            transition: width 0.3s ease;
+        }
+        .btn-outline-interactive:hover {
+            color: #ffffff;
+        }
+        .btn-outline-interactive:hover::before {
+            width: 100%;
+        }
+
+        /* 2. CARD ELEVATION & ZOOM EFFECT */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .micro-card {
+            background: #ffffff;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+        .micro-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--color-accent);
+        }
+
+        .micro-card-img-box {
+            height: 160px;
+            background: var(--color-sand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            overflow: hidden;
+        }
+        .micro-card-img-box span {
+            transition: transform 0.4s ease;
+            display: inline-block;
+        }
+        .micro-card:hover .micro-card-img-box span {
+            transform: scale(1.2) rotate(6deg);
+        }
+
+        .micro-card-body {
+            padding: 20px;
+        }
+
+        /* 3. EXPANDING NAVIGATION LINK UNDERLINE */
+        .nav-link-demo {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+        }
+        .animated-link {
+            text-decoration: none;
+            color: var(--color-primary);
+            font-weight: 700;
+            font-size: 15px;
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .animated-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0%;
+            height: 2px;
+            background: var(--color-accent);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform: translateX(-50%);
+        }
+        .animated-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 12:</strong> CSS Transitions &amp; Micro-Interactions (Links, Buttons, Cards)</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">✨</span>
+                <span class="brand-name">Botanica <span>Micro-Interactions</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q6.html">Carousel</a></li>
+                <li><a href="q12.html" class="active">Micro-Interactions</a></li>
+                <li><a href="q13.html">FAQ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="margin-bottom: 30px;">
+            <span class="badge badge-primary">Fluid UI Experience</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">CSS Micro-Interactions &amp; Tactile Feedback</h1>
+            <p style="color: var(--color-muted); max-width: 800px;">
+                Subtle physics-based micro-interactions enhance tactile perception, clarify affordances, and provide delight without compromising rendering frame-rates.
+            </p>
+        </div>
+
+        <!-- 1. BUTTONS PLAYGROUND -->
+        <section class="section-card">
+            <h2>1. State-Driven Button Micro-Interactions</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">
+                Hover over and click these buttons to observe hover lift, shadow expansion, sliding arrows, and background wipe fills:
+            </p>
+
+            <div class="interactive-btn-group">
+                <button class="btn-glow">
+                    Elevation Glow &bull; Hover Me
+                </button>
+
+                <button class="btn-arrow-slide">
+                    Explore Menu <span>&rarr;</span>
+                </button>
+
+                <button class="btn-outline-interactive">
+                    Color Fill Swipe &bull; Click
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. CARD ELEVATION & ZOOM -->
+        <section class="section-card">
+            <h2>2. 3D Elevation &amp; Asset Zoom Cards</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">
+                Hovering over cards triggers an 8px vertical lift, expanded depth shadow, border illumination, and subtle rotational icon zoom:
+            </p>
+
+            <div class="cards-grid">
+                <div class="micro-card">
+                    <div class="micro-card-img-box">
+                        <span>🥖</span>
+                    </div>
+                    <div class="micro-card-body">
+                        <span class="badge badge-accent">Fermentation</span>
+                        <h3 style="font-size: 18px; margin: 8px 0;">Artisan Sourdough</h3>
+                        <p style="color: var(--color-muted); font-size: 13.5px;">Hover to see the crumb icon enlarge with a gentle spring tilt.</p>
+                    </div>
+                </div>
+
+                <div class="micro-card">
+                    <div class="micro-card-img-box">
+                        <span>☕</span>
+                    </div>
+                    <div class="micro-card-body">
+                        <span class="badge badge-accent">Specialty Brew</span>
+                        <h3 style="font-size: 18px; margin: 8px 0;">Cold Drip Reserve</h3>
+                        <p style="color: var(--color-muted); font-size: 13.5px;">Slow 12-hour immersion extraction with notes of dark berries.</p>
+                    </div>
+                </div>
+
+                <div class="micro-card">
+                    <div class="micro-card-img-box">
+                        <span>🥐</span>
+                    </div>
+                    <div class="micro-card-body">
+                        <span class="badge badge-accent">Viennoiserie</span>
+                        <h3 style="font-size: 18px; margin: 8px 0;">Honey Butter Croissant</h3>
+                        <p style="color: var(--color-muted); font-size: 13.5px;">Golden flaky laminations made with grass-fed organic cultured butter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. EXPANDING NAVIGATION UNDERLINES -->
+        <section class="section-card">
+            <h2>3. Center-Out Expanding Link Underlines</h2>
+            <p style="color: var(--color-muted); font-size: 14px; margin-top: 4px;">
+                Clean minimal typography that dynamically deploys an amber indicator line from the center outward:
+            </p>
+
+            <div class="nav-link-demo">
+                <a href="#" class="animated-link">Home Sanctuary</a>
+                <a href="#" class="animated-link">Artisanal Bakery</a>
+                <a href="#" class="animated-link">Roastery Story</a>
+                <a href="#" class="animated-link">Sustainability Lab</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 12: CSS Micro-Interactions).
+        </div>
+    </footer>
+
+</body>
+</html>

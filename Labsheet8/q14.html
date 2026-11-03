@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q14 - Live Menu Search &amp; Filter | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .filter-controls {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-top-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            font-size: 14.5px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-muted);
+            pointer-events: none;
+            font-size: 16px;
+        }
+
+        .sort-select {
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            background: #ffffff;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* Category Filter Pills */
+        .category-pills {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .pill-btn {
+            background: var(--color-sand);
+            border: 1px solid var(--color-border);
+            padding: 8px 18px;
+            border-radius: 99px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--color-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pill-btn.active, .pill-btn:hover {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.25s, box-shadow 0.25s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-img-box {
+            height: 160px;
+            background: var(--color-sand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 54px;
+        }
+
+        .product-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--color-accent);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            grid-column: 1 / -1;
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            border: 1px dashed var(--color-border);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 14:</strong> Client-Side Product Search &amp; Category Filter with Live UI Updates</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">🌿</span>
+                <span class="brand-name">Botanica <span>Menu Filter</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q2.html">Offerings</a></li>
+                <li><a href="q14.html" class="active">Live Filter</a></li>
+                <li><a href="q15.html">Booking Wizard</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="margin-bottom: 24px;">
+            <span class="badge badge-primary">Interactive Catalog</span>
+            <h1 style="font-size: 32px; margin-top: 8px;">Explore Our Artisanal Offerings</h1>
+            <p style="color: var(--color-muted);">
+                Instant real-time filtering by keyword, botanical category, dietary preferences, and price sorting.
+            </p>
+        </div>
+
+        <!-- FILTER CONTROLS -->
+        <div class="filter-controls">
+            <div class="filter-top-row">
+                <!-- Live Search Bar -->
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search by name, ingredient (e.g. sourdough, lavender, brioche)..." oninput="applyFilters()">
+                </div>
+
+                <!-- Sort Dropdown -->
+                <div>
+                    <select id="sortSelect" class="sort-select" onchange="applyFilters()">
+                        <option value="default">Sort by: Featured</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Category Pills -->
+            <div class="category-pills">
+                <button class="pill-btn active" data-category="all" onclick="selectCategory('all', this)">All Offerings</button>
+                <button class="pill-btn" data-category="bread" onclick="selectCategory('bread', this)">🥖 Artisan Breads</button>
+                <button class="pill-btn" data-category="coffee" onclick="selectCategory('coffee', this)">☕ Specialty Coffee</button>
+                <button class="pill-btn" data-category="pastry" onclick="selectCategory('pastry', this)">🥐 Botanical Pastries</button>
+                <button class="pill-btn" data-category="vegan" onclick="selectCategory('vegan', this)">🌱 Vegan Only</button>
+            </div>
+
+            <!-- Live Match Counter -->
+            <div style="margin-top: 14px; font-size: 13.5px; color: var(--color-muted);">
+                Showing <strong id="matchCount" style="color: var(--color-primary);">6</strong> items
+            </div>
+        </div>
+
+        <!-- PRODUCTS GRID -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Dynamically populated by JavaScript -->
+        </div>
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 14: Client-Side Filter).
+        </div>
+    </footer>
+
+    <script>
+        const productsData = [
+            { id: 1, name: "Wild Fermented Heritage Sourdough", category: "bread", isVegan: true, price: 7.50, icon: "🥖", desc: "48-hour cold fermentation with ancient organic spelt and Himalayan salt." },
+            { id: 2, name: "Ethiopian Yirgacheffe Pour-Over", category: "coffee", isVegan: true, price: 5.25, icon: "☕", desc: "Floral jasmine notes, light citrus bergamot with clean golden honey finish." },
+            { id: 3, name: "Damask Rose & Pistachio Brioche", category: "pastry", isVegan: false, price: 6.00, icon: "🥐", desc: "Infused with organic rose water and crunchy Sicilian pistachios." },
+            { id: 4, name: "Kalamata Olive & Rosemary Focaccia", category: "bread", isVegan: true, price: 6.75, icon: "🍞", desc: "Drizzled with cold-pressed extra virgin olive oil and fresh valley rosemary." },
+            { id: 5, name: "Kyoto Cold-Drip Brew Reserve", category: "coffee", isVegan: true, price: 5.75, icon: "🧊", desc: "Extracted drop-by-drop over 12 hours using chilled mineral spring water." },
+            { id: 6, name: "Lavender Almond Frangipane Tart", category: "pastry", isVegan: true, price: 6.50, icon: "🧁", desc: "Crisp almond pastry crust loaded with organic valley lavender cream." }
+        ];
+
+        let selectedCategory = 'all';
+
+        function selectCategory(cat, btn) {
+            selectedCategory = cat;
+            document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const sortBy = document.getElementById('sortSelect').value;
+            const grid = document.getElementById('productsGrid');
+
+            let filtered = productsData.filter(item => {
+                const matchesQuery = item.name.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query);
+                
+                let matchesCategory = true;
+                if (selectedCategory === 'vegan') {
+                    matchesCategory = item.isVegan;
+                } else if (selectedCategory !== 'all') {
+                    matchesCategory = item.category === selectedCategory;
+                }
+
+                return matchesQuery && matchesCategory;
+            });
+
+            // Sorting
+            if (sortBy === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+
+            document.getElementById('matchCount').innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <div style="font-size: 40px; margin-bottom: 8px;">🔍</div>
+                        <h3>No culinary offerings match your search</h3>
+                        <p style="color: var(--color-muted); margin-top: 4px;">Try searching for "coffee", "sourdough", or reset filters.</p>
+                        <button class="btn btn-secondary" onclick="resetSearch()" style="margin-top: 14px;">Reset Filters</button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(item => `
+                <article class="product-card">
+                    <div class="product-img-box">${item.icon}</div>
+                    <div class="product-body">
+                        <div>
+                            <span class="badge ${item.isVegan ? 'badge-success' : 'badge-accent'}" style="margin-bottom: 8px;">
+                                ${item.isVegan ? '🌱 100% Vegan' : '🥐 Pastry'}
+                            </span>
+                            <h3 style="font-size: 17px; margin-top: 4px;">${item.name}</h3>
+                            <p style="color: var(--color-muted); font-size: 13.5px; margin-top: 6px; line-height: 1.5;">${item.desc}</p>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$${item.price.toFixed(2)}</span>
+                            <button class="btn btn-primary" style="padding: 6px 14px; font-size: 12.5px;" onclick="alert('Added ${item.name} to tasting order!')">Add to Order +</button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function resetSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('sortSelect').value = 'default';
+            selectCategory('all', document.querySelector('[data-category="all"]'));
+        }
+
+        // Initialize grid on load
+        applyFilters();
+    </script>
+</body>
+</html>

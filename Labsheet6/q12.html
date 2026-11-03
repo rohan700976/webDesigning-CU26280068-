@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q12 - Modern Footer with Flexbox Social Media Icon Links</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Placeholder Page Body to highlight footer */
+        main.content-area {
+            flex: 1;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        .showcase-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .showcase-card h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .showcase-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* ==================================================
+           FOOTER SECTION WITH CSS FLEXBOX & SOCIAL ICONS
+           ================================================== */
+        footer.site-footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 60px 24px 24px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        /* 1. Primary Top Flexbox Grid */
+        .footer-flex-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .footer-brand {
+            flex: 1 1 320px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 14px;
+        }
+
+        .footer-logo span {
+            color: #38bdf8;
+        }
+
+        .footer-desc {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            max-width: 360px;
+        }
+
+        /* 2. Social Media Icons Flexbox Row */
+        .social-flex-list {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #1e293b;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            /* Hover Color Transition */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #334155;
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        /* Distinct Brand Hover Transitions */
+        .social-link.github:hover {
+            background-color: #24292e;
+            color: #ffffff;
+            border-color: #ffffff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-link.linkedin:hover {
+            background-color: #0077b5;
+            color: #ffffff;
+            border-color: #0077b5;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 119, 181, 0.35);
+        }
+
+        .social-link.twitter:hover {
+            background-color: #1da1f2;
+            color: #ffffff;
+            border-color: #1da1f2;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(29, 161, 242, 0.35);
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: #ffffff;
+            border-color: #dc2743;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(220, 39, 67, 0.35);
+        }
+
+        .social-link.youtube:hover {
+            background-color: #ff0000;
+            color: #ffffff;
+            border-color: #ff0000;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(255, 0, 0, 0.35);
+        }
+
+        .social-link:hover svg {
+            transform: scale(1.15);
+        }
+
+        /* Footer Navigation Columns */
+        .footer-col {
+            flex: 1 1 160px;
+        }
+
+        .footer-col h4 {
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: #38bdf8;
+            padding-left: 4px;
+        }
+
+        /* 3. Bottom Copyright Bar */
+        .footer-bottom-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-top: 24px;
+            font-size: 13px;
+        }
+
+        .footer-legal-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .footer-legal-links a {
+            color: #64748b;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-legal-links a:hover {
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 12:</strong> Footer section with social media icon links styled with CSS Flexbox &amp; hover color transitions</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <main class="content-area">
+        <div class="showcase-card">
+            <h1>Modern Flexbox Footer Component</h1>
+            <p>Scroll down or observe the footer below. Hover over any of the social media icons (GitHub, LinkedIn, Twitter, Instagram, YouTube) to see the smooth color transitions and elevation transforms.</p>
+        </div>
+    </main>
+
+    <!-- Semantic & Responsive Flexbox Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- Top Footer Content via Flexbox -->
+            <div class="footer-flex-top">
+                <!-- Brand & Description -->
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">Dev<span>Studio</span></a>
+                    <p class="footer-desc">
+                        Creating modern web experiences with semantic architecture, responsive layouts, and accessible component libraries.
+                    </p>
+
+                    <!-- Social Media Links (CSS Flexbox) -->
+                    <ul class="social-flex-list">
+                        <!-- GitHub -->
+                        <li>
+                            <a href="https://github.com" target="_blank" class="social-link github" title="GitHub Profile">
+                                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            </a>
+                        </li>
+
+                        <!-- LinkedIn -->
+                        <li>
+                            <a href="https://linkedin.com" target="_blank" class="social-link linkedin" title="LinkedIn Network">
+                                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                        </li>
+
+                        <!-- Twitter/X -->
+                        <li>
+                            <a href="https://twitter.com" target="_blank" class="social-link twitter" title="Twitter / X">
+                                <svg viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.936 9.936 0 0024 4.59z"/></svg>
+                            </a>
+                        </li>
+
+                        <!-- Instagram -->
+                        <li>
+                            <a href="https://instagram.com" target="_blank" class="social-link instagram" title="Instagram Gallery">
+                                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                            </a>
+                        </li>
+
+                        <!-- YouTube -->
+                        <li>
+                            <a href="https://youtube.com" target="_blank" class="social-link youtube" title="YouTube Channel">
+                                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 1 -->
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="q1.html">Home Overview</a></li>
+                        <li><a href="q5.html">Photo Gallery</a></li>
+                        <li><a href="q8.html">Pricing Tables</a></li>
+                        <li><a href="q10.html">FAQ Accordion</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 2 -->
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="q2.html">Flexbox Cards</a></li>
+                        <li><a href="q7.html">Dark Theme</a></li>
+                        <li><a href="q6.html">Form Validation</a></li>
+                        <li><a href="q15.html">Counters</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 3 -->
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="mailto:contact@coer.ac.in">Email Support</a></li>
+                        <li><a href="tel:+911234567890">Call Center</a></li>
+                        <li><a href="#">Roorkee Campus</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Legal Bar via Flexbox -->
+            <div class="footer-bottom-flex">
+                <p>&copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 12: Flexbox Footer).</p>
+                <ul class="footer-legal-links">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Notice</a></li>
+                    <li><a href="#">Security</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

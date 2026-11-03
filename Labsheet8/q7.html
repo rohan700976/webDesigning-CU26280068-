@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q7 - Table Reservation &amp; Validation | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .booking-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            box-shadow: var(--shadow-sm);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 650px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .error-message {
+            color: var(--color-danger);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .form-control.is-invalid {
+            border-color: var(--color-danger);
+            background: #fef2f2;
+        }
+
+        .form-control.is-valid {
+            border-color: var(--color-success);
+            background: #f0fdf4;
+        }
+
+        /* Confirmation Receipt Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: var(--radius-md);
+            padding: 32px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 8 - Question 7:</strong> Interactive Booking/Reservation Form with Client-Side JS Validation</span>
+        <a href="index.html">← Back to Lab Sheet 8 Index</a>
+    </div>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="q1.html" class="client-brand">
+                <span class="brand-icon">🌿</span>
+                <span class="brand-name">Botanica <span>Reservations</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Brief</a></li>
+                <li><a href="q6.html">Carousel</a></li>
+                <li><a href="q7.html" class="active">Book a Table</a></li>
+                <li><a href="q8.html">Location</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <span class="badge badge-accent">Reserve Your Experience</span>
+            <h1 style="font-size: 32px; margin-top: 8px; margin-bottom: 8px;">Botanica Table Reservation</h1>
+            <p style="color: var(--color-muted); max-width: 600px; margin: 0 auto;">
+                Book an intimate breakfast, artisanal coffee cupping, or botanical garden table. Instant confirmation with live JavaScript field validation.
+            </p>
+        </div>
+
+        <div class="booking-card">
+            <form id="reservationForm" novalidate onsubmit="return handleReservation(event)">
+                
+                <div class="form-row">
+                    <!-- Guest Name -->
+                    <div class="form-group">
+                        <label for="guestName">Full Name *</label>
+                        <input type="text" id="guestName" class="form-control" placeholder="e.g. Rohan Sharma" required>
+                        <div class="error-message" id="err-name">Please enter your full name (at least 3 characters).</div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="guestEmail">Email Address *</label>
+                        <input type="email" id="guestEmail" class="form-control" placeholder="e.g. rohan@example.com" required>
+                        <div class="error-message" id="err-email">Please provide a valid email address.</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="guestPhone">Contact Phone Number *</label>
+                        <input type="tel" id="guestPhone" class="form-control" placeholder="e.g. 9876543210" required>
+                        <div class="error-message" id="err-phone">Please enter a valid 10-digit phone number.</div>
+                    </div>
+
+                    <!-- Party Size -->
+                    <div class="form-group">
+                        <label for="guestGuests">Number of Guests *</label>
+                        <select id="guestGuests" class="form-control" required>
+                            <option value="">Select party size...</option>
+                            <option value="1">1 Person (Solo Coffee / Remote Study)</option>
+                            <option value="2">2 Persons (Table for Two)</option>
+                            <option value="4">4 Persons (Standard Table)</option>
+                            <option value="6">6 Persons (Family / Group Booth)</option>
+                            <option value="8">8+ Persons (Botanical Garden Patio)</option>
+                        </select>
+                        <div class="error-message" id="err-guests">Please select your party size.</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <!-- Date -->
+                    <div class="form-group">
+                        <label for="guestDate">Reservation Date *</label>
+                        <input type="date" id="guestDate" class="form-control" required>
+                        <div class="error-message" id="err-date">Please pick a valid future date.</div>
+                    </div>
+
+                    <!-- Time Slot -->
+                    <div class="form-group">
+                        <label for="guestTime">Seating Time Slot *</label>
+                        <select id="guestTime" class="form-control" required>
+                            <option value="">Select time slot...</option>
+                            <option value="08:30 AM">08:30 AM - Morning Bakery &amp; Espresso</option>
+                            <option value="11:30 AM">11:30 AM - Farm-to-Table Brunch</option>
+                            <option value="03:30 PM">03:30 PM - Afternoon Tea &amp; Rose Brioche</option>
+                            <option value="07:00 PM">07:00 PM - Sunset Sourdough &amp; Mocktails</option>
+                        </select>
+                        <div class="error-message" id="err-time">Please pick an available time slot.</div>
+                    </div>
+                </div>
+
+                <!-- Seating Preference -->
+                <div class="form-group">
+                    <label for="guestArea">Seating Atmosphere Preference</label>
+                    <select id="guestArea" class="form-control">
+                        <option value="Greenhouse Glass Atrium">Greenhouse Glass Atrium (Natural Sun &amp; Plants)</option>
+                        <option value="Outdoor Terrace Patio">Outdoor Terrace Garden Patio</option>
+                        <option value="Artisan Chef's Counter">Artisan Chef's Bakery Bar Counter</option>
+                    </select>
+                </div>
+
+                <!-- Special Notes -->
+                <div class="form-group">
+                    <label for="guestNotes">Dietary Notes &amp; Special Requests (Optional)</label>
+                    <textarea id="guestNotes" class="form-control" rows="3" placeholder="Tell us if you have any gluten, dairy or nut allergies, or if you're celebrating a birthday!"></textarea>
+                </div>
+
+                <div style="text-align: right; margin-top: 10px;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 16px;">
+                        Confirm Reservation &rarr;
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- CONFIRMATION RECEIPT MODAL -->
+    <div class="modal-overlay" id="receiptModal">
+        <div class="modal-box">
+            <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
+            <h2 style="color: var(--color-primary); margin-bottom: 8px;">Reservation Confirmed!</h2>
+            <p style="color: var(--color-muted); font-size: 14px;">
+                Your table at Botanica Eco-Cafe has been successfully booked.
+            </p>
+
+            <div style="background: var(--color-sand); padding: 16px; border-radius: var(--radius-md); text-align: left; margin: 20px 0; font-size: 13.5px; line-height: 1.8;">
+                <div><strong>Booking Reference:</strong> <span id="rec-code" style="color: var(--color-accent); font-weight: 700;"></span></div>
+                <div><strong>Guest Name:</strong> <span id="rec-name"></span></div>
+                <div><strong>Party Size:</strong> <span id="rec-guests"></span></div>
+                <div><strong>Date &amp; Time:</strong> <span id="rec-datetime"></span></div>
+                <div><strong>Seating Area:</strong> <span id="rec-area"></span></div>
+            </div>
+
+            <button class="btn btn-primary" onclick="closeModal()" style="width: 100%;">
+                Done &bull; Return to Menu
+            </button>
+        </div>
+    </div>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 (Question 7: Interactive Booking &amp; Validation).
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('guestDate').min = today;
+
+        function handleReservation(e) {
+            e.preventDefault();
+            let isValid = true;
+
+            const name = document.getElementById('guestName');
+            const email = document.getElementById('guestEmail');
+            const phone = document.getElementById('guestPhone');
+            const guests = document.getElementById('guestGuests');
+            const date = document.getElementById('guestDate');
+            const time = document.getElementById('guestTime');
+            const area = document.getElementById('guestArea');
+
+            // Name check
+            if (name.value.trim().length < 3) {
+                showError('err-name', name);
+                isValid = false;
+            } else {
+                showSuccess('err-name', name);
+            }
+
+            // Email check
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value.trim())) {
+                showError('err-email', email);
+                isValid = false;
+            } else {
+                showSuccess('err-email', email);
+            }
+
+            // Phone check (10 digits)
+            const phonePattern = /^[6-9]\d{9}$/;
+            if (!phonePattern.test(phone.value.trim().replace(/\D/g, ''))) {
+                showError('err-phone', phone);
+                isValid = false;
+            } else {
+                showSuccess('err-phone', phone);
+            }
+
+            // Guests check
+            if (!guests.value) {
+                showError('err-guests', guests);
+                isValid = false;
+            } else {
+                showSuccess('err-guests', guests);
+            }
+
+            // Date check
+            if (!date.value) {
+                showError('err-date', date);
+                isValid = false;
+            } else {
+                showSuccess('err-date', date);
+            }
+
+            // Time check
+            if (!time.value) {
+                showError('err-time', time);
+                isValid = false;
+            } else {
+                showSuccess('err-time', time);
+            }
+
+            if (isValid) {
+                // Populate confirmation modal
+                const randomRef = 'BOT-' + Math.floor(100000 + Math.random() * 900000);
+                document.getElementById('rec-code').innerText = randomRef;
+                document.getElementById('rec-name').innerText = name.value.trim();
+                document.getElementById('rec-guests').innerText = guests.options[guests.selectedIndex].text;
+                document.getElementById('rec-datetime').innerText = date.value + ' at ' + time.value;
+                document.getElementById('rec-area').innerText = area.value;
+
+                document.getElementById('receiptModal').style.display = 'flex';
+            }
+
+            return false;
+        }
+
+        function showError(errId, inputEl) {
+            document.getElementById(errId).style.display = 'block';
+            inputEl.classList.add('is-invalid');
+            inputEl.classList.remove('is-valid');
+        }
+
+        function showSuccess(errId, inputEl) {
+            document.getElementById(errId).style.display = 'none';
+            inputEl.classList.remove('is-invalid');
+            inputEl.classList.add('is-valid');
+        }
+
+        function closeModal() {
+            document.getElementById('receiptModal').style.display = 'none';
+            document.getElementById('reservationForm').reset();
+            document.querySelectorAll('.form-control').forEach(el => el.classList.remove('is-valid', 'is-invalid'));
+        }
+    </script>
+</body>
+</html>

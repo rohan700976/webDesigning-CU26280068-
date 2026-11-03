@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Sheet 8 - Complete Client Website Implementation | Botanica Eco-Cafe</title>
+    <link rel="stylesheet" href="cafe_style.css">
+    <style>
+        .hero-banner {
+            background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
+            color: #ffffff;
+            padding: 60px 24px;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-banner h1 {
+            color: #ffffff;
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .hero-banner p {
+            color: #e2e8f0;
+            max-width: 750px;
+            margin: 0 auto 20px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .student-chip-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .student-chip {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 8px 18px;
+            border-radius: 99px;
+            font-size: 13.5px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* 20 Questions Directory Grid */
+        .directory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 22px;
+        }
+
+        .q-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .q-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .q-number {
+            font-weight: 800;
+            font-size: 13px;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .q-title {
+            font-size: 18px;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        .q-desc {
+            font-size: 13.5px;
+            color: var(--color-muted);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .q-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 14px;
+            border-top: 1px solid var(--color-border);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        /* Category Filter Bar */
+        .filter-bar {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="client-header">
+        <div class="client-nav-inner">
+            <a href="index.html" class="client-brand">
+                <span class="brand-icon">🌿</span>
+                <span class="brand-name">Botanica <span>Lab Sheet 8 Hub</span></span>
+            </a>
+            <ul class="client-nav-links">
+                <li><a href="q1.html">Q1: Brief</a></li>
+                <li><a href="q3.html">Q3: Grid</a></li>
+                <li><a href="q7.html">Q7: Booking</a></li>
+                <li><a href="q20.html">Q20: Audit</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- HERO BANNER -->
+        <div class="hero-banner">
+            <span class="badge" style="background: rgba(217, 119, 6, 0.9); color: #fff; margin-bottom: 12px; font-size: 12px; padding: 5px 14px;">
+                COER University &bull; Web Designing &bull; Semester Lab Practice
+            </span>
+            <h1>Lab Sheet 8: Client Website Design &amp; Architecture</h1>
+            <p>
+                Comprehensive 20-exercise client web application designed for <strong>Botanica Eco-Cafe &amp; Artisan Bakery</strong>. Built with semantic HTML5, modern design tokens, CSS Grid/Flexbox layouts, client-side validation, full WCAG accessibility, and Google Lighthouse 98+ optimizations.
+            </p>
+            <div class="student-chip-row">
+                <div class="student-chip">🎓 <strong>Course:</strong> Web Designing (CU26280068)</div>
+                <div class="student-chip">🌿 <strong>Client Project:</strong> Botanica Eco-Cafe &amp; Bakery</div>
+                <div class="student-chip">⚡ <strong>Status:</strong> 20 / 20 Questions Completed</div>
+            </div>
+        </div>
+
+        <!-- SEARCH / QUICK JUMP -->
+        <div class="filter-bar">
+            <strong style="font-size: 14px; color: var(--color-primary); margin-right: 8px;">Filter Exercises:</strong>
+            <button class="btn btn-primary" onclick="filterQs('all')" style="padding: 6px 14px; font-size: 13px;">All (20)</button>
+            <button class="btn btn-secondary" onclick="filterQs('design')" style="padding: 6px 14px; font-size: 13px;">Design &amp; Layout</button>
+            <button class="btn btn-secondary" onclick="filterQs('interactive')" style="padding: 6px 14px; font-size: 13px;">Interactivity &amp; JS</button>
+            <button class="btn btn-secondary" onclick="filterQs('audit')" style="padding: 6px 14px; font-size: 13px;">A11y, SEO &amp; Performance</button>
+        </div>
+
+        <!-- 20 QUESTIONS DIRECTORY GRID -->
+        <div class="directory-grid" id="qGrid">
+            
+            <!-- Q1 -->
+            <a href="q1.html" class="q-card" data-cat="design">
+                <div>
+                    <div class="q-number">Question 1</div>
+                    <h2 class="q-title">Client Website Concept &amp; Requirements Brief</h2>
+                    <p class="q-desc">Comprehensive client profile for Botanica Eco-Cafe, business objectives, target audience demographics, brand identity, and color palette strategy.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q1.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q2 -->
+            <a href="q2.html" class="q-card" data-cat="design">
+                <div>
+                    <div class="q-number">Question 2</div>
+                    <h2 class="q-title">Semantic HTML5 Structure &amp; Offerings</h2>
+                    <p class="q-desc">Semantic document outline with header, nav, main, sections, figure/figcaption, aside sidebar, and detailed culinary offerings table.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q2.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q3 -->
+            <a href="q3.html" class="q-card" data-cat="design">
+                <div>
+                    <div class="q-number">Question 3</div>
+                    <h2 class="q-title">Responsive Multi-Device Layout (Grid/Flex)</h2>
+                    <p class="q-desc">Adaptive layout architecture tested across mobile (375px), tablet (768px), and desktop (1200px) with live viewport simulator toggles.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q3.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q4 -->
+            <a href="q4.html" class="q-card" data-cat="design">
+                <div>
+                    <div class="q-number">Question 4</div>
+                    <h2 class="q-title">Modern Web Design Tokens &amp; Whitespace</h2>
+                    <p class="q-desc">Color palette tokens with click-to-copy HEX codes, modular fluid typographic scale, and 8-point rhythmic whitespace management system.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q4.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q5 -->
+            <a href="q5.html" class="q-card" data-cat="audit">
+                <div>
+                    <div class="q-number">Question 5</div>
+                    <h2 class="q-title">WCAG 2.1 AA Standards &amp; Screen Reader</h2>
+                    <p class="q-desc">Skip-to-content bypass link, semantic ARIA landmarks, audited 14.2:1 contrast ratios, and acoustic speech synthesis screen reader simulator.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q5.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q6 -->
+            <a href="q6.html" class="q-card" data-cat="interactive">
+                <div>
+                    <div class="q-number">Question 6</div>
+                    <h2 class="q-title">Interactive Hero Showcase Carousel</h2>
+                    <p class="q-desc">GPU-accelerated CSS transform slider with auto-rotation (5s), pause-on-hover, arrow keys support, pagination dots, and touch friendliness.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q6.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q7 -->
+            <a href="q7.html" class="q-card" data-cat="interactive">
+                <div>
+                    <div class="q-number">Question 7</div>
+                    <h2 class="q-title">Table Reservation &amp; JS Field Validation</h2>
+                    <p class="q-desc">Real-time regex email, 10-digit phone, and party size validator with interactive feedback states and confirmation receipt modal dialog.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q7.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q8 -->
+            <a href="q8.html" class="q-card" data-cat="design">
+                <div>
+                    <div class="q-number">Question 8</div>
+                    <h2 class="q-title">Responsive Google Maps Embed &amp; Contact</h2>
+                    <p class="q-desc">Fluid aspect-ratio 16:9 Google Maps iframe integration, GPS coordinates for COER University highway area, opening hours, and one-click app launch.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q8.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q9 -->
+            <a href="q9.html" class="q-card" data-cat="interactive">
+                <div>
+                    <div class="q-number">Question 9</div>
+                    <h2 class="q-title">Social Feeds &amp; Sharing Footer</h2>
+                    <p class="q-desc">Live community Instagram feed with interactive like simulation, WhatsApp, Twitter/X, LinkedIn share shortcuts, and copy-link toast alerts.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q9.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q10 -->
+            <a href="q10.html" class="q-card" data-cat="audit">
+                <div>
+                    <div class="q-number">Question 10</div>
+                    <h2 class="q-title">Website Asset Optimization Pipeline</h2>
+                    <p class="q-desc">WebP/AVIF next-gen compression demonstration, live CSS/JS minification engine (73% savings), resource hints, and payload comparison.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q10.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q11 -->
+            <a href="q11.html" class="q-card" data-cat="audit">
+                <div>
+                    <div class="q-number">Question 11</div>
+                    <h2 class="q-title">On-Page SEO &amp; Schema.org JSON-LD</h2>
+                    <p class="q-desc">Title tags, meta description, Open Graph / Twitter Card social cards, Google SERP simulator, and Bakery/Cafe JSON-LD structured data.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q11.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q12 -->
+            <a href="q12.html" class="q-card" data-cat="interactive">
+                <div>
+                    <div class="q-number">Question 12</div>
+                    <h2 class="q-title">CSS Micro-Interactions &amp; 3D Hover Cards</h2>
+                    <p class="q-desc">Tactile button elevation glows, sliding icon arrows, center-out expanding link underlines, and rotating icon zoom cards.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q12.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q13 -->
+            <a href="q13.html" class="q-card" data-cat="interactive">
+                <div>
+                    <div class="q-number">Question 13</div>
+                    <h2 class="q-title">Accessible Semantic FAQ Accordion</h2>
+                    <p class="q-desc">W3C WAI-ARIA accordion with aria-expanded/aria-controls, smooth scrollHeight collapsing, and answers regarding fermentation and coffee sourcing.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q13.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q14 -->
+            <a href="q14.html" class="q-card" data-cat="interactive">
+                <div>
+                    <div class="q-number">Question 14</div>
+                    <h2 class="q-title">Live Menu Search &amp; Category Filter</h2>
+                    <p class="q-desc">Real-time keyword search, interactive category pill toggles (Breads, Coffee, Pastries, Vegan), price sorting, and live match counter.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q14.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q15 -->
+            <a href="q15.html" class="q-card" data-cat="interactive">
+                <div>
+                    <div class="q-number">Question 15</div>
+                    <h2 class="q-title">Multi-Step Booking Wizard</h2>
+                    <p class="q-desc">4-phase workshop reservation flow with visual step progress line, interactive card selectors, dynamic price calculation, and state preservation.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q15.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q16 -->
+            <a href="q16.html" class="q-card" data-cat="audit">
+                <div>
+                    <div class="q-number">Question 16</div>
+                    <h2 class="q-title">Axe-Core &amp; WAVE Accessibility Audit</h2>
+                    <p class="q-desc">Defect resolution report detailing 5 critical WCAG remediations (contrast, labels, alt tags, button names, skip links) with live DOM scanner.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q16.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q17 -->
+            <a href="q17.html" class="q-card" data-cat="interactive">
+                <div>
+                    <div class="q-number">Question 17</div>
+                    <h2 class="q-title">Dynamic Testimonial Review Slider</h2>
+                    <p class="q-desc">Patron quote carousel with 5-star ratings, interactive navigation dots, and a live review submission form that appends cards dynamically.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q17.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q18 -->
+            <a href="q18.html" class="q-card" data-cat="design">
+                <div>
+                    <div class="q-number">Question 18</div>
+                    <h2 class="q-title">Pricing Tables &amp; Tier Comparison (Flex/Grid)</h2>
+                    <p class="q-desc">Monthly Roastery &amp; Bakery club tiers, monthly vs. annual billing toggle (Save 20%), featured plan badge, and 4-column comparison matrix.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q18.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q19 -->
+            <a href="q19.html" class="q-card" data-cat="interactive">
+                <div>
+                    <div class="q-number">Question 19</div>
+                    <h2 class="q-title">Newsletter Signup with localStorage</h2>
+                    <p class="q-desc">Persistent client subscription management using browser localStorage, active subscriber badge, topic preferences, and unsubscribe workflow.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q19.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Q20 -->
+            <a href="q20.html" class="q-card" data-cat="audit">
+                <div>
+                    <div class="q-number">Question 20</div>
+                    <h2 class="q-title">Google Lighthouse Performance Audit (90+)</h2>
+                    <p class="q-desc">Certified audit report (Performance 98, Accessibility 100, Best Practices 100, SEO 100), Core Web Vitals breakdown, and engineering log.</p>
+                </div>
+                <div class="q-footer">
+                    <span>q20.html</span>
+                    <span>Launch &rarr;</span>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer class="client-footer">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center; font-size: 14px;">
+            &copy; 2026 Botanica Eco-Cafe &bull; COER University Lab Sheet 8 Solutions &bull; Student ID: CU26280068.
+        </div>
+    </footer>
+
+    <script>
+        function filterQs(category) {
+            const cards = document.querySelectorAll('.q-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

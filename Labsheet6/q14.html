@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q14 - Custom CSS Media Queries (Mobile, Tablet, Desktop)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Question Context Banner */
+        .lab-header-banner {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 10px 24px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-header-banner a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* LIVE VIEWPORT DETECTOR BANNER */
+        .viewport-detector {
+            text-align: center;
+            padding: 12px 20px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        /* BASE / DESKTOP VIEWPORT STYLES (Min-width: 1025px) */
+        .viewport-detector {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        .viewport-name::after {
+            content: "DESKTOP VIEWPORT (> 1024px)";
+        }
+
+        /* Header Navigation */
+        .site-nav {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .nav-links-row {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links-row a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .nav-links-row a:hover {
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        /* Main Container */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .intro-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .intro-hero h1 {
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .intro-hero p {
+            color: #64748b;
+            font-size: 17px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* RESPONSIVE MULTI-COLUMN GRID */
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Columns on Desktop */
+            gap: 28px;
+        }
+
+        .grid-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grid-card h3 {
+            font-size: 20px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .grid-card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .device-badge {
+            display: inline-block;
+            align-self: flex-start;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        /* ==================================================
+           MEDIA QUERY 1: TABLET VIEWPORTS (601px to 1024px)
+           ================================================== */
+        @media screen and (min-width: 601px) and (max-width: 1024px) {
+            .viewport-detector {
+                background-color: #fef3c7;
+                color: #92400e;
+            }
+            .viewport-name::after {
+                content: "TABLET VIEWPORT (601px - 1024px)";
+            }
+
+            .intro-hero h1 {
+                font-size: 30px;
+            }
+
+            .intro-hero p {
+                font-size: 15px;
+            }
+
+            /* Switches from 3 columns to 2 columns on tablet */
+            .responsive-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .site-nav {
+                padding: 16px 20px;
+            }
+        }
+
+        /* ==================================================
+           MEDIA QUERY 2: MOBILE VIEWPORTS (<= 600px)
+           ================================================== */
+        @media screen and (max-width: 600px) {
+            .viewport-detector {
+                background-color: #fee2e2;
+                color: #991b1b;
+            }
+            .viewport-name::after {
+                content: "MOBILE VIEWPORT (≤ 600px)";
+            }
+
+            /* Mobile Stacked Navigation */
+            .site-nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+                padding: 16px;
+            }
+
+            .nav-links-row {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .intro-hero h1 {
+                font-size: 24px;
+            }
+
+            .intro-hero p {
+                font-size: 14px;
+            }
+
+            /* Single full-width column on mobile */
+            .responsive-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .grid-card {
+                padding: 20px;
+            }
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Question Context Banner -->
+    <div class="lab-header-banner">
+        <span><strong>Lab Sheet 6 - Question 14:</strong> Custom CSS media queries ensuring full responsiveness across Mobile, Tablet &amp; Desktop</span>
+        <a href="index.html">← Back to Lab Sheet 6 Index</a>
+    </div>
+
+    <!-- Live Media Query Viewport Detector -->
+    <div class="viewport-detector">
+        <span class="viewport-name">Active Breakpoint: </span>
+        <span id="windowSize" style="margin-left: 10px; opacity: 0.85;">(Width: --px)</span>
+    </div>
+
+    <!-- Responsive Navigation Bar -->
+    <nav class="site-nav">
+        <div class="nav-brand">MediaBreakpoints</div>
+        <ul class="nav-links-row">
+            <li><a href="#desktop">Desktop (1025px+)</a></li>
+            <li><a href="#tablet">Tablet (601-1024px)</a></li>
+            <li><a href="#mobile">Mobile (&le;600px)</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <header class="intro-hero">
+            <h1>Adaptive Multi-Viewport Architecture</h1>
+            <p>Resize your browser window or press F12 to inspect how custom CSS media queries automatically restructure the navigation, layout grid, and typography hierarchy.</p>
+        </header>
+
+        <!-- Responsive Adaptive Card Grid -->
+        <section class="responsive-grid">
+            <div class="grid-card">
+                <span class="device-badge">Desktop Viewport</span>
+                <h3>3-Column Desktop Grid</h3>
+                <p>For viewports wider than 1024px, the layout comfortably utilizes 3 equal columns (<code>grid-template-columns: repeat(3, 1fr)</code>), presenting maximum content density.</p>
+            </div>
+
+            <div class="grid-card">
+                <span class="device-badge">Tablet Viewport</span>
+                <h3>2-Column Tablet Grid</h3>
+                <p>Between 601px and 1024px, media queries collapse the cards into a 2-column layout with compact paddings and adjusted typography scales.</p>
+            </div>
+
+            <div class="grid-card">
+                <span class="device-badge">Mobile Viewport</span>
+                <h3>1-Column Mobile Stack</h3>
+                <p>On screens up to 600px, all cards expand to 100% full width in a single vertical stream, optimizing readability and thumb ergonomics.</p>
+            </div>
+
+            <div class="grid-card">
+                <span class="device-badge">Fluid Typo</span>
+                <h3>Dynamic Font Sizing</h3>
+                <p>Headlines dynamically scale from 38px down to 24px on mobile phones, preventing awkward line wrapping and horizontal overflow.</p>
+            </div>
+
+            <div class="grid-card">
+                <span class="device-badge">Navigation</span>
+                <h3>Adaptive Nav Header</h3>
+                <p>The desktop horizontal flex navbar reflows into a centered multi-line or stacked mobile navigation unit when the viewport shrinks below 600px.</p>
+            </div>
+
+            <div class="grid-card">
+                <span class="device-badge">W3C Standard</span>
+                <h3>Zero Horizontal Scroll</h3>
+                <p>All containers strictly respect <code>box-sizing: border-box</code> and <code>max-width: 100%</code>, guaranteeing zero unintended horizontal scrollbars.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 COER University - Web Designing Lab Sheet 6 (Question 14: CSS Media Queries).
+    </footer>
+
+    <!-- Script displaying real-time viewport width for testing -->
+    <script>
+        const windowSizeSpan = document.getElementById('windowSize');
+
+        function updateDimensions() {
+            windowSizeSpan.textContent = `(Current Width: ${window.innerWidth}px)`;
+        }
+
+        window.addEventListener('resize', updateDimensions);
+        updateDimensions();
+    </script>
+
+</body>
+</html>
